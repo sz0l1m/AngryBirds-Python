@@ -1,3 +1,4 @@
+import pygame
 import pymunk
 import config
 
@@ -55,3 +56,10 @@ class Bird:
         if new_radius < 0:
             raise ValueError('Radius cannot be negative')
         self._radius = new_radius
+
+    def draw(self, screen):
+        """
+        Draws bird on pygame display
+        """
+        x, y = self.body.position
+        pygame.draw.circle(screen, (0, 0, 0), (x, config.SCREEN_HEIGHT - y), self._radius)
