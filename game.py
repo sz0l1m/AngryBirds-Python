@@ -1,4 +1,5 @@
 import config
+import pymunk
 import pygame
 from pygame.locals import (
     K_ESCAPE,
@@ -6,6 +7,7 @@ from pygame.locals import (
     QUIT,
 )
 
+space = pymunk.Space()
 
 pygame.init()
 screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
