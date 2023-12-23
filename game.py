@@ -7,6 +7,7 @@ import pymunk
 import pygame
 from pygame.locals import (
     K_ESCAPE,
+    K_SPACE,
     KEYDOWN,
     QUIT,
 )
@@ -28,11 +29,16 @@ def main():
 
     running = True
 
+    space_used = 0
+
     while running:
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     running = False
+                elif event.key == K_SPACE and not space_used:
+                    bird.body.velocity = (bird.x_velocity, bird.y_velocity)
+                    space_used = 1
             elif event.type == QUIT:
                 running = False
 

@@ -117,7 +117,6 @@ class Bird:
                 self.x_velocity -= 10
             else:
                 self.x_velocity = 0
-        self.body.velocity = (self.x_velocity, self.y_velocity)
 
 
 class Floor:
