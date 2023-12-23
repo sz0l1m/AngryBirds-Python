@@ -1,4 +1,7 @@
-from classes import Bird
+from classes import (
+    Bird,
+    Floor
+)
 import config
 import pymunk
 import pygame
@@ -18,6 +21,9 @@ screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
 bird = Bird(config.bird_position, 30)
 space.add(bird.body, bird.shape)
 
+floor = Floor()
+space.add(floor.body, floor.shape)
+
 running = True
 
 while running:
@@ -32,6 +38,7 @@ while running:
 
     screen.fill((255, 255, 255))
     bird.draw(screen)
+    floor.draw(screen)
     pygame.display.flip()
 
     clock.tick(config.FPS)

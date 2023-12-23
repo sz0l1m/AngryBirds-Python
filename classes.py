@@ -90,7 +90,11 @@ class Floor:
         Creates instance of Floor.
         """
         self._body = pymunk.Body(body_type=pymunk.Body.STATIC)
-        self._shape = pymunk.Segment(self._body, (0, 0), (SCREEN_WIDTH, 0), floor_height)
+        self._shape = pymunk.Segment(
+            body=self._body,
+            a=(0, 0),
+            b=(SCREEN_WIDTH, 0),
+            radius=floor_height)
         self._shape.elasticity = 0.5
 
     @property
@@ -106,3 +110,15 @@ class Floor:
         Returns shape of the floor
         """
         return self._shape
+
+    def draw(self, screen):
+        """
+        Draws floor on pygame display
+        """
+        pygame.draw.line(
+            surface=screen,
+            color=(0, 0, 0),
+            start_pos=(0, SCREEN_HEIGHT - floor_height),
+            end_pos=(SCREEN_WIDTH, SCREEN_HEIGHT - floor_height),
+            width=6
+        )
