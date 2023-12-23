@@ -3,3 +3,4 @@ SCREEN_HEIGHT = 1000
 FPS = 30
 gravity = (0, -500)
 bird_position = (100, 500)
+floor_height = 100

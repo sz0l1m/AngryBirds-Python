@@ -1,8 +1,13 @@
 from classes import (
     CoordinatesError,
-    Bird
+    Bird,
+    Floor
 )
-import config
+from config import (
+    SCREEN_HEIGHT,
+    SCREEN_WIDTH,
+    floor_height
+)
 import pytest
 
 
@@ -29,7 +34,7 @@ def test_bird_create_negative_coordinates():
 
 def test_bird_create_invalid_coordinates():
     with pytest.raises(CoordinatesError):
-        Bird((100, config.SCREEN_HEIGHT + 10), 30, 4)
+        Bird((100, SCREEN_HEIGHT + 10), 30, 4)
 
 
 def test_bird_create_negative_radius():
@@ -59,3 +64,11 @@ def test_bird_set_radius_negative_radius():
     assert bird.radius == 30
     with pytest.raises(ValueError):
         bird.set_radius(-10)
+
+
+def test_floor_create():
+    floor = Floor()
+    assert floor.shape.a == (0, 0)
+    assert floor.shape.b == (SCREEN_WIDTH, 0)
+    assert floor.shape.radius == floor_height
+    assert floor.shape.elasticity == 0.5

@@ -1,6 +1,10 @@
 import pygame
 import pymunk
-import config
+from config import (
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    floor_height
+)
 
 
 class CoordinatesError(Exception):
@@ -19,8 +23,15 @@ class Bird:
     :type body: pymunk.shapes.Circle
     """
     def __init__(self, position: tuple, radius: int, density=1, elasticity=1):
+        """
+        Creates instance of Bird.
+
+        Raises ValueError if radius, density or elasticiy is negative.
+
+        Raises CoordinatesError if coordinates are negative or are bigger than screen size.
+        """
         x, y = position
-        if x < 0 or y < 0 or x > config.SCREEN_WIDTH or y > config.SCREEN_HEIGHT:
+        if x < 0 or y < 0 or x > SCREEN_WIDTH or y > SCREEN_HEIGHT:
             raise CoordinatesError(position)
         if radius < 0:
             raise ValueError('Radius cannot be negative')
@@ -62,4 +73,36 @@ class Bird:
         Draws bird on pygame display
         """
         x, y = self.body.position
-        pygame.draw.circle(screen, (0, 0, 0), (x, config.SCREEN_HEIGHT - y), self._radius)
+        pygame.draw.circle(screen, (0, 0, 0), (x, SCREEN_HEIGHT - y), self._radius)
+
+
+class Floor:
+    """
+    Class Floor. Contains attributes:
+    :param body: pymunk body of the floor
+    :type body: pymunk.body.Body
+
+    :param shape: pymunk shape of the floor
+    :type body: pymunk.shapes.Segment
+    """
+    def __init__(self):
+        """
+        Creates instance of Floor.
+        """
+        self._body = pymunk.Body(body_type=pymunk.Body.STATIC)
+        self._shape = pymunk.Segment(self._body, (0, 0), (SCREEN_WIDTH, 0), floor_height)
+        self._shape.elasticity = 0.5
+
+    @property
+    def body(self):
+        """
+        Returns body of the floor
+        """
+        return self._body
+
+    @property
+    def shape(self):
+        """
+        Returns shape of the floor
+        """
+        return self._shape
