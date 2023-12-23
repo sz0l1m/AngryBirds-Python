@@ -1,3 +1,4 @@
+import config
 import pygame
 from pygame.locals import (
     K_ESCAPE,
@@ -5,11 +6,9 @@ from pygame.locals import (
     QUIT,
 )
 
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 1000
 
 pygame.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
 
 running = True
 
