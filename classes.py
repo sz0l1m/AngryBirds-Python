@@ -5,6 +5,16 @@ from config import (
     SCREEN_HEIGHT,
     floor_height
 )
+from pygame.locals import (
+    K_w,
+    K_a,
+    K_s,
+    K_d,
+    K_UP,
+    K_DOWN,
+    K_LEFT,
+    K_RIGHT,
+)
 
 
 def convert_coords(coords):
@@ -57,6 +67,9 @@ class Bird:
         self._shape.density = density
         self._shape.elasticity = elasticity
         self._radius = radius
+        self.x_velocity = 0
+        self.y_velocity = 0
+        self.body.velocity = (self.x_velocity, self.y_velocity)
 
     @property
     def shape(self):
@@ -85,6 +98,26 @@ class Bird:
         Draws bird on pygame display
         """
         pygame.draw.circle(screen, (0, 0, 0), convert_coords(self.body.position), self._radius)
+
+    def set_speed(self, pressed_keys):
+        """
+        Sets speed of the bird depending on what key has been pressed.
+        """
+        if pressed_keys[K_UP] or pressed_keys[K_w]:
+            self.y_velocity += 10
+        if pressed_keys[K_DOWN] or pressed_keys[K_s]:
+            if self.y_velocity > 10:
+                self.y_velocity -= 10
+            else:
+                self.y_velocity = 0
+        if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
+            self.x_velocity += 10
+        if pressed_keys[K_LEFT] or pressed_keys[K_a]:
+            if self.x_velocity > 10:
+                self.x_velocity -= 10
+            else:
+                self.x_velocity = 0
+        self.body.velocity = (self.x_velocity, self.y_velocity)
 
 
 class Floor:

@@ -36,6 +36,9 @@ def main():
             elif event.type == QUIT:
                 running = False
 
+        pressed_keys = pygame.key.get_pressed()
+        bird.set_speed(pressed_keys)
+
         space.step(1 / config.FPS)
 
         screen.fill((255, 255, 255))

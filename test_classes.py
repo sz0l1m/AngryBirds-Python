@@ -1,7 +1,8 @@
 from classes import (
     CoordinatesError,
     Bird,
-    Floor
+    Floor,
+    convert_coords
 )
 from config import (
     SCREEN_HEIGHT,
@@ -72,3 +73,8 @@ def test_floor_create():
     assert floor.shape.b == (SCREEN_WIDTH, 0)
     assert floor.shape.radius == floor_height
     assert floor.shape.elasticity == 0.5
+
+
+def test_convert_coordinates():
+    coords = (300, 100)
+    assert convert_coords(coords) == (300, SCREEN_HEIGHT - coords[1])
