@@ -11,34 +11,40 @@ from pygame.locals import (
     QUIT,
 )
 
-space = pymunk.Space()
-space.gravity = config.gravity
 
-pygame.init()
-clock = pygame.time.Clock()
-screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
+def main():
+    space = pymunk.Space()
+    space.gravity = config.gravity
 
-bird = Bird(config.bird_position, 30)
-space.add(bird.body, bird.shape)
+    pygame.init()
+    clock = pygame.time.Clock()
+    screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
 
-floor = Floor()
-space.add(floor.body, floor.shape)
+    bird = Bird(config.bird_position, 30)
+    space.add(bird.body, bird.shape)
 
-running = True
+    floor = Floor()
+    space.add(floor.body, floor.shape)
 
-while running:
-    for event in pygame.event.get():
-        if event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
+    running = True
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    running = False
+            elif event.type == QUIT:
                 running = False
-        elif event.type == QUIT:
-            running = False
 
-    space.step(1 / config.FPS)
+        space.step(1 / config.FPS)
 
-    screen.fill((255, 255, 255))
-    bird.draw(screen)
-    floor.draw(screen)
-    pygame.display.flip()
+        screen.fill((255, 255, 255))
+        bird.draw(screen)
+        floor.draw(screen)
+        pygame.display.flip()
 
-    clock.tick(config.FPS)
+        clock.tick(config.FPS)
+
+
+if __name__ == '__main__':
+    main()
