@@ -7,6 +7,18 @@ from config import (
 )
 
 
+def convert_coords(coords):
+    """
+    Converts coordinates in such a way that it moves horizontal axis
+    from the bottom of display to the top or vice versa.
+    Vertical axis stays the same and it is located on the left of the diplay.
+    The function is needed because pygame has its horizontal axis at the top of diplay,
+    while pymunk on the bottom.
+    """
+    x, y = coords
+    return (x, SCREEN_HEIGHT - y)
+
+
 class CoordinatesError(Exception):
     def __init__(self, coords):
         super().__init__('Invalid coordinates')
@@ -72,8 +84,7 @@ class Bird:
         """
         Draws bird on pygame display
         """
-        x, y = self.body.position
-        pygame.draw.circle(screen, (0, 0, 0), (x, SCREEN_HEIGHT - y), self._radius)
+        pygame.draw.circle(screen, (0, 0, 0), convert_coords(self.body.position), self._radius)
 
 
 class Floor:
@@ -118,7 +129,7 @@ class Floor:
         pygame.draw.line(
             surface=screen,
             color=(0, 0, 0),
-            start_pos=(0, SCREEN_HEIGHT - floor_height),
-            end_pos=(SCREEN_WIDTH, SCREEN_HEIGHT - floor_height),
+            start_pos=convert_coords((0, floor_height)),
+            end_pos=convert_coords((SCREEN_WIDTH, floor_height)),
             width=6
         )
