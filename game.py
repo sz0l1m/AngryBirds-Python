@@ -9,11 +9,14 @@ from pygame.locals import (
 )
 
 space = pymunk.Space()
+space.gravity = config.gravity
 
 pygame.init()
+clock = pygame.time.Clock()
 screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
 
 bird = Bird(config.bird_position, 30)
+space.add(bird.body, bird.shape)
 
 running = True
 
@@ -25,6 +28,10 @@ while running:
         elif event.type == QUIT:
             running = False
 
+    space.step(1 / config.FPS)
+
     screen.fill((255, 255, 255))
     bird.draw(screen)
     pygame.display.flip()
+
+    clock.tick(config.FPS)
