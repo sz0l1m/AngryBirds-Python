@@ -29,7 +29,7 @@ def main():
 
     running = True
 
-    space_used = 0
+    space_used = False
 
     while running:
         for event in pygame.event.get():
@@ -38,7 +38,7 @@ def main():
                     running = False
                 elif event.key == K_SPACE and not space_used:
                     bird.body.velocity = (bird.x_velocity, bird.y_velocity)
-                    space_used = 1
+                    space_used = True
             elif event.type == QUIT:
                 running = False
 

@@ -1,5 +1,6 @@
 import pygame
 import pymunk
+from math import sin, cos, radians
 from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
@@ -67,6 +68,8 @@ class Bird:
         self._shape.density = density
         self._shape.elasticity = elasticity
         self._radius = radius
+        self.velocity = 0
+        self.angle = 0
         self.x_velocity = 0
         self.y_velocity = 0
         self.body.velocity = (self.x_velocity, self.y_velocity)
@@ -104,19 +107,39 @@ class Bird:
         Sets speed of the bird depending on what key has been pressed.
         """
         if pressed_keys[K_UP] or pressed_keys[K_w]:
-            self.y_velocity += 10
+            if self.angle < 90:
+                self.angle += 1
         if pressed_keys[K_DOWN] or pressed_keys[K_s]:
-            if self.y_velocity > 10:
-                self.y_velocity -= 10
-            else:
-                self.y_velocity = 0
+            if self.y_velocity > 0:
+                self.y_velocity -= 1
         if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
-            self.x_velocity += 10
+            self.velocity += 10
         if pressed_keys[K_LEFT] or pressed_keys[K_a]:
-            if self.x_velocity > 10:
-                self.x_velocity -= 10
+            if self.velocity > 10:
+                self.velocity -= 10
             else:
-                self.x_velocity = 0
+                self.velocity = 0
+        self.x_velocity = self.velocity * cos(radians(self.angle))
+        self.y_velocity = self.velocity * sin(radians(self.angle))
+
+    # def set_speed(self, pressed_keys):
+    #     """
+    #     Sets speed of the bird depending on what key has been pressed.
+    #     """
+    #     if pressed_keys[K_UP] or pressed_keys[K_w]:
+    #         self.y_velocity += 10
+    #     if pressed_keys[K_DOWN] or pressed_keys[K_s]:
+    #         if self.y_velocity > 10:
+    #             self.y_velocity -= 10
+    #         else:
+    #             self.y_velocity = 0
+    #     if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
+    #         self.x_velocity += 10
+    #     if pressed_keys[K_LEFT] or pressed_keys[K_a]:
+    #         if self.x_velocity > 10:
+    #             self.x_velocity -= 10
+    #         else:
+    #             self.x_velocity = 0
 
 
 class Floor:
