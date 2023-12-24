@@ -2,6 +2,7 @@ from classes import (
     CoordinatesError,
     Bird,
     Floor,
+    Text,
     convert_coords
 )
 from config import (
@@ -10,6 +11,7 @@ from config import (
     floor_height
 )
 import pytest
+import pygame
 
 
 def test_bird_create_normal():
@@ -78,3 +80,23 @@ def test_floor_create():
 def test_convert_coordinates():
     coords = (300, 100)
     assert convert_coords(coords) == (300, SCREEN_HEIGHT - coords[1])
+
+
+def test_text_create_normal():
+    pygame.init()
+    text = Text('WASD123', (100, 200), 20, (0, 0, 255), (0, 0, 0), 'timesnewroman')
+    assert text.str == 'WASD123'
+    assert text.location == (100, 200)
+    assert text.size == 20
+    assert text.color == (0, 0, 255)
+    assert text.background == (0, 0, 0)
+
+
+def test_text_create_default_values():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.str == 'WASD123'
+    assert text.location == (100, 200)
+    assert text.size == 10
+    assert text.color == (0, 0, 0)
+    assert text.background == (255, 255, 255)

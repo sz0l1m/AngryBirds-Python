@@ -242,3 +242,38 @@ class Text:
         self._background = background
         self._font = pygame.font.SysFont(font, self._size)
         self._surf = self._font.render(self._str, True, self._color, self._background)
+
+    @property
+    def str(self):
+        """
+        Returns str of the text
+        """
+        return self._str
+
+    @property
+    def location(self):
+        """
+        Returns location of the text
+        """
+        return self._location
+
+    @property
+    def size(self):
+        """
+        Returns size of the text
+        """
+        return self._size
+
+    @property
+    def color(self):
+        """
+        Returns color of the text
+        """
+        return self._color
+
+    @property
+    def background(self):
+        """
+        Returns background of the text
+        """
+        return self._background
