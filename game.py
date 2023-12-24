@@ -1,6 +1,7 @@
 from classes import (
     Bird,
-    Floor
+    Floor,
+    Text
 )
 import config
 import pymunk
@@ -27,6 +28,9 @@ def main():
     floor = Floor()
     space.add(floor.body, floor.shape)
 
+    angle_text = Text('0', (20, 20), 30)
+    velocity_text = Text('0', (20, 100), 30)
+
     running = True
 
     space_used = False
@@ -50,6 +54,12 @@ def main():
         screen.fill((255, 255, 255))
         bird.draw(screen)
         floor.draw(screen)
+
+        angle_text.set_str(str(bird.angle))
+        velocity_text.set_str(str(bird.velocity))
+        angle_text.draw(screen)
+        velocity_text.draw(screen)
+
         pygame.display.flip()
 
         clock.tick(config.FPS)

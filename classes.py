@@ -134,8 +134,8 @@ class Bird:
             if self.angle < 90:
                 self.angle += 1
         if pressed_keys[K_DOWN] or pressed_keys[K_s]:
-            if self.y_velocity > 0:
-                self.y_velocity -= 1
+            if self.angle > 0:
+                self.angle -= 1
         if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
             self.velocity += 10
         if pressed_keys[K_LEFT] or pressed_keys[K_a]:
@@ -346,3 +346,9 @@ class Text:
         self._font_type = new_font_type
         self._font = pygame.font.SysFont(self._font_type, self._size)
         self._surf = self._font.render(self._str, True, self._color, self._background)
+
+    def draw(self, screen):
+        """
+        Draws text on pygame display
+        """
+        screen.blit(self._surf, self._position)
