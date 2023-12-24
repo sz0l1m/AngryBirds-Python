@@ -247,7 +247,6 @@ class Text:
         check_coords(position)
         if size <= 0:
             raise ValueError('Size has to be positive')
-
         self._str = str
         self._position = position
         self._size = size
