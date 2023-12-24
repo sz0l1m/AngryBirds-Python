@@ -30,6 +30,17 @@ def convert_coords(coords):
     return (x, SCREEN_HEIGHT - y)
 
 
+def check_coords(coords):
+    """
+    If given coordinates are invalid raises CoordinatesError.
+    Coordinates are invlaid when one of them is negative
+    or is bigger than screen size.
+    """
+    x, y = coords
+    if x < 0 or y < 0 or x > SCREEN_WIDTH or y > SCREEN_HEIGHT:
+        raise CoordinatesError(coords)
+
+
 class CoordinatesError(Exception):
     def __init__(self, coords):
         super().__init__('Invalid coordinates')
@@ -68,9 +79,7 @@ class Bird:
 
         Raises CoordinatesError if coordinates are negative or are bigger than screen size.
         """
-        x, y = position
-        if x < 0 or y < 0 or x > SCREEN_WIDTH or y > SCREEN_HEIGHT:
-            raise CoordinatesError(position)
+        check_coords(position)
         if radius < 0:
             raise ValueError('Radius cannot be negative')
         if density < 0:
@@ -211,8 +220,8 @@ class Text:
     :param str: content of the text
     :type str: str
 
-    :param location: location of the text
-    :type location: tuple
+    :param position: position of the text
+    :type position: tuple
 
     :param size: font size of the text
     :type size: int
@@ -229,14 +238,18 @@ class Text:
     def __init__(
             self,
             str: str,
-            location: tuple,
+            position: tuple,
             size=10,
             color=(0, 0, 0),
             background=(255, 255, 255),
             font='timesnewroman'
     ):
+        check_coords(position)
+        if size <= 0:
+            raise ValueError('Size has to be positive')
+
         self._str = str
-        self._location = location
+        self._position = position
         self._size = size
         self._color = color
         self._background = background
@@ -251,11 +264,11 @@ class Text:
         return self._str
 
     @property
-    def location(self):
+    def position(self):
         """
-        Returns location of the text
+        Returns position of the text
         """
-        return self._location
+        return self._position
 
     @property
     def size(self):

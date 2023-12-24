@@ -86,7 +86,7 @@ def test_text_create_normal():
     pygame.init()
     text = Text('WASD123', (100, 200), 20, (0, 0, 255), (0, 0, 0), 'timesnewroman')
     assert text.str == 'WASD123'
-    assert text.location == (100, 200)
+    assert text.position == (100, 200)
     assert text.size == 20
     assert text.color == (0, 0, 255)
     assert text.background == (0, 0, 0)
@@ -96,7 +96,7 @@ def test_text_create_default_values():
     pygame.init()
     text = Text('WASD123', (100, 200))
     assert text.str == 'WASD123'
-    assert text.location == (100, 200)
+    assert text.position == (100, 200)
     assert text.size == 10
     assert text.color == (0, 0, 0)
     assert text.background == (255, 255, 255)
