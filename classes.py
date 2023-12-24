@@ -59,16 +59,16 @@ class Bird:
     :param radius: radius of the bird
     :type radius: int
 
-    :param velocity: initial velocity of the bird set by set_speed method
+    :param velocity: initial velocity of the bird set by set_speed method, defualt: 0
     :type radius: int
 
-    :param angle: initial angle of the bird trajectory set by set_speed method
+    :param angle: initial angle of the bird trajectory set by set_speed method, defualt: 0
     :type radius: int
 
-    :param x_velocity: initial x_velocity of the bird set by set_speed method
+    :param x_velocity: initial x_velocity of the bird set by set_speed method, defualt: 0
     :type x_velocity: int
 
-    :param x_velocity: initial y_velocity of the bird set by set_speed method
+    :param x_velocity: initial y_velocity of the bird set by set_speed method, defualt: 0
     :type x_velocity: int
     """
     def __init__(self, position: tuple, radius: int, density=1, elasticity=1):
@@ -223,16 +223,16 @@ class Text:
     :param position: position of the text
     :type position: tuple
 
-    :param size: font size of the text
+    :param size: font size of the text, defualt: 10
     :type size: int
 
-    :param color: color of the text's symbols
+    :param color: color of the text's symbols, , defualt: (0, 0, 0)
     :type color: tuple
 
-    :param background: background color of the text
+    :param background: background color of the text, defualt: (255, 255, 255)
     :type background: tuple
 
-    :param font_type: system's font of the text
+    :param font_type: system's font of the text, defualt: 'timesnewroman'
     :type font: str
 
     :param font: pygame font object, contains font_type and size
