@@ -232,8 +232,11 @@ class Text:
     :param background: background color of the text
     :type background: tuple
 
-    :param font: system's font of the text
+    :param font_type: system's font of the text
     :type font: str
+
+    :param font: pygame font object, contains font_type and size
+    :type font: pygame.font.SysFont
     """
     def __init__(
             self,
@@ -252,7 +255,8 @@ class Text:
         self._size = size
         self._color = color
         self._background = background
-        self._font = pygame.font.SysFont(font, self._size)
+        self._font_type = font
+        self._font = pygame.font.SysFont(self._font_type, self._size)
         self._surf = self._font.render(self._str, True, self._color, self._background)
 
     @property
@@ -289,3 +293,56 @@ class Text:
         Returns background of the text
         """
         return self._background
+
+    @property
+    def font_type(self):
+        """
+        Returns font_type of the text
+        """
+        return self._font_type
+
+    def set_str(self, new_str):
+        """
+        Changes str of the text to new_str
+        """
+        self._str = new_str
+        self._surf = self._font.render(self._str, True, self._color, self._background)
+
+    def set_position(self, new_position):
+        """
+        Changes position of the text to new_position
+        """
+        check_coords(new_position)
+        self._position = new_position
+
+    def set_size(self, new_size):
+        """
+        Changes size of the text to new_size
+        """
+        if new_size <= 0:
+            raise ValueError('Size has to be positive')
+        self._size = new_size
+        self._font = pygame.font.SysFont(self._font_type, self._size)
+        self._surf = self._font.render(self._str, True, self._color, self._background)
+
+    def set_color(self, new_color):
+        """
+        Changes color of the text to new_color
+        """
+        self._color = new_color
+        self._surf = self._font.render(self._str, True, self._color, self._background)
+
+    def set_background(self, new_background):
+        """
+        Changes background of the text to new_background
+        """
+        self._background = new_background
+        self._surf = self._font.render(self._str, True, self._color, self._background)
+
+    def set_font_type(self, new_font_type):
+        """
+        Changes font_type of the text to new_font_type
+        """
+        self._font_type = new_font_type
+        self._font = pygame.font.SysFont(self._font_type, self._size)
+        self._surf = self._font.render(self._str, True, self._color, self._background)

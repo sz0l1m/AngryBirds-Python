@@ -3,7 +3,8 @@ from classes import (
     Bird,
     Floor,
     Text,
-    convert_coords
+    convert_coords,
+    check_coords
 )
 from config import (
     SCREEN_HEIGHT,
@@ -77,9 +78,26 @@ def test_floor_create():
     assert floor.shape.elasticity == 0.5
 
 
-def test_convert_coordinates():
+def test_convert_coords():
     coords = (300, 100)
     assert convert_coords(coords) == (300, SCREEN_HEIGHT - coords[1])
+
+
+def test_check_coords_valid():
+    coords = (300, 100)
+    check_coords(coords)
+
+
+def test_check_coords_negative():
+    coords = (-300, 100)
+    with pytest.raises(CoordinatesError):
+        check_coords(coords)
+
+
+def test_check_coords_invalid():
+    coords = (SCREEN_WIDTH + 1, 100)
+    with pytest.raises(CoordinatesError):
+        check_coords(coords)
 
 
 def test_text_create_normal():
@@ -90,6 +108,7 @@ def test_text_create_normal():
     assert text.size == 20
     assert text.color == (0, 0, 255)
     assert text.background == (0, 0, 0)
+    assert text.font_type == 'timesnewroman'
 
 
 def test_text_create_default_values():
@@ -100,3 +119,163 @@ def test_text_create_default_values():
     assert text.size == 10
     assert text.color == (0, 0, 0)
     assert text.background == (255, 255, 255)
+
+
+def test_text_create_empty_str():
+    pygame.init()
+    text = Text('', (100, 200))
+    assert text.str == ''
+    assert text.position == (100, 200)
+    assert text.size == 10
+    assert text.color == (0, 0, 0)
+    assert text.background == (255, 255, 255)
+
+
+def test_text_create_negative_position():
+    pygame.init()
+    with pytest.raises(CoordinatesError):
+        Text('WASD123', (-100, 200))
+
+
+def test_text_create_invalid_position():
+    pygame.init()
+    with pytest.raises(CoordinatesError):
+        Text('WASD123', (SCREEN_WIDTH + 100, 200))
+
+
+def test_text_create_invalid_size():
+    pygame.init()
+    with pytest.raises(ValueError):
+        Text('WASD123', (100, 200), -1)
+
+
+def test_text_create_invalid_color():
+    pygame.init()
+    with pytest.raises(ValueError):
+        Text('WASD123', (100, 200), 1, (0, 0, 256))
+
+
+def test_text_create_invalid_background():
+    pygame.init()
+    with pytest.raises(ValueError):
+        Text('WASD123', (100, 200), 1, (0, 0, 255), (-1, 0, 0))
+
+
+def test_text_set_str():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.str == 'WASD123'
+    text.set_str('123')
+    assert text.str == '123'
+
+
+def test_text_set_str_empty():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.str == 'WASD123'
+    text.set_str('')
+    assert text.str == ''
+
+
+def test_text_set_position():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.position == (100, 200)
+    text.set_position((0, 100))
+    assert text.position == (0, 100)
+
+
+def test_text_set_position_negative_position():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.position == (100, 200)
+    with pytest.raises(CoordinatesError):
+        text.set_position((-1, 100))
+
+
+def test_text_set_position_invalid_position():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.position == (100, 200)
+    with pytest.raises(CoordinatesError):
+        text.set_position((100, SCREEN_HEIGHT + 1))
+
+
+def test_text_set_size():
+    pygame.init()
+    text = Text('WASD123', (100, 200), 20)
+    assert text.size == 20
+    text.set_size(30)
+    assert text.size == 30
+
+
+def test_text_set_size_negative_size():
+    pygame.init()
+    text = Text('WASD123', (100, 200), 20)
+    assert text.size == 20
+    with pytest.raises(ValueError):
+        text.set_size(-1)
+
+
+def test_text_set_size_zero_size():
+    pygame.init()
+    text = Text('WASD123', (100, 200), 20)
+    assert text.size == 20
+    with pytest.raises(ValueError):
+        text.set_size(0)
+
+
+def test_text_set_color():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.color == (0, 0, 0)
+    text.set_color((100, 100, 255))
+    assert text.color == (100, 100, 255)
+
+
+def test_text_set_size_negative_color():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.color == (0, 0, 0)
+    with pytest.raises(ValueError):
+        text.set_color((-1, 0, 0))
+
+
+def test_text_set_size_invalid_color():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.color == (0, 0, 0)
+    with pytest.raises(ValueError):
+        text.set_color((300, 0, 0))
+
+
+def test_text_set_background():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.background == (255, 255, 255)
+    text.set_background((100, 100, 255))
+    assert text.background == (100, 100, 255)
+
+
+def test_text_set_size_negative_background():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.background == (255, 255, 255)
+    with pytest.raises(ValueError):
+        text.set_background((-1, 0, 0))
+
+
+def test_text_set_size_invalid_background():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.background == (255, 255, 255)
+    with pytest.raises(ValueError):
+        text.set_background((300, 0, 0))
+
+
+def test_text_set_font_type():
+    pygame.init()
+    text = Text('WASD123', (100, 200))
+    assert text.font_type == 'timesnewroman'
+    text.set_font_type('123')
+    assert text.font_type == '123'
