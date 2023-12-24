@@ -44,6 +44,21 @@ class Bird:
 
     :param shape: pymunk shape of the bird
     :type body: pymunk.shapes.Circle
+
+    :param radius: radius of the bird
+    :type radius: int
+
+    :param velocity: initial velocity of the bird set by set_speed method
+    :type radius: int
+
+    :param angle: initial angle of the bird trajectory set by set_speed method
+    :type radius: int
+
+    :param x_velocity: initial x_velocity of the bird set by set_speed method
+    :type x_velocity: int
+
+    :param x_velocity: initial y_velocity of the bird set by set_speed method
+    :type x_velocity: int
     """
     def __init__(self, position: tuple, radius: int, density=1, elasticity=1):
         """
@@ -119,8 +134,8 @@ class Bird:
                 self.velocity -= 10
             else:
                 self.velocity = 0
-        self.x_velocity = self.velocity * cos(radians(self.angle))
-        self.y_velocity = self.velocity * sin(radians(self.angle))
+        self.x_velocity = int(self.velocity * cos(radians(self.angle)))
+        self.y_velocity = int(self.velocity * sin(radians(self.angle)))
 
     # def set_speed(self, pressed_keys):
     #     """
@@ -188,3 +203,42 @@ class Floor:
             end_pos=convert_coords((SCREEN_WIDTH, floor_height)),
             width=6
         )
+
+
+class Text:
+    """
+    Class Text. Contains attributes:
+    :param str: content of the text
+    :type str: str
+
+    :param location: location of the text
+    :type location: tuple
+
+    :param size: font size of the text
+    :type size: int
+
+    :param color: color of the text's symbols
+    :type color: tuple
+
+    :param background: background color of the text
+    :type background: tuple
+
+    :param font: system's font of the text
+    :type font: str
+    """
+    def __init__(
+            self,
+            str: str,
+            location: tuple,
+            size=10,
+            color=(0, 0, 0),
+            background=(255, 255, 255),
+            font='timesnewroman'
+    ):
+        self._str = str
+        self._location = location
+        self._size = size
+        self._color = color
+        self._background = background
+        self._font = pygame.font.SysFont(font, self._size)
+        self._surf = self._font.render(self._str, True, self._color, self._background)
