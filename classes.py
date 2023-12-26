@@ -54,16 +54,16 @@ class Bird:
     :type body: pymunk.body.Body
 
     :param shape: pymunk shape of the bird
-    :type body: pymunk.shapes.Circle
+    :type shape: pymunk.shapes.Circle
 
     :param radius: radius of the bird
     :type radius: int
 
     :param velocity: initial velocity of the bird set by set_speed method, defualt: 0
-    :type radius: int
+    :type velocity: int
 
     :param angle: initial angle of the bird trajectory set by set_speed method, defualt: 0
-    :type radius: int
+    :type angle: int
 
     :param x_velocity: initial x_velocity of the bird set by set_speed method, defualt: 0
     :type x_velocity: int
@@ -166,6 +166,39 @@ class Bird:
     #             self.x_velocity = 0
 
 
+class Trajectory:
+    """
+    Class Trajcetory. Contains attributes:
+    :param bird: currently used bird
+    :type bird: Bird
+
+    :param x_vel: currently set horizontal speed of the bird, defualt: 0
+    :type x_vel: int
+
+    :param y_vel: currently set vertical speed of the bird, defualt: 0
+    :type y_vel: int
+
+    :param start_point: starting position of the bird
+    :type start_point: tuple
+
+    :param vertex: vertex of the trajectory
+    :type vertex: tuple
+
+    :param a_of_pattern: first coefficient of quadratic function of trajcetory
+    :type x_velocity: float
+    """
+    def __init__(self, bird: Bird):
+        """
+        Creates instance of Bird.
+        """
+        self.bird = bird
+        self.x_vel = 0
+        self.y_vel = 0
+        self.start_point = bird.body.position
+        self.vertex = bird.body.position
+        self.a_of_pattern = 0
+
+
 class Floor:
     """
     Class Floor. Contains attributes:
@@ -173,7 +206,7 @@ class Floor:
     :type body: pymunk.body.Body
 
     :param shape: pymunk shape of the floor
-    :type body: pymunk.shapes.Segment
+    :type shape: pymunk.shapes.Segment
     """
     def __init__(self):
         """
@@ -233,7 +266,7 @@ class Text:
     :type background: tuple
 
     :param font_type: system's font of the text, defualt: 'timesnewroman'
-    :type font: str
+    :type font_type: str
 
     :param font: pygame font object, contains font_type and size
     :type font: pygame.font.SysFont

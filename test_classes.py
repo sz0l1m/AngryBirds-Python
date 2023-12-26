@@ -1,6 +1,7 @@
 from classes import (
     CoordinatesError,
     Bird,
+    Trajectory,
     Floor,
     Text,
     convert_coords,
@@ -283,3 +284,13 @@ def test_text_set_font_type():
     assert text.font_type == 'timesnewroman'
     text.set_font_type('123')
     assert text.font_type == '123'
+
+
+def test_trajectory_create():
+    bird = Bird((100, 200), 20)
+    tra = Trajectory(bird)
+    assert tra.x_vel == 0
+    assert tra.y_vel == 0
+    assert tra.start_point == (100, 200)
+    assert tra.vertex == (100, 200)
+    assert tra.a_of_pattern == 0
