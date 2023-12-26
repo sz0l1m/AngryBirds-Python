@@ -1,7 +1,9 @@
 from classes import (
     Bird,
+    Trajectory,
     Floor,
-    Text
+    Text,
+    convert_coords
 )
 from config import (
     SCREEN_HEIGHT,
@@ -32,6 +34,8 @@ def main():
     bird = Bird(bird_position, bird_radius)
     space.add(bird.body, bird.shape)
 
+    trajectory = Trajectory(bird)
+
     floor = Floor()
     space.add(floor.body, floor.shape)
 
@@ -58,9 +62,12 @@ def main():
 
         space.step(1 / FPS)
 
+        trajectory.calc()
+
         screen.fill((255, 255, 255))
         bird.draw(screen)
         floor.draw(screen)
+        pygame.draw.circle(screen, (0, 0, 0), convert_coords(trajectory.vertex), bird_radius)
 
         angle_text.set_str(str(bird.angle))
         velocity_text.set_str(str(bird.velocity))

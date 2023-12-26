@@ -294,3 +294,16 @@ def test_trajectory_create():
     assert tra.start_point == (100, 200)
     assert tra.vertex == (100, 200)
     assert tra.a_of_pattern == 0
+
+
+def test_trajectory_calc():
+    bird = Bird((100, 200), 20)
+    tra = Trajectory(bird)
+    bird.x_velocity = 200
+    bird.y_velocity = 300
+    tra.calc()
+    assert tra.x_vel == 200
+    assert tra.y_vel == 300
+    assert tra.start_point == [100, 200]
+    assert tra.vertex == [220, 290]
+    assert tra.a_of_pattern == pytest.approx(-0.00625)

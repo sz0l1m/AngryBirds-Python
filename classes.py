@@ -4,7 +4,8 @@ from math import sin, cos, radians
 from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
-    floor_height
+    floor_height,
+    gravity
 )
 from pygame.locals import (
     K_w,
@@ -194,9 +195,21 @@ class Trajectory:
         self.bird = bird
         self.x_vel = 0
         self.y_vel = 0
-        self.start_point = bird.body.position
-        self.vertex = bird.body.position
+        self.start_point = list(bird.body.position)
+        self.vertex = list(bird.body.position)
         self.a_of_pattern = 0
+
+    def calc(self):
+        """
+        Calculates vertex coefficients and a coefficient of quadratic function of trajectory
+        based of vertical and horizontal speed of the bird.
+        """
+        self.x_vel = self.bird.x_velocity
+        self.y_vel = self.bird.y_velocity
+        if self.x_vel and self.y_vel > 0:
+            self.vertex[0] = ((self.x_vel * self.y_vel) / -gravity[1]) + self.start_point[0]
+            self.vertex[1] = ((self.y_vel ** 2) / (2 * -gravity[1])) + self.start_point[1]
+            self.a_of_pattern = (self.start_point[1] - self.vertex[1]) / ((self.start_point[0] - self.vertex[0]) ** 2)
 
 
 class Floor:
