@@ -3,7 +3,14 @@ from classes import (
     Floor,
     Text
 )
-import config
+from config import (
+    SCREEN_HEIGHT,
+    SCREEN_WIDTH,
+    FPS,
+    gravity,
+    bird_position,
+    bird_radius
+)
 import pymunk
 import pygame
 from pygame.locals import (
@@ -16,13 +23,13 @@ from pygame.locals import (
 
 def main():
     space = pymunk.Space()
-    space.gravity = config.gravity
+    space.gravity = gravity
 
     pygame.init()
     clock = pygame.time.Clock()
-    screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    bird = Bird(config.bird_position, 30)
+    bird = Bird(bird_position, bird_radius)
     space.add(bird.body, bird.shape)
 
     floor = Floor()
@@ -49,7 +56,7 @@ def main():
         pressed_keys = pygame.key.get_pressed()
         bird.set_speed(pressed_keys)
 
-        space.step(1 / config.FPS)
+        space.step(1 / FPS)
 
         screen.fill((255, 255, 255))
         bird.draw(screen)
@@ -62,7 +69,7 @@ def main():
 
         pygame.display.flip()
 
-        clock.tick(config.FPS)
+        clock.tick(FPS)
 
 
 if __name__ == '__main__':
