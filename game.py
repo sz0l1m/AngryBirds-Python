@@ -28,6 +28,7 @@ def main():
     space.gravity = gravity
 
     pygame.init()
+    pygame.display.set_caption('Angry Birds')
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
