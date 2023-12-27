@@ -211,6 +211,15 @@ class Trajectory:
             self.vertex[1] = ((self.y_vel ** 2) / (2 * -gravity[1])) + self.start_point[1]
             self.a_of_pattern = (self.start_point[1] - self.vertex[1]) / ((self.start_point[0] - self.vertex[0]) ** 2)
 
+    def draw(self, screen):
+        """
+        Draws circles on trajectory of the bird based of user input.
+        """
+        for x in range(100, 800, 50):
+            y = self.a_of_pattern * (x - self.vertex[0]) ** 2 + self.vertex[1]
+            if y >= 100 and self.y_vel:
+                pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 10)
+
 
 class Floor:
     """
