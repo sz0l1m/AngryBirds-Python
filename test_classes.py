@@ -81,7 +81,7 @@ def test_floor_create():
     assert floor.shape.a == (0, 0)
     assert floor.shape.b == (SCREEN_WIDTH, 0)
     assert floor.shape.radius == floor_height
-    assert floor.shape.elasticity == 0.5
+    assert floor.shape.elasticity == 0.6
 
 
 def test_convert_coords():
@@ -292,8 +292,8 @@ def test_trajectory_create():
     tra = Trajectory(bird)
     assert tra.x_vel == 0
     assert tra.y_vel == 0
-    assert tra.start_point == (width, height)
-    assert tra.vertex == (width, height)
+    assert tra.start_point == [width, height]
+    assert tra.vertex == [width, height]
     assert tra.a_of_pattern == 0
 
 
@@ -306,7 +306,7 @@ def test_trajectory_calc():
     assert tra.x_vel == 200
     assert tra.y_vel == 300
     assert tra.start_point == [width, height]
-    assert tra.vertex == [220, 290]
+    assert tra.vertex == [width + 120, height + 90]
     assert tra.a_of_pattern == pytest.approx(-0.00625)
 
 
@@ -345,9 +345,9 @@ def test_bar_create_negative_size_1():
         Bar((width, height), (-10, 20))
 
 
-def test_bar_create_negative_size_2():
+def test_bar_create_size_zero():
     with pytest.raises(ValueError):
-        Bar((width, height), (10, -20))
+        Bar((width, height), (10, 0))
 
 
 def test_bar_create_negative_color():
@@ -358,3 +358,24 @@ def test_bar_create_negative_color():
 def test_bar_create_invalid_color():
     with pytest.raises(ValueError):
         Bar((width, height), (10, 20), (1, 0, 256))
+
+
+def test_bar_set_position():
+    bar = Bar((width, height), (10, 20))
+    assert bar.body.position == (width, height)
+    bar.set_position((0, 0))
+    assert bar.body.position == (0, 0)
+
+
+def test_bar_set_position_negative():
+    bar = Bar((width, height), (10, 20))
+    assert bar.body.position == (width, height)
+    with pytest.raises(CoordinatesError):
+        bar.set_position((-width, 0))
+
+
+def test_bar_set_position_invalid():
+    bar = Bar((width, height), (10, 20))
+    assert bar.body.position == (width, height)
+    with pytest.raises(CoordinatesError):
+        bar.set_position((width, height + 2))

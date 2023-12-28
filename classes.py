@@ -240,13 +240,13 @@ class Bar:
         Creates instance of bar.
         """
         check_coords(position)
-        if size[0] or size[1] <= 0:
+        if size[0] <= 0 or size[1] <= 0:
             raise ValueError('Size of the bar has to be positive')
         self.body = pymunk.Body()
         self.body.position = position
-        self._shape = pymunk.Poly.create_box(self.body, size, 2)
         self.size = size
-        self._shape.color = color
+        self._shape = pymunk.Poly.create_box(self.body, self.size, 2)
+        self._shape.color = pygame.Color(color)
         self._shape.density = 0.7
         self._shape.elasticity = 0.4
         self._shape.friction = 0.8
@@ -257,6 +257,13 @@ class Bar:
         Returns pymunk's shape of the bar.
         """
         return self._shape
+
+    def set_position(self, new_position):
+        """
+        Changes position of the bar to new_position.
+        """
+        check_coords(new_position)
+        self.body.position = new_position
 
 
 class Floor:
