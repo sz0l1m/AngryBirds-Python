@@ -79,7 +79,7 @@ class Bird:
     :param x_velocity: initial y_velocity of the bird set by set_speed method, defualt: 0
     :type x_velocity: int
     """
-    def __init__(self, position: tuple, radius: int, density=1, elasticity=1):
+    def __init__(self, position: tuple, radius: int, density=1, elasticity=1, friction=0):
         """
         Creates instance of Bird.
 
@@ -99,6 +99,7 @@ class Bird:
         self._shape = pymunk.Circle(self.body, radius)
         self._shape.density = density
         self._shape.elasticity = elasticity
+        self._shape.friction = friction
         self._radius = radius
         self.velocity = 0
         self.angle = 0
@@ -241,7 +242,8 @@ class Floor:
             a=(0, 0),
             b=(SCREEN_WIDTH, 0),
             radius=floor_height)
-        self._shape.elasticity = 0.5
+        self._shape.elasticity = 0.6
+        self._shape.friction = 0.8
 
     @property
     def body(self):
