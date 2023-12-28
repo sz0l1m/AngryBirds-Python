@@ -223,6 +223,42 @@ class Trajectory:
                 pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 10)
 
 
+class Bar:
+    """
+    Class Bar. Contains attributes:
+    :param body: pymunk body of the bar
+    :type body: pymunk.body.Body
+
+    :param shape: pymunk shape of the bar
+    :type shape: pymunk.shapes.Poly
+
+    :param size: size of the bar
+    :type size: tuple
+    """
+    def __init__(self, position: tuple, size: tuple, color=(0, 0, 0)):
+        """
+        Creates instance of bar.
+        """
+        check_coords(position)
+        if size[0] or size[1] <= 0:
+            raise ValueError('Size of the bar has to be positive')
+        self.body = pymunk.Body()
+        self.body.position = position
+        self._shape = pymunk.Poly.create_box(self.body, size, 2)
+        self.size = size
+        self._shape.color = color
+        self._shape.density = 0.7
+        self._shape.elasticity = 0.4
+        self._shape.friction = 0.8
+
+    @property
+    def shape(self):
+        """
+        Returns pymunk's shape of the bar.
+        """
+        return self._shape
+
+
 class Floor:
     """
     Class Floor. Contains attributes:

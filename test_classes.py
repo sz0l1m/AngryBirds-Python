@@ -1,6 +1,7 @@
 from classes import (
     CoordinatesError,
     Bird,
+    Bar,
     Trajectory,
     Floor,
     Text,
@@ -238,7 +239,7 @@ def test_text_set_color():
     assert text.color == (100, 100, 255)
 
 
-def test_text_set_size_negative_color():
+def test_text_set_color_negative_color():
     pygame.init()
     text = Text('WASD123', (width, height))
     assert text.color == (0, 0, 0)
@@ -246,7 +247,7 @@ def test_text_set_size_negative_color():
         text.set_color((-1, 0, 0))
 
 
-def test_text_set_size_invalid_color():
+def test_text_set_color_invalid_color():
     pygame.init()
     text = Text('WASD123', (width, height))
     assert text.color == (0, 0, 0)
@@ -287,23 +288,73 @@ def test_text_set_font_type():
 
 
 def test_trajectory_create():
-    bird = Bird((100, 200), 20)
+    bird = Bird((width, height), 20)
     tra = Trajectory(bird)
     assert tra.x_vel == 0
     assert tra.y_vel == 0
-    assert tra.start_point == (100, 200)
-    assert tra.vertex == (100, 200)
+    assert tra.start_point == (width, height)
+    assert tra.vertex == (width, height)
     assert tra.a_of_pattern == 0
 
 
 def test_trajectory_calc():
-    bird = Bird((100, 200), 20)
+    bird = Bird((width, height), 20)
     tra = Trajectory(bird)
     bird.x_velocity = 200
     bird.y_velocity = 300
     tra.calc()
     assert tra.x_vel == 200
     assert tra.y_vel == 300
-    assert tra.start_point == [100, 200]
+    assert tra.start_point == [width, height]
     assert tra.vertex == [220, 290]
     assert tra.a_of_pattern == pytest.approx(-0.00625)
+
+
+def test_bar_create_normal():
+    bar = Bar((width, height), (10, 20), (0, 0, 0))
+    assert bar.body.position == (width, height)
+    assert bar.size == (10, 20)
+    assert bar.shape.color == (0, 0, 0)
+    assert bar.shape.density == 0.7
+    assert bar.shape.elasticity == 0.4
+    assert bar.shape.friction == 0.8
+
+
+def test_bar_create_default_valuse():
+    bar = Bar((width, height), (10, 20))
+    assert bar.body.position == (width, height)
+    assert bar.size == (10, 20)
+    assert bar.shape.color == (0, 0, 0)
+    assert bar.shape.density == 0.7
+    assert bar.shape.elasticity == 0.4
+    assert bar.shape.friction == 0.8
+
+
+def test_bar_create_negative_position():
+    with pytest.raises(CoordinatesError):
+        Bar((-width, height), (10, 20))
+
+
+def test_bar_create_invalid_position():
+    with pytest.raises(CoordinatesError):
+        Bar((width, height + 2), (10, 20))
+
+
+def test_bar_create_negative_size_1():
+    with pytest.raises(ValueError):
+        Bar((width, height), (-10, 20))
+
+
+def test_bar_create_negative_size_2():
+    with pytest.raises(ValueError):
+        Bar((width, height), (10, -20))
+
+
+def test_bar_create_negative_color():
+    with pytest.raises(ValueError):
+        Bar((width, height), (10, 20), (-1, 0, 0))
+
+
+def test_bar_create_invalid_color():
+    with pytest.raises(ValueError):
+        Bar((width, height), (10, 20), (1, 0, 256))
