@@ -265,6 +265,15 @@ class Bar:
         check_coords(new_position)
         self.body.position = new_position
 
+    def set_size(self, new_size):
+        """
+        Changes size of the bar to new_size.
+        """
+        if new_size[0] <= 0 or new_size[1] <= 0:
+            raise ValueError('Size of the bar has to be positive')
+        self.size = new_size
+        self._shape = pymunk.Poly.create_box(self.body, self.size, 2)
+
 
 class Floor:
     """

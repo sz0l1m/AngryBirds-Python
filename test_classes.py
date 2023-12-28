@@ -379,3 +379,24 @@ def test_bar_set_position_invalid():
     assert bar.body.position == (width, height)
     with pytest.raises(CoordinatesError):
         bar.set_position((width, height + 2))
+
+
+def test_bar_set_size():
+    bar = Bar((width, height), (10, 20))
+    assert bar.size == (10, 20)
+    bar.set_size((1, 2))
+    assert bar.size == (1, 2)
+
+
+def test_bar_set_size_negative():
+    bar = Bar((width, height), (10, 20))
+    assert bar.size == (10, 20)
+    with pytest.raises(ValueError):
+        bar.set_size((-1, 2))
+
+
+def test_bar_set_size_zero():
+    bar = Bar((width, height), (10, 20))
+    assert bar.size == (10, 20)
+    with pytest.raises(ValueError):
+        bar.set_size((1, 0))
