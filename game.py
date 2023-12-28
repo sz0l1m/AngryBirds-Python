@@ -36,6 +36,10 @@ def main():
 
     bird = Bird(space, bird_position, bird_radius, density=1, elasticity=0.8, friction=0.6)
 
+    Bar(space, (700, 200), (20, 200))
+    Bar(space, (900, 200), (20, 200))
+    Bar(space, (800, 310), (220, 20))
+
     trajectory = Trajectory(bird)
 
     Floor(space)
