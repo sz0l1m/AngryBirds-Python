@@ -79,7 +79,7 @@ class Bird:
     :param x_velocity: initial y_velocity of the bird set by set_speed method, defualt: 0
     :type x_velocity: int
     """
-    def __init__(self, position: tuple, radius: int, density=1, elasticity=1, friction=0):
+    def __init__(self, space: pymunk.Space, position: tuple, radius: int, density=1, elasticity=1, friction=0):
         """
         Creates instance of Bird.
 
@@ -106,6 +106,7 @@ class Bird:
         self.x_velocity = 0
         self.y_velocity = 0
         self.body.velocity = (self.x_velocity, self.y_velocity)
+        space.add(self.body, self.shape)
 
     @property
     def shape(self):
@@ -235,7 +236,7 @@ class Bar:
     :param size: size of the bar
     :type size: tuple
     """
-    def __init__(self, position: tuple, size: tuple, color=(0, 0, 0)):
+    def __init__(self, space: pymunk.Space, position: tuple, size: tuple, color=(0, 0, 0)):
         """
         Creates instance of bar.
         """
@@ -249,7 +250,8 @@ class Bar:
         self._shape.color = pygame.Color(color)
         self._shape.density = 0.7
         self._shape.elasticity = 0.4
-        self._shape.friction = 0.8
+        self._shape.friction = 0.6
+        space.add(self.body, self.shape)
 
     @property
     def shape(self):
@@ -272,7 +274,7 @@ class Bar:
         if new_size[0] <= 0 or new_size[1] <= 0:
             raise ValueError('Size of the bar has to be positive')
         self.size = new_size
-        self._shape = pymunk.Poly.create_box(self.body, self.size, 2)
+        self._shape = pymunk.Poly.create_box(self.body, self.size, 1)
 
     def set_color(self, new_color):
         """
@@ -290,7 +292,7 @@ class Floor:
     :param shape: pymunk shape of the floor
     :type shape: pymunk.shapes.Segment
     """
-    def __init__(self):
+    def __init__(self, space: pymunk.Space):
         """
         Creates instance of Floor.
         """
@@ -302,6 +304,7 @@ class Floor:
             radius=floor_height)
         self._shape.elasticity = 0.6
         self._shape.friction = 0.8
+        space.add(self.body, self.shape)
 
     @property
     def body(self):

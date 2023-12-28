@@ -1,5 +1,6 @@
 from classes import (
     Bird,
+    Bar,
     Trajectory,
     Floor,
     Text,
@@ -33,13 +34,11 @@ def main():
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    bird = Bird(bird_position, bird_radius, density=1, elasticity=0.8, friction=0.6)
-    space.add(bird.body, bird.shape)
+    bird = Bird(space, bird_position, bird_radius, density=1, elasticity=0.8, friction=0.6)
 
     trajectory = Trajectory(bird)
 
-    floor = Floor()
-    space.add(floor.body, floor.shape)
+    Floor(space)
 
     angle_text = Text('0', (20, 20), 30)
     velocity_text = Text('0', (20, 100), 30)
