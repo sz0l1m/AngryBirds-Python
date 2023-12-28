@@ -15,14 +15,16 @@ from config import (
 )
 import pytest
 import pygame
+import pymunk
 
+space = pymunk.Space()
 
 width = SCREEN_WIDTH - 1
 height = SCREEN_HEIGHT - 1
 
 
 def test_bird_create_normal():
-    bird = Bird((width, height), 30, 2, 3)
+    bird = Bird(space, (width, height), 30, 2, 3)
     assert bird.body.position == (width, height)
     assert bird.radius == 30
     assert bird.shape.density == 2
@@ -30,7 +32,7 @@ def test_bird_create_normal():
 
 
 def test_bird_create_default_values():
-    bird = Bird((width, height), 30)
+    bird = Bird(space, (width, height), 30)
     assert bird.body.position == (width, height)
     assert bird.radius == 30
     assert bird.shape.density == 1
@@ -39,45 +41,45 @@ def test_bird_create_default_values():
 
 def test_bird_create_negative_coordinates():
     with pytest.raises(CoordinatesError):
-        Bird((-100, height), 30, 4)
+        Bird(space, (-100, height), 30, 4)
 
 
 def test_bird_create_invalid_coordinates():
     with pytest.raises(CoordinatesError):
-        Bird((width, SCREEN_HEIGHT + 10), 30, 4)
+        Bird(space, (width, SCREEN_HEIGHT + 10), 30, 4)
 
 
 def test_bird_create_negative_radius():
     with pytest.raises(ValueError):
-        Bird((width, height), -10, 4)
+        Bird(space, (width, height), -10, 4)
 
 
 def test_bird_create_negative_density():
     with pytest.raises(ValueError):
-        Bird((width, height), 10, -4)
+        Bird(space, (width, height), 10, -4)
 
 
 def test_bird_create_negative_elasticity():
     with pytest.raises(ValueError):
-        Bird((width, height), 10, 4, -1)
+        Bird(space, (width, height), 10, 4, -1)
 
 
 def test_bird_set_radius():
-    bird = Bird((width, height), 30)
+    bird = Bird(space, (width, height), 30)
     assert bird.radius == 30
     bird.set_radius(50)
     assert bird.radius == 50
 
 
 def test_bird_set_radius_negative_radius():
-    bird = Bird((width, height), 30)
+    bird = Bird(space, (width, height), 30)
     assert bird.radius == 30
     with pytest.raises(ValueError):
         bird.set_radius(-10)
 
 
 def test_floor_create():
-    floor = Floor()
+    floor = Floor(space)
     assert floor.shape.a == (0, 0)
     assert floor.shape.b == (SCREEN_WIDTH, 0)
     assert floor.shape.radius == floor_height
@@ -288,7 +290,7 @@ def test_text_set_font_type():
 
 
 def test_trajectory_create():
-    bird = Bird((width, height), 20)
+    bird = Bird(space, (width, height), 20)
     tra = Trajectory(bird)
     assert tra.x_vel == 0
     assert tra.y_vel == 0
@@ -298,7 +300,7 @@ def test_trajectory_create():
 
 
 def test_trajectory_calc():
-    bird = Bird((width, height), 20)
+    bird = Bird(space, (width, height), 20)
     tra = Trajectory(bird)
     bird.x_velocity = 200
     bird.y_velocity = 300
@@ -311,113 +313,113 @@ def test_trajectory_calc():
 
 
 def test_bar_create_normal():
-    bar = Bar((width, height), (10, 20), (0, 0, 0))
+    bar = Bar(space, (width, height), (10, 20), (0, 0, 0))
     assert bar.body.position == (width, height)
     assert bar.size == (10, 20)
     assert bar.shape.color == (0, 0, 0)
     assert bar.shape.density == 0.7
     assert bar.shape.elasticity == 0.4
-    assert bar.shape.friction == 0.8
+    assert bar.shape.friction == 0.6
 
 
 def test_bar_create_default_valuse():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.body.position == (width, height)
     assert bar.size == (10, 20)
     assert bar.shape.color == (0, 0, 0)
     assert bar.shape.density == 0.7
     assert bar.shape.elasticity == 0.4
-    assert bar.shape.friction == 0.8
+    assert bar.shape.friction == 0.6
 
 
 def test_bar_create_negative_position():
     with pytest.raises(CoordinatesError):
-        Bar((-width, height), (10, 20))
+        Bar(space, (-width, height), (10, 20))
 
 
 def test_bar_create_invalid_position():
     with pytest.raises(CoordinatesError):
-        Bar((width, height + 2), (10, 20))
+        Bar(space, (width, height + 2), (10, 20))
 
 
 def test_bar_create_negative_size_1():
     with pytest.raises(ValueError):
-        Bar((width, height), (-10, 20))
+        Bar(space, (width, height), (-10, 20))
 
 
 def test_bar_create_size_zero():
     with pytest.raises(ValueError):
-        Bar((width, height), (10, 0))
+        Bar(space, (width, height), (10, 0))
 
 
 def test_bar_create_negative_color():
     with pytest.raises(ValueError):
-        Bar((width, height), (10, 20), (-1, 0, 0))
+        Bar(space, (width, height), (10, 20), (-1, 0, 0))
 
 
 def test_bar_create_invalid_color():
     with pytest.raises(ValueError):
-        Bar((width, height), (10, 20), (1, 0, 256))
+        Bar(space, (width, height), (10, 20), (1, 0, 256))
 
 
 def test_bar_set_position():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.body.position == (width, height)
     bar.set_position((0, 0))
     assert bar.body.position == (0, 0)
 
 
 def test_bar_set_position_negative():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.body.position == (width, height)
     with pytest.raises(CoordinatesError):
         bar.set_position((-width, 0))
 
 
 def test_bar_set_position_invalid():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.body.position == (width, height)
     with pytest.raises(CoordinatesError):
         bar.set_position((width, height + 2))
 
 
 def test_bar_set_size():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.size == (10, 20)
     bar.set_size((1, 2))
     assert bar.size == (1, 2)
 
 
 def test_bar_set_size_negative():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.size == (10, 20)
     with pytest.raises(ValueError):
         bar.set_size((-1, 2))
 
 
 def test_bar_set_size_zero():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.size == (10, 20)
     with pytest.raises(ValueError):
         bar.set_size((1, 0))
 
 
 def test_bar_set_color():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.shape.color == (0, 0, 0)
     bar.set_color((255, 255, 255))
     assert bar.shape.color == (255, 255, 255)
 
 
 def test_bar_set_color_negative():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.shape.color == (0, 0, 0)
     with pytest.raises(ValueError):
         bar.set_color((-1, 0, 0))
 
 
 def test_bar_set_color_zero():
-    bar = Bar((width, height), (10, 20))
+    bar = Bar(space, (width, height), (10, 20))
     assert bar.shape.color == ((0, 0, 0))
     with pytest.raises(ValueError):
         bar.set_color((256, 0, 0))
