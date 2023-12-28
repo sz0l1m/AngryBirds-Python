@@ -400,3 +400,24 @@ def test_bar_set_size_zero():
     assert bar.size == (10, 20)
     with pytest.raises(ValueError):
         bar.set_size((1, 0))
+
+
+def test_bar_set_color():
+    bar = Bar((width, height), (10, 20))
+    assert bar.shape.color == (0, 0, 0)
+    bar.set_color((255, 255, 255))
+    assert bar.shape.color == (255, 255, 255)
+
+
+def test_bar_set_color_negative():
+    bar = Bar((width, height), (10, 20))
+    assert bar.shape.color == (0, 0, 0)
+    with pytest.raises(ValueError):
+        bar.set_color((-1, 0, 0))
+
+
+def test_bar_set_color_zero():
+    bar = Bar((width, height), (10, 20))
+    assert bar.shape.color == ((0, 0, 0))
+    with pytest.raises(ValueError):
+        bar.set_color((256, 0, 0))

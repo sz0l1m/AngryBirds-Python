@@ -274,6 +274,12 @@ class Bar:
         self.size = new_size
         self._shape = pymunk.Poly.create_box(self.body, self.size, 2)
 
+    def set_color(self, new_color):
+        """
+        Changes color of the bar to new_color.
+        """
+        self._shape.color = pygame.Color(new_color)
+
 
 class Floor:
     """
