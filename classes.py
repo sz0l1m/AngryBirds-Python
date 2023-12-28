@@ -24,7 +24,7 @@ def convert_coords(coords):
     Converts coordinates in such a way that it moves horizontal axis
     from the bottom of display to the top or vice versa.
     Vertical axis stays the same and it is located on the left of the diplay.
-    The function is needed because pygame has its horizontal axis at the top of diplay,
+    The function is needed because pygame has its horizontal axis at the top of display,
     while pymunk on the bottom.
     """
     x, y = coords
@@ -40,6 +40,13 @@ def check_coords(coords):
     x, y = coords
     if x < 0 or y < 0 or x > SCREEN_WIDTH or y > SCREEN_HEIGHT:
         raise CoordinatesError(coords)
+
+
+def space_draw(space: pymunk.Space, options):
+    """
+    Draws all elements in pymunk's space on pygame's display.
+    """
+    space.debug_draw(options)
 
 
 class CoordinatesError(Exception):
@@ -120,12 +127,6 @@ class Bird:
         if new_radius < 0:
             raise ValueError('Radius cannot be negative')
         self._radius = new_radius
-
-    def draw(self, screen):
-        """
-        Draws bird on pygame display
-        """
-        pygame.draw.circle(screen, (0, 0, 0), convert_coords(self.body.position), self._radius)
 
     def set_speed(self, pressed_keys):
         """
@@ -255,18 +256,6 @@ class Floor:
         Returns shape of the floor
         """
         return self._shape
-
-    def draw(self, screen):
-        """
-        Draws floor on pygame display
-        """
-        pygame.draw.line(
-            surface=screen,
-            color=(0, 0, 0),
-            start_pos=convert_coords((0, floor_height)),
-            end_pos=convert_coords((SCREEN_WIDTH, floor_height)),
-            width=6
-        )
 
 
 class Text:

@@ -2,7 +2,8 @@ from classes import (
     Bird,
     Trajectory,
     Floor,
-    Text
+    Text,
+    space_draw
 )
 from config import (
     SCREEN_HEIGHT,
@@ -12,8 +13,9 @@ from config import (
     bird_position,
     bird_radius
 )
-import pymunk
 import pygame
+import pymunk
+import pymunk.pygame_util
 from pygame.locals import (
     K_ESCAPE,
     K_SPACE,
@@ -42,6 +44,9 @@ def main():
     angle_text = Text('0', (20, 20), 30)
     velocity_text = Text('0', (20, 100), 30)
 
+    pymunk.pygame_util.positive_y_is_up = True
+    draw_options = pymunk.pygame_util.DrawOptions(screen)
+
     running = True
 
     space_used = False
@@ -65,10 +70,10 @@ def main():
         trajectory.calc()
 
         screen.fill((255, 255, 255))
-        bird.draw(screen)
-        floor.draw(screen)
+
+        space_draw(space, draw_options)
+
         trajectory.draw(screen)
-        # pygame.draw.circle(screen, (0, 0, 0), convert_coords(trajectory.vertex), bird_radius)
 
         angle_text.set_str(str(bird.angle))
         velocity_text.set_str(str(bird.velocity))
