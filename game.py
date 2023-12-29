@@ -1,19 +1,14 @@
 from classes import (
-    Bird,
-    Pig,
-    Bar,
     Trajectory,
-    Floor,
     Text,
     space_draw
 )
+from get_levels import Level, get_data
 from config import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
     FPS,
     gravity,
-    bird_position,
-    bird_radius
 )
 import pygame
 import pymunk
@@ -35,17 +30,11 @@ def main():
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    bird = Bird(space, bird_position, bird_radius, density=1, elasticity=0.8, friction=0.6)
-
-    Bar(space, (700, 200), (20, 200))
-    Bar(space, (900, 200), (20, 200))
-    Bar(space, (800, 310), (220, 20))
-
-    Pig(space, (800, 320), 20)
+    data = get_data()['levels']
+    level_1 = Level(data[0])
+    bird = level_1.create_objects(space)[0]
 
     trajectory = Trajectory(bird)
-
-    Floor(space)
 
     angle_text = Text('0', (20, 20), 30)
     velocity_text = Text('0', (20, 100), 30)
