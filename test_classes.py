@@ -95,8 +95,8 @@ def test_bird_set_radius_zero_radius():
 
 def test_floor_create():
     floor = Floor(space)
-    assert floor.shape.a == (0, 0)
-    assert floor.shape.b == (SCREEN_WIDTH, 0)
+    assert floor.shape.a == (-500, 0)
+    assert floor.shape.b == (SCREEN_WIDTH + 500, 0)
     assert floor.shape.radius == floor_height
     assert floor.shape.elasticity == 0.6
 

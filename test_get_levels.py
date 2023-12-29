@@ -72,9 +72,9 @@ def test_level_create_objects_check_bird():
     assert bird.body.position == (100, 130)
     assert bird.radius == 30
     assert bird.shape.radius == 30
-    assert bird.shape.density == 1
-    assert bird.shape.elasticity == 1
-    assert bird.shape.friction == 0
+    assert bird.shape.density == 0.7
+    assert bird.shape.elasticity == 0.7
+    assert bird.shape.friction == 0.8
 
 
 def test_level_create_objects_check_pig():
@@ -102,7 +102,7 @@ def test_level_create_objects_check_bar():
 def test_level_create_objects_check_floor():
     level = Level(data[0])
     floor = level.create_objects(space)[3]
-    assert floor.shape.a == (0, 0)
-    assert floor.shape.b == (config.SCREEN_WIDTH, 0)
+    assert floor.shape.a == (-500, 0)
+    assert floor.shape.b == (config.SCREEN_WIDTH + 500, 0)
     assert floor.shape.radius == config.floor_height
     assert floor.shape.elasticity == 0.6
