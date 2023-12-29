@@ -226,6 +226,12 @@ class Trajectory:
 
 class Pig:
     def __init__(self, space: pymunk.Space, position: tuple, radius: int):
+        """
+        Creates instance of pig.
+        """
+        check_coords(position)
+        if radius <= 0:
+            raise ValueError('Radius has to be positive')
         self.body = pymunk.Body()
         self.body.position = position
         self._radius = radius
@@ -233,6 +239,20 @@ class Pig:
         self._shape.density = 0.8
         self._shape.elasticity = 0.7
         self._shape.friction = 0.8
+
+    @property
+    def shape(self):
+        """
+        Returns shape of the pig
+        """
+        return self._shape
+
+    @property
+    def radius(self):
+        """
+        Returns radius of the pig
+        """
+        return self._radius
 
 
 class Bar:
