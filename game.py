@@ -31,7 +31,7 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
     data = get_data()['levels']
-    level_1 = Level(data[0])
+    level_1 = Level(data[1])
     bird = level_1.create_objects(space)[0]
 
     trajectory = Trajectory(bird)

@@ -385,8 +385,8 @@ class Floor:
         self._body = pymunk.Body(body_type=pymunk.Body.STATIC)
         self._shape = pymunk.Segment(
             body=self._body,
-            a=(0, 0),
-            b=(SCREEN_WIDTH, 0),
+            a=(-500, 0),
+            b=(SCREEN_WIDTH + 500, 0),
             radius=floor_height)
         self._shape.elasticity = 0.6
         self._shape.friction = 0.8
