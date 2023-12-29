@@ -1,12 +1,6 @@
 from get_levels import (
     Level
 )
-from classes import (
-    Bird,
-    Pig,
-    Bar,
-    Floor
-)
 from io import StringIO
 import json
 import pymunk
