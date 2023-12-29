@@ -475,3 +475,28 @@ def test_pig_set_position_invalid_position():
     assert pig.body.position == (width, height)
     with pytest.raises(CoordinatesError):
         pig.set_position((width, height + 2))
+
+
+def test_pig_set_radius_normal():
+    pig = Pig(space, (width, height), 10)
+    assert pig.radius == 10
+    assert pig.shape.radius == 10
+    pig.set_radius(1)
+    assert pig.radius == 1
+    assert pig.shape.radius == 1
+
+
+def test_pig_set_radius_negative_radius():
+    pig = Pig(space, (width, height), 10)
+    assert pig.radius == 10
+    assert pig.shape.radius == 10
+    with pytest.raises(ValueError):
+        pig.set_radius(-1)
+
+
+def test_pig_set_radius_zero_radius():
+    pig = Pig(space, (width, height), 10)
+    assert pig.radius == 10
+    assert pig.shape.radius == 10
+    with pytest.raises(ValueError):
+        pig.set_radius(0)

@@ -262,6 +262,15 @@ class Pig:
         self.body.position = new_position
         self._shape = pymunk.Circle(self.body, self._radius)
 
+    def set_radius(self, new_radius):
+        """
+        Sets radius of the pig to new_radius.
+        """
+        if new_radius <= 0:
+            raise ValueError('Radius has to be positive')
+        self._radius = new_radius
+        self._shape = pymunk.Circle(self.body, self._radius)
+
 
 class Bar:
     """
