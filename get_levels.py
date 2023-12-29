@@ -24,3 +24,17 @@ class Level:
         """
         self._number = level_data["level"]
         self._objects = level_data["objects"]
+
+    @property
+    def number(self):
+        """
+        Returns number of the level.
+        """
+        return self._number
+
+    @property
+    def objects(self):
+        """
+        Returns objects of the level.
+        """
+        return self._objects
