@@ -224,6 +224,17 @@ class Trajectory:
                 pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 10)
 
 
+class Pig:
+    def __init__(self, space: pymunk.Space, position: tuple, radius: int):
+        self.body = pymunk.Body()
+        self.body.position = position
+        self._radius = radius
+        self._shape = pymunk.Circle(self.body, self._radius)
+        self._shape.density = 0.8
+        self._shape.elasticity = 0.7
+        self._shape.friction = 0.8
+
+
 class Bar:
     """
     Class Bar. Contains attributes:
