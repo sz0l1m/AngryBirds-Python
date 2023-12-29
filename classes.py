@@ -58,7 +58,17 @@ def space_draw(space: pymunk.Space, options):
 
 
 class CoordinatesError(Exception):
+    """
+    Class CoordinatesError.
+    Class inherits attributes from Exception class.
+    Contains attributes:
+    :param coordinates: invalid coordinates
+    :type coordinates: tuple
+    """
     def __init__(self, coords):
+        """
+        Creates instance of error.
+        """
         super().__init__('Invalid coordinates')
         self.coordinates = coords
 
@@ -93,7 +103,7 @@ class Bird:
 
         Raises ValueError if radius, density or elasticiy is negative.
 
-        Raises CoordinatesError if coordinates are negative or are bigger than screen size.
+        Raises CoordinatesError if coordinates are negative or bigger than screen size.
         """
         check_coords(position)
         check_radius(radius)
@@ -118,27 +128,29 @@ class Bird:
     @property
     def shape(self):
         """
-        Returns shape of the bird
+        Returns shape of the bird.
         """
         return self._shape
 
     @property
     def radius(self):
         """
-        Returns radius of the bird
+        Returns radius of the bird.
         """
         return self._radius
 
     def set_radius(self, new_radius):
         """
-        Changes radius of the bird to new_radius
+        Changes radius of the bird to new_radius.
+
+        Raises ValueError if new_radius is not positive.
         """
         check_radius(new_radius)
         self._radius = new_radius
 
     def set_speed(self, pressed_keys):
         """
-        Sets speed of the bird depending on what key has been pressed.
+        Sets speed of the bird depending on angle and velocity given by user.
         """
         if pressed_keys[K_UP] or pressed_keys[K_w]:
             if self.angle < 90:
@@ -199,7 +211,7 @@ class Trajectory:
     """
     def __init__(self, bird: Bird):
         """
-        Creates instance of Bird.
+        Creates instance of Trajectory.
         """
         self.bird = bird
         self.x_vel = 0
@@ -210,7 +222,7 @@ class Trajectory:
 
     def calc(self):
         """
-        Calculates vertex coefficients and a coefficient of quadratic function of trajectory
+        Calculates vertex coefficients and "a" coefficient of quadratic function of trajectory
         based of vertical and horizontal speed of the bird.
         """
         self.x_vel = self.bird.x_velocity
@@ -234,6 +246,10 @@ class Pig:
     def __init__(self, space: pymunk.Space, position: tuple, radius: int):
         """
         Creates instance of pig.
+
+        Raises CoordinatesError if coordinates are negative or bigger than screen size.
+
+        Raises ValueError if raidus is not positive.
         """
         check_coords(position)
         check_radius(radius)
@@ -262,6 +278,8 @@ class Pig:
     def set_position(self, new_position):
         """
         Sets position of the pig to new_position.
+
+        Raises CoordinatesError if coordinates are negative or bigger than screen size.
         """
         check_coords(new_position)
         self.body.position = new_position
@@ -270,6 +288,8 @@ class Pig:
     def set_radius(self, new_radius):
         """
         Sets radius of the pig to new_radius.
+
+        Raises ValueError if raidus is not positive.
         """
         check_radius(new_radius)
         self._radius = new_radius
@@ -291,6 +311,12 @@ class Bar:
     def __init__(self, space: pymunk.Space, position: tuple, size: tuple, color=(0, 0, 0)):
         """
         Creates instance of bar.
+
+        Raises CoordinatesError if coordinates are negative or bigger than screen size.
+
+        Raises ValueError if size is not positive.
+
+        Raises ValueError if color is invalid.
         """
         check_coords(position)
         if size[0] <= 0 or size[1] <= 0:
@@ -315,6 +341,8 @@ class Bar:
     def set_position(self, new_position):
         """
         Changes position of the bar to new_position.
+
+        Raises CoordinatesError if coordinates are negative or bigger than screen size.
         """
         check_coords(new_position)
         self.body.position = new_position
@@ -322,6 +350,8 @@ class Bar:
     def set_size(self, new_size):
         """
         Changes size of the bar to new_size.
+
+        Raises ValueError if size is not positive.
         """
         if new_size[0] <= 0 or new_size[1] <= 0:
             raise ValueError('Size of the bar has to be positive')
@@ -331,6 +361,8 @@ class Bar:
     def set_color(self, new_color):
         """
         Changes color of the bar to new_color.
+
+        Raises ValueError if color is invalid.
         """
         self._shape.color = pygame.Color(new_color)
 
@@ -406,6 +438,15 @@ class Text:
             background=(255, 255, 255),
             font='timesnewroman'
     ):
+        """
+        Creates instance of Text.
+
+        Raises CoordinatesError if coordinates are negative or bigger than screen size.
+
+        Raises ValueError if size is not positive.
+
+        Raises ValueError if color or background is invalid.
+        """
         check_coords(position)
         if size <= 0:
             raise ValueError('Size has to be positive')
@@ -421,62 +462,66 @@ class Text:
     @property
     def str(self):
         """
-        Returns str of the text
+        Returns str of the text.
         """
         return self._str
 
     @property
     def position(self):
         """
-        Returns position of the text
+        Returns position of the text.
         """
         return self._position
 
     @property
     def size(self):
         """
-        Returns size of the text
+        Returns size of the text.
         """
         return self._size
 
     @property
     def color(self):
         """
-        Returns color of the text
+        Returns color of the text.
         """
         return self._color
 
     @property
     def background(self):
         """
-        Returns background of the text
+        Returns background of the text.
         """
         return self._background
 
     @property
     def font_type(self):
         """
-        Returns font_type of the text
+        Returns font_type of the text.
         """
         return self._font_type
 
     def set_str(self, new_str):
         """
-        Changes str of the text to new_str
+        Changes str of the text to new_str.
         """
         self._str = new_str
         self._surf = self._font.render(self._str, True, self._color, self._background)
 
     def set_position(self, new_position):
         """
-        Changes position of the text to new_position
+        Changes position of the text to new_position.
+
+        Raises CoordinatesError if coordinates are negative or bigger than screen size.
         """
         check_coords(new_position)
         self._position = new_position
 
     def set_size(self, new_size):
         """
-        Changes size of the text to new_size
+        Changes size of the text to new_size.
+
+        Raises ValueError if size is not positive.
         """
         if new_size <= 0:
             raise ValueError('Size has to be positive')
@@ -486,21 +531,25 @@ class Text:
 
     def set_color(self, new_color):
         """
-        Changes color of the text to new_color
+        Changes color of the text to new_color.
+
+        Raises ValueError if color is invalid.
         """
         self._color = new_color
         self._surf = self._font.render(self._str, True, self._color, self._background)
 
     def set_background(self, new_background):
         """
-        Changes background of the text to new_background
+        Changes background of the text to new_background.
+
+        Raises ValueError if background is invalid.
         """
         self._background = new_background
         self._surf = self._font.render(self._str, True, self._color, self._background)
 
     def set_font_type(self, new_font_type):
         """
-        Changes font_type of the text to new_font_type
+        Changes font_type of the text to new_font_type.
         """
         self._font_type = new_font_type
         self._font = pygame.font.SysFont(self._font_type, self._size)
@@ -508,6 +557,6 @@ class Text:
 
     def draw(self, screen):
         """
-        Draws text on pygame display
+        Draws text on pygame display.
         """
         screen.blit(self._surf, self._position)
