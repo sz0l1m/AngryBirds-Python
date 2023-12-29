@@ -48,7 +48,14 @@ class Level:
 
     def create_objects(self, space):
         floor = Floor(space)
-        bird = Bird(space, config.bird_position, config.bird_radius)
+        bird = Bird(
+            space,
+            config.bird_position,
+            config.bird_radius,
+            0.7,
+            0.7,
+            0.8
+        )
         pigs = [
             Pig(
                 space,
