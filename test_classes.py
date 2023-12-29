@@ -57,6 +57,11 @@ def test_bird_create_negative_radius():
         Bird(space, (width, height), -10, 4)
 
 
+def test_bird_create_zero_radius():
+    with pytest.raises(ValueError):
+        Bird(space, (width, height), 0, 4)
+
+
 def test_bird_create_negative_density():
     with pytest.raises(ValueError):
         Bird(space, (width, height), 10, -4)
@@ -79,6 +84,13 @@ def test_bird_set_radius_negative_radius():
     assert bird.radius == 30
     with pytest.raises(ValueError):
         bird.set_radius(-10)
+
+
+def test_bird_set_radius_zero_radius():
+    bird = Bird(space, (width, height), 30)
+    assert bird.radius == 30
+    with pytest.raises(ValueError):
+        bird.set_radius(0)
 
 
 def test_floor_create():

@@ -42,6 +42,14 @@ def check_coords(coords):
         raise CoordinatesError(coords)
 
 
+def check_radius(radius):
+    """
+    Raises ValueError if radius is not positive.
+    """
+    if radius <= 0:
+        raise ValueError('Radius has to be positive')
+
+
 def space_draw(space: pymunk.Space, options):
     """
     Draws all elements in pymunk's space on pygame's display.
@@ -88,8 +96,7 @@ class Bird:
         Raises CoordinatesError if coordinates are negative or are bigger than screen size.
         """
         check_coords(position)
-        if radius < 0:
-            raise ValueError('Radius cannot be negative')
+        check_radius(radius)
         if density < 0:
             raise ValueError('Density cannot be negative')
         if elasticity < 0:
@@ -126,8 +133,7 @@ class Bird:
         """
         Changes radius of the bird to new_radius
         """
-        if new_radius < 0:
-            raise ValueError('Radius cannot be negative')
+        check_radius(new_radius)
         self._radius = new_radius
 
     def set_speed(self, pressed_keys):
@@ -230,8 +236,7 @@ class Pig:
         Creates instance of pig.
         """
         check_coords(position)
-        if radius <= 0:
-            raise ValueError('Radius has to be positive')
+        check_radius(radius)
         self.body = pymunk.Body()
         self.body.position = position
         self._radius = radius
@@ -266,8 +271,7 @@ class Pig:
         """
         Sets radius of the pig to new_radius.
         """
-        if new_radius <= 0:
-            raise ValueError('Radius has to be positive')
+        check_radius(new_radius)
         self._radius = new_radius
         self._shape = pymunk.Circle(self.body, self._radius)
 
