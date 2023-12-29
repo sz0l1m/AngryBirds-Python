@@ -1,5 +1,6 @@
 from classes import (
     Bird,
+    Pig,
     Bar,
     Trajectory,
     Floor,
@@ -39,6 +40,8 @@ def main():
     Bar(space, (700, 200), (20, 200))
     Bar(space, (900, 200), (20, 200))
     Bar(space, (800, 310), (220, 20))
+
+    Pig(space, (800, 320), 20)
 
     trajectory = Trajectory(bird)
 

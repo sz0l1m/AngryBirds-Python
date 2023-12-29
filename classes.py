@@ -260,6 +260,8 @@ class Pig:
         self._shape.density = 0.8
         self._shape.elasticity = 0.7
         self._shape.friction = 0.8
+        self._shape.color = pygame.Color("green")
+        space.add(self.body, self._shape)
 
     @property
     def shape(self):
