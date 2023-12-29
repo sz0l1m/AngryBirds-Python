@@ -430,6 +430,7 @@ def test_pig_create_normal():
     pig = Pig(space, (width, height), 10)
     assert pig.body.position == (width, height)
     assert pig.radius == 10
+    assert pig.shape.radius == 10
     assert pig.shape.density == 0.8
     assert pig.shape.elasticity == 0.7
     assert pig.shape.friction == 0.8
@@ -453,3 +454,24 @@ def test_pig_create_negative_radius():
 def test_pig_create_zero_radius():
     with pytest.raises(ValueError):
         Pig(space, (width, height), 0)
+
+
+def test_pig_set_position_normal():
+    pig = Pig(space, (width, height), 10)
+    assert pig.body.position == (width, height)
+    pig.set_position((0, 0))
+    assert pig.body.position == (0, 0)
+
+
+def test_pig_set_position_negative_position():
+    pig = Pig(space, (width, height), 10)
+    assert pig.body.position == (width, height)
+    with pytest.raises(CoordinatesError):
+        pig.set_position((-1, 0))
+
+
+def test_pig_set_position_invalid_position():
+    pig = Pig(space, (width, height), 10)
+    assert pig.body.position == (width, height)
+    with pytest.raises(CoordinatesError):
+        pig.set_position((width, height + 2))

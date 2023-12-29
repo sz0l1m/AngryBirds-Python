@@ -254,6 +254,14 @@ class Pig:
         """
         return self._radius
 
+    def set_position(self, new_position):
+        """
+        Sets position of the pig to new_position.
+        """
+        check_coords(new_position)
+        self.body.position = new_position
+        self._shape = pymunk.Circle(self.body, self._radius)
+
 
 class Bar:
     """
