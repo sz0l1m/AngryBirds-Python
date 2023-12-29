@@ -1,0 +1,101 @@
+{
+    "levels": [
+        {
+            "level": 1,
+            "objects": {
+                "birds": {
+                    "amount": 2
+                },
+                "pigs": [
+                    {
+                        "x_position": 800,
+                        "y_position": 320,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 850,
+                        "y_position": 120,
+                        "radius": 30
+                    }
+                ],
+                "bars": [
+                    {
+                        "x_position": 700,
+                        "y_position": 200,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 900,
+                        "y_position": 200,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 800,
+                        "y_position": 310,
+                        "x_size": 220,
+                        "y_size": 20
+                    }
+                ]
+            }
+        },
+        {
+            "level": 2,
+            "objects": {
+                "birds": {
+                    "amount": 3
+                },
+                "pigs": [
+                    {
+                        "x_position": 1000,
+                        "y_position": 320,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 500,
+                        "y_position": 120,
+                        "radius": 40
+                    },
+                    {
+                        "x_position": 700,
+                        "y_position": 100,
+                        "radius": 10
+                    }
+                ],
+                "bars": [
+                    {
+                        "x_position": 700,
+                        "y_position": 200,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 900,
+                        "y_position": 200,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 800,
+                        "y_position": 310,
+                        "x_size": 220,
+                        "y_size": 20
+                    },
+                    {
+                        "x_position": 1300,
+                        "y_position": 300,
+                        "x_size": 40,
+                        "y_size": 400
+                    },
+                    {
+                        "x_position": 1100,
+                        "y_position": 250,
+                        "x_size": 30,
+                        "y_size": 300
+                    }
+                ]
+            }
+        }
+    ]
+}
