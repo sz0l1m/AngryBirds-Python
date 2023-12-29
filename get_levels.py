@@ -1,4 +1,11 @@
 import json
+from classes import (
+    Bird,
+    Pig,
+    Bar,
+    Floor
+)
+import config
 
 
 def get_data():
@@ -38,3 +45,24 @@ class Level:
         Returns objects of the level.
         """
         return self._objects
+
+    def create_objects(self, space):
+        Floor(space)
+        bird = Bird(space, config.bird_position, config.bird_radius)
+        pigs = [
+            Pig(
+                space,
+                (pig['x_position'], pig['y_position']),
+                pig['radius']
+            )
+            for pig in self._objects['pigs']
+            ]
+        bars = [
+            Bar(
+                space,
+                (bar['x_position'], bar['x_position']),
+                (bar['x_position'], bar['x_position'])
+            )
+            for bar in self._objects['bars']
+        ]
+        return bird, pigs, bars
