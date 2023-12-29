@@ -47,7 +47,7 @@ class Level:
         return self._objects
 
     def create_objects(self, space):
-        Floor(space)
+        floor = Floor(space)
         bird = Bird(space, config.bird_position, config.bird_radius)
         pigs = [
             Pig(
@@ -60,9 +60,9 @@ class Level:
         bars = [
             Bar(
                 space,
-                (bar['x_position'], bar['x_position']),
-                (bar['x_position'], bar['x_position'])
+                (bar['x_position'], bar['y_position']),
+                (bar['x_size'], bar['y_size'])
             )
             for bar in self._objects['bars']
         ]
-        return bird, pigs, bars
+        return bird, pigs, bars, floor
