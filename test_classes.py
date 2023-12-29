@@ -28,6 +28,7 @@ def test_bird_create_normal():
     bird = Bird(space, (width, height), 30, 2, 3)
     assert bird.body.position == (width, height)
     assert bird.radius == 30
+    assert bird.shape.radius == 30
     assert bird.shape.density == 2
     assert bird.shape.elasticity == 3
 
@@ -36,6 +37,7 @@ def test_bird_create_default_values():
     bird = Bird(space, (width, height), 30)
     assert bird.body.position == (width, height)
     assert bird.radius == 30
+    assert bird.shape.radius == 30
     assert bird.shape.density == 1
     assert bird.shape.elasticity == 1
 
