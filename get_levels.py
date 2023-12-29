@@ -9,11 +9,16 @@ import config
 
 
 def get_data():
+    """
+    Returns data from the file.
+    """
     with open('levels.json') as fp:
         return json.load(fp)
 
 
-levels_data = get_data()["levels"]
+def load_level(space, level):
+    level = Level(get_data()['levels'][level])
+    return level.create_objects(space)
 
 
 class Level:
@@ -47,6 +52,9 @@ class Level:
         return self._objects
 
     def create_objects(self, space):
+        """
+        Creates instances of all objects and returns them.
+        """
         floor = Floor(space)
         bird = Bird(
             space,

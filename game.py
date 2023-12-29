@@ -3,7 +3,7 @@ from classes import (
     Text,
     space_draw
 )
-from get_levels import Level, get_data
+from get_levels import load_level
 from config import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
@@ -30,9 +30,7 @@ def main():
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    data = get_data()['levels']
-    level_1 = Level(data[1])
-    bird = level_1.create_objects(space)[0]
+    bird = load_level(space, 1)[0]
 
     trajectory = Trajectory(bird)
 
