@@ -47,7 +47,7 @@ def main():
     pymunk.pygame_util.positive_y_is_up = True
     draw_options = pymunk.pygame_util.DrawOptions(screen)
 
-    handler = space.add_collision_handler(2, 2)
+    handler = space.add_collision_handler(3, 4)
     handler.post_solve = pre_solve
 
     running = True
