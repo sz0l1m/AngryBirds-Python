@@ -5,7 +5,10 @@ from classes import (
     Bar,
     Floor
 )
-import config
+from config import (
+    bird_position,
+    bird_radius
+)
 
 
 def get_data():
@@ -17,8 +20,19 @@ def get_data():
 
 
 def load_level(space, level):
+    """
+    Creates instance of Level and calls create objects method.
+    """
     level = Level(get_data()['levels'][level])
     return level.create_objects(space)
+
+
+def load_bird(space, bird: Bird):
+    """
+    Loads new bird on the screen.
+    """
+    space.remove(bird.body, bird.shape)
+    return Bird(space, bird_position, bird_radius, 0.7, 0.7, 0.8)
 
 
 class Level:
@@ -58,8 +72,8 @@ class Level:
         floor = Floor(space)
         bird = Bird(
             space,
-            config.bird_position,
-            config.bird_radius,
+            bird_position,
+            bird_radius,
             0.7,
             0.7,
             0.8

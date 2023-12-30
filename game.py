@@ -3,7 +3,7 @@ from classes import (
     Text,
     space_draw
 )
-from get_levels import load_level
+from get_levels import load_level, load_bird
 from config import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
@@ -16,6 +16,7 @@ import pymunk.pygame_util
 from pygame.locals import (
     K_ESCAPE,
     K_SPACE,
+    K_l,
     KEYDOWN,
     QUIT,
 )
@@ -55,6 +56,8 @@ def main():
                 elif event.key == K_SPACE and not space_used:
                     bird.body.velocity = (bird.x_velocity, bird.y_velocity)
                     space_used = True
+                elif event.key == K_l:
+                    load_bird(space, bird)
             elif event.type == QUIT:
                 running = False
 
