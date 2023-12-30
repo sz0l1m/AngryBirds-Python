@@ -23,3 +23,17 @@ def create_handlers(space: pymunk.Space):
         handler.begin = calculate_collision
         handler.post_solve = calculate_collision
     return handlers
+
+
+def rolling_resistance(space: pymunk.Space):
+    for body, shape in zip(space.bodies, space.shapes):
+        if shape.collision_type == 1 or shape.collision_type == 3:
+            if round(body.velocity[1]) == 0:
+                if body.velocity[0] >= 2:
+                    body.velocity -= (2, 0)
+                elif body.velocity[0] > 0:
+                    body.velocity = (0, 0)
+                elif body.velocity[0] <= -2:
+                    body.velocity += (2, 0)
+                elif body.velocity[0] < 0:
+                    body.velocity = (0, 0)

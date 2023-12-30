@@ -89,6 +89,8 @@ def main():
         angle_text.draw(screen)
         velocity_text.draw(screen)
 
+        collisions.rolling_resistance(space)
+
         pygame.display.flip()
 
         clock.tick(FPS)
