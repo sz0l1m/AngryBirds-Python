@@ -16,9 +16,10 @@ import pymunk.pygame_util
 from pygame.locals import (
     K_ESCAPE,
     K_SPACE,
-    K_l,
     KEYDOWN,
     QUIT,
+    K_l,
+    K_r,
 )
 import collisions
 
@@ -57,6 +58,12 @@ def main():
                 elif event.key == K_SPACE and not space_used:
                     bird.body.velocity = (bird.x_velocity, bird.y_velocity)
                     space_used = True
+                elif event.key == K_r:
+                    for body, shape in zip(space.bodies, space.shapes):
+                        space.remove(body, shape)
+                    level = load_level(space, 1)
+                    bird = level.bird
+                    space_used = False
                 elif event.key == K_l:
                     level.load_bird(space)
                     bird = level.bird
