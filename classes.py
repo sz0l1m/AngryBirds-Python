@@ -117,6 +117,7 @@ class Bird:
         self._shape.density = density
         self._shape.elasticity = elasticity
         self._shape.friction = friction
+        self._shape.collision_type = 1
         self._radius = radius
         self.velocity = 0
         self.angle = 0
@@ -261,6 +262,7 @@ class Pig:
         self._shape.elasticity = 0.7
         self._shape.friction = 0.8
         self._shape.color = pygame.Color("green")
+        self._shape.collision_type = 3
         space.add(self.body, self._shape)
 
     @property
@@ -331,6 +333,7 @@ class Bar:
         self._shape.density = 0.7
         self._shape.elasticity = 0.4
         self._shape.friction = 0.6
+        self._shape.collision_type = 4
         space.add(self.body, self.shape)
 
     @property
@@ -390,6 +393,7 @@ class Floor:
             radius=floor_height)
         self._shape.elasticity = 0.6
         self._shape.friction = 0.8
+        self._shape.collision_type = 2
         space.add(self.body, self.shape)
 
     @property
