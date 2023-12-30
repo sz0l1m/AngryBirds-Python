@@ -24,7 +24,8 @@ def load_level(space, level):
     Creates instance of Level and calls create objects method.
     """
     level = Level(get_data()['levels'][level])
-    return level.create_objects(space)
+    level.create_objects(space)
+    return level
 
 
 class Level:
@@ -81,8 +82,8 @@ class Level:
         """
         Creates instances of all objects and returns them.
         """
-        floor = Floor(space)
-        bird = Bird(
+        self.floor = Floor(space)
+        self.bird = Bird(
             space,
             bird_position,
             bird_radius,
@@ -90,7 +91,7 @@ class Level:
             0.7,
             0.8
         )
-        pigs = [
+        self.pigs = [
             Pig(
                 space,
                 (pig['x_position'], pig['y_position']),
@@ -98,7 +99,7 @@ class Level:
             )
             for pig in self._objects['pigs']
             ]
-        bars = [
+        self.bars = [
             Bar(
                 space,
                 (bar['x_position'], bar['y_position']),
@@ -106,12 +107,11 @@ class Level:
             )
             for bar in self._objects['bars']
         ]
-        return self._attempts, bird, pigs, bars, floor
 
-    def load_bird(self, space, bird: Bird):
+    def load_bird(self, space):
         """
         Loads new bird on the screen.
         """
-        self._attempts
-        space.remove(bird.body, bird.shape)
-        return Bird(space, bird_position, bird_radius, 0.7, 0.7, 0.8)
+        self._attempts -= 1
+        space.remove(self.bird.body, self.bird.shape)
+        self.bird = Bird(space, bird_position, bird_radius, 0.7, 0.7, 0.8)

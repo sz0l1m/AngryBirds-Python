@@ -68,41 +68,41 @@ def test_level_create():
 
 def test_level_create_objects_check_bird():
     level = Level(data[0])
-    bird = level.create_objects(space)[0]
-    assert bird.body.position == (100, 130)
-    assert bird.radius == 30
-    assert bird.shape.radius == 30
-    assert bird.shape.density == 0.7
-    assert bird.shape.elasticity == 0.7
-    assert bird.shape.friction == 0.8
+    level.create_objects(space)
+    assert level.bird.body.position == (100, 130)
+    assert level.bird.radius == 30
+    assert level.bird.shape.radius == 30
+    assert level.bird.shape.density == 0.7
+    assert level.bird.shape.elasticity == 0.7
+    assert level.bird.shape.friction == 0.8
 
 
 def test_level_create_objects_check_pig():
     level = Level(data[0])
-    pig = level.create_objects(space)[1][1]
-    assert pig.body.position == (850, 120)
-    assert pig.radius == 30
-    assert pig.shape.radius == 30
-    assert pig.shape.density == 0.8
-    assert pig.shape.elasticity == 0.7
-    assert pig.shape.friction == 0.8
+    level.create_objects(space)
+    assert level.pigs[1].body.position == (850, 120)
+    assert level.pigs[1].radius == 30
+    assert level.pigs[1].shape.radius == 30
+    assert level.pigs[1].shape.density == 0.8
+    assert level.pigs[1].shape.elasticity == 0.7
+    assert level.pigs[1].shape.friction == 0.8
 
 
 def test_level_create_objects_check_bar():
     level = Level(data[0])
-    bar = level.create_objects(space)[2][0]
-    assert bar.body.position == (700, 200)
-    assert bar.size == (20, 200)
-    assert bar.shape.color == (0, 0, 0)
-    assert bar.shape.density == 0.7
-    assert bar.shape.elasticity == 0.4
-    assert bar.shape.friction == 0.6
+    level.create_objects(space)
+    assert level.bars[0].body.position == (700, 200)
+    assert level.bars[0].size == (20, 200)
+    assert level.bars[0].shape.color == (0, 0, 0)
+    assert level.bars[0].shape.density == 0.7
+    assert level.bars[0].shape.elasticity == 0.4
+    assert level.bars[0].shape.friction == 0.6
 
 
 def test_level_create_objects_check_floor():
     level = Level(data[0])
-    floor = level.create_objects(space)[3]
-    assert floor.shape.a == (-500, 0)
-    assert floor.shape.b == (config.SCREEN_WIDTH + 500, 0)
-    assert floor.shape.radius == config.floor_height
-    assert floor.shape.elasticity == 0.6
+    level.create_objects(space)
+    assert level.floor.shape.a == (-500, 0)
+    assert level.floor.shape.b == (config.SCREEN_WIDTH + 500, 0)
+    assert level.floor.shape.radius == config.floor_height
+    assert level.floor.shape.elasticity == 0.6
