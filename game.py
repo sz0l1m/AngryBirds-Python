@@ -19,13 +19,7 @@ from pygame.locals import (
     KEYDOWN,
     QUIT,
 )
-
-
-def pre_solve(arbiter: pymunk.Arbiter, space: pymunk.Space, data):
-    print('Colission babe')
-    print(arbiter.total_ke)
-    space.remove(arbiter.shapes[0].body, arbiter.shapes[0])
-    space.remove(arbiter.shapes[1].body, arbiter.shapes[1])
+import collisions
 
 
 def main():
@@ -47,8 +41,7 @@ def main():
     pymunk.pygame_util.positive_y_is_up = True
     draw_options = pymunk.pygame_util.DrawOptions(screen)
 
-    handler = space.add_collision_handler(3, 4)
-    handler.post_solve = pre_solve
+    collisions.create_handlers(space)
 
     running = True
 

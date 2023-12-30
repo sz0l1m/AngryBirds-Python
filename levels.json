@@ -53,6 +53,16 @@
                         "radius": 20
                     },
                     {
+                        "x_position": 800,
+                        "y_position": 320,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 1100,
+                        "y_position": 220,
+                        "radius": 20
+                    },
+                    {
                         "x_position": 500,
                         "y_position": 120,
                         "radius": 40
@@ -94,7 +104,7 @@
                         "y_size": 400
                     },
                     {
-                        "x_position": 1100,
+                        "x_position": 1200,
                         "y_position": 250,
                         "x_size": 30,
                         "y_size": 300
