@@ -27,14 +27,6 @@ def load_level(space, level):
     return level.create_objects(space)
 
 
-def load_bird(space, bird: Bird):
-    """
-    Loads new bird on the screen.
-    """
-    space.remove(bird.body, bird.shape)
-    return Bird(space, bird_position, bird_radius, 0.7, 0.7, 0.8)
-
-
 class Level:
     """
     Class Level. Contains attributes:
@@ -43,6 +35,21 @@ class Level:
 
     :param objects: all objects of the level
     :type objects: dict
+
+    :param attempts: attempts of the level
+    :type attempts: int
+
+    :param bird: currently used bird
+    :type bird: Bird
+
+    :param pigs: all pigs of the level
+    :type pigs: list
+
+    :param bars: all bars of the level
+    :type bars: list
+
+    :param floor: floor of the level
+    :type floor: Floor
     """
     def __init__(self, level_data: dict):
         """
@@ -50,6 +57,11 @@ class Level:
         """
         self._number = level_data["level"]
         self._objects = level_data["objects"]
+        self._attempts = self._objects["birds"]["amount"]
+        self.bird = None
+        self.pigs = None
+        self.bars = None
+        self.floor = None
 
     @property
     def number(self):
@@ -94,4 +106,12 @@ class Level:
             )
             for bar in self._objects['bars']
         ]
-        return bird, pigs, bars, floor
+        return self._attempts, bird, pigs, bars, floor
+
+    def load_bird(self, space, bird: Bird):
+        """
+        Loads new bird on the screen.
+        """
+        self._attempts
+        space.remove(bird.body, bird.shape)
+        return Bird(space, bird_position, bird_radius, 0.7, 0.7, 0.8)
