@@ -84,7 +84,6 @@ def main():
                     space_used = True
                 elif event.key == K_r:
                     level, bird, trajectory = load_level(space, level.number - 1)
-                    # space_used = False
             elif event.type == QUIT:
                 running = False
 

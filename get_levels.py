@@ -21,7 +21,7 @@ def get_data():
 
 def get_level(space, level):
     """
-    Creates instance of Level and calls create objects method.
+    Creates instance of Level and calls create_objects method.
     """
     for body, shape in zip(space.bodies, space.shapes):
         space.remove(body, shape)

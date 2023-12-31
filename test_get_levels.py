@@ -1,5 +1,6 @@
 from get_levels import (
-    Level
+    Level,
+    get_level
 )
 from io import StringIO
 import json
@@ -59,6 +60,10 @@ file_handle = StringIO(file)
 data = json.load(file_handle)['levels']
 
 
+def get_data():
+    return json.load(file_handle)
+
+
 def test_level_create():
     level = Level(data[0], len(data))
     assert level.number == 1
@@ -66,6 +71,10 @@ def test_level_create():
     assert level.objects['bars'][0]['x_position'] == 700
     assert level.amount_of_levels == 1
     assert level.attempts == 2
+    assert level.bird is None
+    assert level.pigs is None
+    assert level.bars is None
+    assert level.floor is None
 
 
 def test_level_create_objects_check_bird():
