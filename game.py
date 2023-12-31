@@ -28,11 +28,18 @@ def handle_level(space: pymunk.Space, level: Level):
     pigs = 0
     for body, shape in zip(space.bodies, space.shapes):
         if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
-            return level
-        if shape.collision_type == 2:
+            return None
+        if shape.collision_type == 3:
             pigs += 1
     if pigs == 0:
-        pass
+        return 'Next level'
+
+
+def load_level(space, level_number):
+    level = get_level(space, level_number)
+    bird = level.bird
+    trajectory = Trajectory(bird)
+    return level, bird, trajectory
 
 
 def main():
@@ -44,10 +51,7 @@ def main():
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    level = get_level(space, 0)
-    bird = level.bird
-
-    trajectory = Trajectory(bird)
+    level, bird, trajectory = load_level(space, 0)
 
     angle_text = Text('0', (20, 20), 30)
     velocity_text = Text('0', (20, 100), 30)
@@ -102,7 +106,9 @@ def main():
 
         collisions.rolling_resistance(space)
 
-        level = handle_level(space, level)
+        if handle_level(space, level) == 'Next level':
+            level, bird, trajectory = load_level(space, level.number)
+            space_used = False
 
         pygame.display.flip()
 
