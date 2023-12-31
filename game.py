@@ -18,7 +18,6 @@ from pygame.locals import (
     K_SPACE,
     KEYDOWN,
     QUIT,
-    K_l,
     K_r,
 )
 import collisions
@@ -84,15 +83,8 @@ def main():
                     bird.body.velocity = (bird.x_velocity, bird.y_velocity)
                     space_used = True
                 elif event.key == K_r:
-                    for body, shape in zip(space.bodies, space.shapes):
-                        space.remove(body, shape)
-                    level = get_level(space, 1)
-                    bird = level.bird
-                    space_used = False
-                elif event.key == K_l:
-                    level.load_bird(space)
-                    bird = level.bird
-                    space_used = False
+                    level, bird, trajectory = load_level(space, level.number - 1)
+                    # space_used = False
             elif event.type == QUIT:
                 running = False
 
