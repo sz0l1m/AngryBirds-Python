@@ -3,7 +3,7 @@ from classes import (
     Text,
     space_draw
 )
-from get_levels import load_level
+from get_levels import Level, get_level
 from config import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
@@ -24,6 +24,17 @@ from pygame.locals import (
 import collisions
 
 
+def handle_level(space: pymunk.Space, level: Level):
+    pigs = 0
+    for body, shape in zip(space.bodies, space.shapes):
+        if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
+            return level
+        if shape.collision_type == 2:
+            pigs += 1
+    if pigs == 0:
+        pass
+
+
 def main():
     space = pymunk.Space()
     space.gravity = gravity
@@ -33,7 +44,7 @@ def main():
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    level = load_level(space, 1)
+    level = get_level(space, 0)
     bird = level.bird
 
     trajectory = Trajectory(bird)
@@ -61,7 +72,7 @@ def main():
                 elif event.key == K_r:
                     for body, shape in zip(space.bodies, space.shapes):
                         space.remove(body, shape)
-                    level = load_level(space, 1)
+                    level = get_level(space, 1)
                     bird = level.bird
                     space_used = False
                 elif event.key == K_l:
@@ -90,6 +101,8 @@ def main():
         velocity_text.draw(screen)
 
         collisions.rolling_resistance(space)
+
+        level = handle_level(space, level)
 
         pygame.display.flip()
 

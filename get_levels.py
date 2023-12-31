@@ -19,7 +19,7 @@ def get_data():
         return json.load(fp)
 
 
-def load_level(space, level):
+def get_level(space, level):
     """
     Creates instance of Level and calls create objects method.
     """
