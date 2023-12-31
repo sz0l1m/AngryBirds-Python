@@ -1,7 +1,8 @@
 from classes import (
     Trajectory,
     Text,
-    space_draw
+    space_draw,
+    convert_coords
 )
 from get_levels import Level, get_level
 from config import (
@@ -17,6 +18,7 @@ from pygame.locals import (
     K_ESCAPE,
     K_SPACE,
     KEYDOWN,
+    MOUSEBUTTONDOWN,
     QUIT,
     K_r,
 )
@@ -49,6 +51,14 @@ def load_level(space, level_number):
     bird = level.bird
     trajectory = Trajectory(bird)
     return level, bird, trajectory
+
+
+def is_on_circle(circle_position, radius, position):
+    a, b = circle_position
+    x, y = convert_coords(position)
+    if round((x - a)**2 + (y - b)**2) <= round(radius ** 2):
+        return True
+    return False
 
 
 def main():
@@ -84,6 +94,12 @@ def main():
                     space_used = True
                 elif event.key == K_r:
                     level, bird, trajectory = load_level(space, level.number - 1)
+            elif event.type == MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if is_on_circle(bird.body.position, bird.radius, pygame.mouse.get_pos()):
+                        print('YES')
+                    else:
+                        print('NO')
             elif event.type == QUIT:
                 running = False
 

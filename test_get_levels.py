@@ -1,6 +1,5 @@
 from get_levels import (
-    Level,
-    get_level
+    Level
 )
 from io import StringIO
 import json
