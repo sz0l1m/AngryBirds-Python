@@ -36,6 +36,10 @@ def handle_level(space: pymunk.Space, level: Level):
             pigs += 1
     if pigs == 0 and level.number < level.amount_of_levels:
         return 'Next level'
+    elif pigs != 0 and level.attempts > 1:
+        return 'Next attempt'
+    elif pigs != 0 and level.attempts == 1:
+        return 'Restart'
 
 
 def load_level(space, level_number):
@@ -109,9 +113,16 @@ def main():
 
         collisions.rolling_resistance(space)
 
-        if handle_level(space, level) == 'Next level':
-            level, bird, trajectory = load_level(space, level.number)
-            space_used = False
+        if space_used:
+            match handle_level(space, level):
+                case 'Next level':
+                    level, bird, trajectory = load_level(space, level.number)
+                    space_used = False
+                case 'Next attempt':
+                    level.load_bird(space)
+                    bird = level.bird
+                    trajectory = Trajectory(bird)
+                    space_used = False
 
         pygame.display.flip()
 
