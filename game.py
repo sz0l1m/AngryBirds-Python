@@ -126,6 +126,8 @@ def main():
                     bird = level.bird
                     trajectory = Trajectory(bird)
                     space_used = False
+                case 'Restart':
+                    level, bird, trajectory = load_level(space, level.number - 1)
 
         pygame.display.flip()
 
