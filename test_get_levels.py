@@ -60,14 +60,16 @@ data = json.load(file_handle)['levels']
 
 
 def test_level_create():
-    level = Level(data[0])
+    level = Level(data[0], len(data))
     assert level.number == 1
     assert level.objects['pigs'][0]['x_position'] == 800
     assert level.objects['bars'][0]['x_position'] == 700
+    assert level.amount_of_levels == 1
+    assert level.attempts == 2
 
 
 def test_level_create_objects_check_bird():
-    level = Level(data[0])
+    level = Level(data[0], len(data))
     level.create_objects(space)
     assert level.bird.body.position == (100, 130)
     assert level.bird.radius == 30
@@ -78,7 +80,7 @@ def test_level_create_objects_check_bird():
 
 
 def test_level_create_objects_check_pig():
-    level = Level(data[0])
+    level = Level(data[0], len(data))
     level.create_objects(space)
     assert level.pigs[1].body.position == (850, 120)
     assert level.pigs[1].radius == 30
@@ -89,7 +91,7 @@ def test_level_create_objects_check_pig():
 
 
 def test_level_create_objects_check_bar():
-    level = Level(data[0])
+    level = Level(data[0], len(data))
     level.create_objects(space)
     assert level.bars[0].body.position == (700, 200)
     assert level.bars[0].size == (20, 200)
@@ -100,7 +102,7 @@ def test_level_create_objects_check_bar():
 
 
 def test_level_create_objects_check_floor():
-    level = Level(data[0])
+    level = Level(data[0], len(data))
     level.create_objects(space)
     assert level.floor.shape.a == (-500, 0)
     assert level.floor.shape.b == (config.SCREEN_WIDTH + 500, 0)

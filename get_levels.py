@@ -25,7 +25,8 @@ def get_level(space, level):
     """
     for body, shape in zip(space.bodies, space.shapes):
         space.remove(body, shape)
-    level = Level(get_data()['levels'][level])
+    data = get_data()
+    level = Level(data['levels'][level], len(data['levels']))
     level.create_objects(space)
     return level
 
@@ -54,12 +55,13 @@ class Level:
     :param floor: floor of the level
     :type floor: Floor
     """
-    def __init__(self, level_data: dict):
+    def __init__(self, level_data: dict, amount_of_levels):
         """
         Creates instance of the level.
         """
         self._number = level_data["level"]
         self._objects = level_data["objects"]
+        self._amount_of_levels = amount_of_levels
         self._attempts = self._objects["birds"]["amount"]
         self.bird = None
         self.pigs = None
@@ -79,6 +81,20 @@ class Level:
         Returns objects of the level.
         """
         return self._objects
+
+    @property
+    def amount_of_levels(self):
+        """
+        Returns total amount of levels in the game.
+        """
+        return self._amount_of_levels
+
+    @property
+    def attempts(self):
+        """
+        Returns total attempts of the level.
+        """
+        return self._attempts
 
     def create_objects(self, space):
         """
