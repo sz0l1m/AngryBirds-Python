@@ -1,6 +1,6 @@
 import pygame
 import pymunk
-from math import sin, cos, radians, sqrt
+from math import sin, cos, asin, radians, degrees, sqrt
 from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
@@ -57,13 +57,15 @@ def space_draw(space: pymunk.Space, options):
     space.debug_draw(options)
 
 
-def calc_distance(point1: int, point2: int):
+def calc_distance_and_angle(point1: int, point2: int):
     """
     Calculates distance between two points.
     """
     x1, y1 = point1
     x2, y2 = point2
-    return sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+    distance = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+    angle = degrees(asin(abs(y1 - y2) / distance))
+    return distance, angle
 
 
 class CoordinatesError(Exception):

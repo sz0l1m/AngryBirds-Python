@@ -7,7 +7,8 @@ from classes import (
     Floor,
     Text,
     convert_coords,
-    check_coords
+    check_coords,
+    calc_distance_and_angle
 )
 from config import (
     SCREEN_HEIGHT,
@@ -514,3 +515,9 @@ def test_pig_set_radius_zero_radius():
     assert pig.shape.radius == 10
     with pytest.raises(ValueError):
         pig.set_radius(0)
+
+
+def test_calc_distance_and_angle():
+    distance, angle = calc_distance_and_angle((100, 200), (50, 120))
+    assert distance == pytest.approx(94.3398)
+    assert angle == pytest.approx(57.9946)
