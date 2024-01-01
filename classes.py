@@ -6,7 +6,8 @@ from config import (
     SCREEN_HEIGHT,
     floor_height,
     gravity,
-    bird_position
+    bird_position,
+    bird_radius
 )
 from pygame.locals import (
     K_w,
@@ -292,6 +293,14 @@ class Trajectory:
                     y = self.a_of_pattern * (x - self.vertex[0]) ** 2 + self.vertex[1]
                     if y >= 100 and self.y_vel:
                         pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 3)
+            elif self.y_vel > 0:
+                distance = self.y_vel ** 2 / (2 * -gravity[1])
+                pygame.draw.circle(screen, (0, 0, 0),
+                                   (bird_position[0], SCREEN_HEIGHT - (distance + bird_radius + floor_height)), 3)
+                for height in range(0, int(distance), 30):
+                    pygame.draw.circle(screen, (0, 0, 0),
+                                       (bird_position[0],
+                                        SCREEN_HEIGHT - (floor_height + bird_radius + height)), 3)
 
 
 class Pig:
