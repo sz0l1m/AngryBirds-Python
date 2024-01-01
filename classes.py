@@ -179,7 +179,9 @@ class Bird:
                 else:
                     self.velocity = 0
         else:
-            pass
+            distance, angle = calc_distance_and_angle(self.body.position, mouse_pos)
+            self.velocity = distance * 3
+            self.angle = angle
         self.x_velocity = int(self.velocity * cos(radians(self.angle)))
         self.y_velocity = int(self.velocity * sin(radians(self.angle)))
 
