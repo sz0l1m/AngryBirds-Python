@@ -9,31 +9,31 @@
                 "pigs": [
                     {
                         "x_position": 800,
-                        "y_position": 320,
+                        "y_position": 220,
                         "radius": 20
                     },
                     {
                         "x_position": 850,
-                        "y_position": 120,
+                        "y_position": 20,
                         "radius": 30
                     }
                 ],
                 "bars": [
                     {
                         "x_position": 700,
-                        "y_position": 200,
+                        "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
                         "x_position": 900,
-                        "y_position": 200,
+                        "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
                         "x_position": 800,
-                        "y_position": 310,
+                        "y_position": 210,
                         "x_size": 220,
                         "y_size": 20
                     }
@@ -49,63 +49,63 @@
                 "pigs": [
                     {
                         "x_position": 1000,
-                        "y_position": 320,
-                        "radius": 20
-                    },
-                    {
-                        "x_position": 800,
-                        "y_position": 320,
-                        "radius": 30
-                    },
-                    {
-                        "x_position": 1100,
                         "y_position": 220,
                         "radius": 20
                     },
                     {
-                        "x_position": 500,
+                        "x_position": 800,
+                        "y_position": 220,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 1100,
                         "y_position": 120,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 500,
+                        "y_position": 20,
                         "radius": 40
                     },
                     {
                         "x_position": 750,
-                        "y_position": 100,
+                        "y_position": 5,
                         "radius": 10
                     },
                     {
                         "x_position": 300,
-                        "y_position": 110,
+                        "y_position": 10,
                         "radius": 20
                     }
                 ],
                 "bars": [
                     {
                         "x_position": 700,
-                        "y_position": 200,
+                        "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
                         "x_position": 900,
-                        "y_position": 200,
+                        "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
                         "x_position": 800,
-                        "y_position": 310,
+                        "y_position": 210,
                         "x_size": 220,
                         "y_size": 20
                     },
                     {
                         "x_position": 1300,
-                        "y_position": 300,
+                        "y_position": 200,
                         "x_size": 40,
                         "y_size": 400
                     },
                     {
                         "x_position": 1200,
-                        "y_position": 250,
+                        "y_position": 150,
                         "x_size": 30,
                         "y_size": 300
                     }

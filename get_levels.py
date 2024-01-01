@@ -7,7 +7,8 @@ from classes import (
 )
 from config import (
     bird_position,
-    bird_radius
+    bird_radius,
+    floor_height
 )
 
 
@@ -112,7 +113,7 @@ class Level:
         self.pigs = [
             Pig(
                 space,
-                (pig['x_position'], pig['y_position']),
+                (pig['x_position'], pig['y_position'] + floor_height),
                 pig['radius']
             )
             for pig in self._objects['pigs']
@@ -120,7 +121,7 @@ class Level:
         self.bars = [
             Bar(
                 space,
-                (bar['x_position'], bar['y_position']),
+                (bar['x_position'], bar['y_position'] + floor_height),
                 (bar['x_size'], bar['y_size'])
             )
             for bar in self._objects['bars']
