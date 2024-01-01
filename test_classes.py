@@ -9,7 +9,8 @@ from classes import (
     convert_coords,
     check_coords,
     check_radius,
-    calc_distance_and_angle
+    calc_distance_and_angle,
+    is_on_circle
 )
 from config import (
     SCREEN_HEIGHT,
@@ -531,3 +532,11 @@ def test_check_radius_valid():
 def test_check_radius_invalid():
     with pytest.raises(ValueError):
         check_radius(-20)
+
+
+def test_is_on_circle_true():
+    assert is_on_circle((100, 100), 30, (110, 105))
+
+
+def test_is_on_circle_false():
+    assert not is_on_circle((100, 100), 30, (130, 105))

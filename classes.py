@@ -69,9 +69,15 @@ def calc_distance_and_angle(point1: int, point2: int):
     return min(distance, bird_position[0]), angle
 
 
-def is_on_circle(circle_position, radius, position):
+def is_on_circle(circle_position, radius, point):
+    """
+    Returns True if given point is inside a circle with the center in circle_position
+    and given radius.
+    Otherwise it return False.
+    """
     a, b = circle_position
-    x, y = convert_coords(position)
+    x, y = point
+    print(round((x - a)**2 + (y - b)**2))
     if round((x - a)**2 + (y - b)**2) <= round(radius ** 2):
         return True
     return False

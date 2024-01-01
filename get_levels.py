@@ -38,11 +38,11 @@ def get_level(space: pymunk.Space, level):
 def handle_level(space: pymunk.Space, level):
     pigs = 0
     for body, shape in zip(space.bodies, space.shapes):
-        if body.position[0] > SCREEN_WIDTH + 100 or body.position[0] < -100:
+        if body.position[0] > SCREEN_WIDTH + 50 or body.position[0] < -50:
             if shape.collision_type == 3:
                 space.remove(body, shape)
             else:
-                body.position = (SCREEN_WIDTH + 100, floor_height)
+                body.position = (SCREEN_WIDTH + 50, floor_height)
                 body.velocity = (0, 0)
         if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
             return None
