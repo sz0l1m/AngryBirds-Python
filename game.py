@@ -101,6 +101,9 @@ def main():
                 if event.button == 1:
                     if is_on_circle(bird.body.position, bird.radius, pygame.mouse.get_pos()):
                         bird_clicked = True
+            elif event.type == MOUSEBUTTONUP and bird_clicked and not space_used:
+                bird.body.velocity = (bird.x_velocity, bird.y_velocity)
+                space_used = True
             elif event.type == MOUSEBUTTONUP:
                 bird_clicked = False
             elif event.type == QUIT:
