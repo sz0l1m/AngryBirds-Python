@@ -97,11 +97,10 @@ def main():
                     space_used = True
                 elif event.key == K_r:
                     level, bird, trajectory = load_level(space, level.number - 1)
-            elif event.type == MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    if is_on_circle(bird.body.position, bird.radius, pygame.mouse.get_pos()):
-                        bird_clicked = True
-            elif event.type == MOUSEBUTTONUP and bird_clicked and not space_used:
+            elif event.type == MOUSEBUTTONDOWN and event.button == 1:
+                if is_on_circle(bird.body.position, bird.radius, pygame.mouse.get_pos()):
+                    bird_clicked = True
+            elif event.type == MOUSEBUTTONUP and bird_clicked and not space_used and event.button == 1:
                 bird.body.velocity = (bird.x_velocity, bird.y_velocity)
                 space_used = True
             elif event.type == MOUSEBUTTONUP:
