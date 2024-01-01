@@ -2,7 +2,8 @@ from classes import (
     Trajectory,
     Text,
     space_draw,
-    convert_coords
+    convert_coords,
+    is_on_circle
 )
 from get_levels import handle_level, load_level
 from config import (
@@ -24,14 +25,6 @@ from pygame.locals import (
     K_r,
 )
 import collisions
-
-
-def is_on_circle(circle_position, radius, position):
-    a, b = circle_position
-    x, y = convert_coords(position)
-    if round((x - a)**2 + (y - b)**2) <= round(radius ** 2):
-        return True
-    return False
 
 
 def main():

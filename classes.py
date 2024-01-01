@@ -69,6 +69,14 @@ def calc_distance_and_angle(point1: int, point2: int):
     return min(distance, bird_position[0]), angle
 
 
+def is_on_circle(circle_position, radius, position):
+    a, b = circle_position
+    x, y = convert_coords(position)
+    if round((x - a)**2 + (y - b)**2) <= round(radius ** 2):
+        return True
+    return False
+
+
 class CoordinatesError(Exception):
     """
     Class CoordinatesError.
