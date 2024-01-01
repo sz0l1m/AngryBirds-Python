@@ -66,7 +66,7 @@ def calc_distance_and_angle(point1: int, point2: int):
     x2, y2 = point2
     distance = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
     angle = degrees(asin(abs(y1 - y2) / distance))
-    return distance, angle
+    return min(distance, bird_position[0]), angle
 
 
 class CoordinatesError(Exception):
@@ -184,11 +184,19 @@ class Bird:
                 else:
                     self.velocity = 0
         else:
+            x, y = bird_position
             distance, angle = calc_distance_and_angle(self.body.position, mouse_pos)
             pygame.draw.line(screen, (0, 0, 0), convert_coords(mouse_pos), convert_coords(bird_position), 3)
-            # pygame.draw.line(screen, (0, 0, 0), (0, 0), (200, 200), 3)
+            if mouse_pos[0] > x and mouse_pos[1] < y:
+                self.angle = 180 - angle
+            elif mouse_pos[0] > x and mouse_pos[1] > y:
+                self.angle = 180 + angle
+            elif mouse_pos[0] < x and mouse_pos[1] > y:
+                self.angle = 360 - angle
+            else:
+                self.angle = angle
             self.velocity = distance * 3
-            self.angle = angle
+            print(self.velocity, self.angle)
         self.x_velocity = int(self.velocity * cos(radians(self.angle)))
         self.y_velocity = int(self.velocity * sin(radians(self.angle)))
 
