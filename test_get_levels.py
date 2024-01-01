@@ -79,7 +79,7 @@ def test_level_create():
 def test_level_create_objects_check_bird():
     level = Level(data[0], len(data))
     level.create_objects(space)
-    assert level.bird.body.position == (100, 130)
+    assert level.bird.body.position == config.bird_position
     assert level.bird.radius == 30
     assert level.bird.shape.radius == 30
     assert level.bird.shape.density == 0.7
@@ -90,7 +90,7 @@ def test_level_create_objects_check_bird():
 def test_level_create_objects_check_pig():
     level = Level(data[0], len(data))
     level.create_objects(space)
-    assert level.pigs[1].body.position == (850, 120)
+    assert level.pigs[1].body.position == (850, 320)
     assert level.pigs[1].radius == 30
     assert level.pigs[1].shape.radius == 30
     assert level.pigs[1].shape.density == 0.8
@@ -101,7 +101,7 @@ def test_level_create_objects_check_pig():
 def test_level_create_objects_check_bar():
     level = Level(data[0], len(data))
     level.create_objects(space)
-    assert level.bars[0].body.position == (700, 200)
+    assert level.bars[0].body.position == (700, 400)
     assert level.bars[0].size == (20, 200)
     assert level.bars[0].shape.color == (0, 0, 0)
     assert level.bars[0].shape.density == 0.7
