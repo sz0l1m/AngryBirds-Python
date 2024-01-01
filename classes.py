@@ -287,6 +287,11 @@ class Trajectory:
                     y = self.a_of_pattern * (x - self.vertex[0]) ** 2 + self.vertex[1]
                     if y >= 100 and self.y_vel:
                         pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 3)
+            elif self.x_vel < 0:
+                for x in range(-100, bird_position[0], interval):
+                    y = self.a_of_pattern * (x - self.vertex[0]) ** 2 + self.vertex[1]
+                    if y >= 100 and self.y_vel:
+                        pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 3)
 
 
 class Pig:
