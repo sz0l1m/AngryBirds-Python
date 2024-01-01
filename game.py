@@ -4,7 +4,7 @@ from classes import (
     space_draw,
     convert_coords
 )
-from get_levels import Level, get_level
+from get_levels import handle_level, load_level
 from config import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
@@ -24,34 +24,6 @@ from pygame.locals import (
     K_r,
 )
 import collisions
-
-
-def handle_level(space: pymunk.Space, level: Level):
-    pigs = 0
-    for body, shape in zip(space.bodies, space.shapes):
-        if body.position[0] > SCREEN_WIDTH + 50 or body.position[0] < -50:
-            if shape.collision_type == 3:
-                space.remove(body, shape)
-            else:
-                body.position = (SCREEN_WIDTH + 50, 100)
-                body.velocity = (0, 0)
-        if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
-            return None
-        if shape.collision_type == 3:
-            pigs += 1
-    if pigs == 0 and level.number < level.amount_of_levels:
-        return 'Next level'
-    elif pigs != 0 and level.attempts > 1:
-        return 'Next attempt'
-    elif pigs != 0 and level.attempts == 1:
-        return 'Restart'
-
-
-def load_level(space, level_number):
-    level = get_level(space, level_number)
-    bird = level.bird
-    trajectory = Trajectory(bird)
-    return level, bird, trajectory
 
 
 def is_on_circle(circle_position, radius, position):

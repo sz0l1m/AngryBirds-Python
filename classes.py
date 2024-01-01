@@ -195,7 +195,7 @@ class Bird:
                 self.angle = 360 - angle
             else:
                 self.angle = angle
-            self.velocity = distance * 3
+            self.velocity = distance * 4
             print(self.velocity, self.angle)
         self.x_velocity = int(self.velocity * cos(radians(self.angle)))
         self.y_velocity = int(self.velocity * sin(radians(self.angle)))
