@@ -59,8 +59,12 @@ file_handle = StringIO(file)
 data = json.load(file_handle)['levels']
 
 
-def get_data():
-    return json.load(file_handle)
+def get_level(space: pymunk.Space, level):
+    for body, shape in zip(space.bodies, space.shapes):
+        space.remove(body, shape)
+    level = Level(data[level], len(data))
+    level.create_objects(space)
+    return level
 
 
 def test_level_create():
@@ -112,6 +116,53 @@ def test_level_create_objects_check_bar():
 def test_level_create_objects_check_floor():
     level = Level(data[0], len(data))
     level.create_objects(space)
+    assert level.floor.shape.a == (-500, 0)
+    assert level.floor.shape.b == (config.SCREEN_WIDTH + 500, 0)
+    assert level.floor.shape.radius == config.floor_height
+    assert level.floor.shape.elasticity == 0.6
+
+
+def test_get_level():
+    level = get_level(space, 0)
+    assert level.number == 1
+    assert level.objects['pigs'][0]['x_position'] == 800
+    assert level.objects['bars'][0]['x_position'] == 700
+    assert level.amount_of_levels == 1
+    assert level.attempts == 2
+
+
+def test_get_level_check_bird():
+    level = get_level(space, 0)
+    assert level.bird.body.position == config.bird_position
+    assert level.bird.radius == 30
+    assert level.bird.shape.radius == 30
+    assert level.bird.shape.density == 0.7
+    assert level.bird.shape.elasticity == 0.7
+    assert level.bird.shape.friction == 0.8
+
+
+def test_get_level_check_pig():
+    level = get_level(space, 0)
+    assert level.pigs[1].body.position == (850, 320)
+    assert level.pigs[1].radius == 30
+    assert level.pigs[1].shape.radius == 30
+    assert level.pigs[1].shape.density == 0.8
+    assert level.pigs[1].shape.elasticity == 0.7
+    assert level.pigs[1].shape.friction == 0.8
+
+
+def test_get_level_check_bar():
+    level = get_level(space, 0)
+    assert level.bars[0].body.position == (700, 400)
+    assert level.bars[0].size == (20, 200)
+    assert level.bars[0].shape.color == (0, 0, 0)
+    assert level.bars[0].shape.density == 0.7
+    assert level.bars[0].shape.elasticity == 0.4
+    assert level.bars[0].shape.friction == 0.6
+
+
+def test_get_level_check_floor():
+    level = get_level(space, 0)
     assert level.floor.shape.a == (-500, 0)
     assert level.floor.shape.b == (config.SCREEN_WIDTH + 500, 0)
     assert level.floor.shape.radius == config.floor_height
