@@ -87,8 +87,9 @@ def main():
 
     bird_clicked = False
 
+    last_mouse_pos = None
+
     while running:
-        print(level.attempts)
         mouse_pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == KEYDOWN:
@@ -124,10 +125,9 @@ def main():
         pressed_keys = pygame.key.get_pressed()
         if bird_clicked:
             # pygame.draw.line(screen, (0, 0, 0), convert_coords(mouse_pos), convert_coords(bird_position))
-            bird.set_speed(pressed_keys, convert_coords(mouse_pos), screen)
-            print(mouse_pos)
+            last_mouse_pos = bird.set_speed(pressed_keys, convert_coords(mouse_pos), screen, last_mouse_pos)
         else:
-            bird.set_speed(pressed_keys, None, None)
+            bird.set_speed(pressed_keys, None, None, None)
 
         angle_text.set_str(str(bird.angle))
         velocity_text.set_str(str(bird.velocity))
@@ -142,7 +142,6 @@ def main():
                     level, bird, trajectory = load_level(space, level.number)
                     space_used = False
                 case 'Next attempt':
-                    print('next attempt')
                     level.load_bird(space)
                     bird = level.bird
                     trajectory = Trajectory(bird)
