@@ -5,7 +5,8 @@ from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     floor_height,
-    gravity
+    gravity,
+    bird_position
 )
 from pygame.locals import (
     K_w,
@@ -160,7 +161,7 @@ class Bird:
         check_radius(new_radius)
         self._radius = new_radius
 
-    def set_speed(self, pressed_keys, mouse_pos):
+    def set_speed(self, pressed_keys, mouse_pos, screen):
         """
         Sets speed of the bird depending on angle and velocity given by user.
         """
@@ -180,6 +181,7 @@ class Bird:
                     self.velocity = 0
         else:
             distance, angle = calc_distance_and_angle(self.body.position, mouse_pos)
+            pygame.draw.line(screen, (0, 0, 0), convert_coords(mouse_pos), convert_coords(bird_position), 3)
             self.velocity = distance * 3
             self.angle = angle
         self.x_velocity = int(self.velocity * cos(radians(self.angle)))

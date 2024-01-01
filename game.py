@@ -9,7 +9,7 @@ from config import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
     FPS,
-    gravity,
+    gravity
 )
 import pygame
 import pymunk
@@ -88,6 +88,8 @@ def main():
     bird_clicked = False
 
     while running:
+        print(level.attempts)
+        mouse_pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
@@ -98,32 +100,34 @@ def main():
                 elif event.key == K_r:
                     level, bird, trajectory = load_level(space, level.number - 1)
             elif event.type == MOUSEBUTTONDOWN and event.button == 1:
-                if is_on_circle(bird.body.position, bird.radius, pygame.mouse.get_pos()):
+                if is_on_circle(bird.body.position, bird.radius, mouse_pos):
                     bird_clicked = True
             elif event.type == MOUSEBUTTONUP and bird_clicked and not space_used and event.button == 1:
                 bird.body.velocity = (bird.x_velocity, bird.y_velocity)
                 space_used = True
+                bird_clicked = False
             elif event.type == MOUSEBUTTONUP:
                 bird_clicked = False
             elif event.type == QUIT:
                 running = False
 
-        pressed_keys = pygame.key.get_pressed()
-        if bird_clicked:
-            bird.set_speed(pressed_keys, convert_coords(pygame.mouse.get_pos()))
-            print(pygame.mouse.get_pos())
-        else:
-            bird.set_speed(pressed_keys, None)
-
         space.step(1 / FPS)
-
-        trajectory.calc()
 
         screen.fill((255, 255, 255))
 
-        space_draw(space, draw_options)
+        trajectory.calc()
 
         trajectory.draw(screen)
+
+        space_draw(space, draw_options)
+
+        pressed_keys = pygame.key.get_pressed()
+        if bird_clicked:
+            # pygame.draw.line(screen, (0, 0, 0), convert_coords(mouse_pos), convert_coords(bird_position))
+            bird.set_speed(pressed_keys, convert_coords(mouse_pos), screen)
+            print(mouse_pos)
+        else:
+            bird.set_speed(pressed_keys, None, None)
 
         angle_text.set_str(str(bird.angle))
         velocity_text.set_str(str(bird.velocity))
@@ -138,12 +142,14 @@ def main():
                     level, bird, trajectory = load_level(space, level.number)
                     space_used = False
                 case 'Next attempt':
+                    print('next attempt')
                     level.load_bird(space)
                     bird = level.bird
                     trajectory = Trajectory(bird)
                     space_used = False
                 case 'Restart':
-                    level, bird, trajectory = load_level(space, level.number - 1)
+                    level, bird, trajectory = load_level(space, 0)
+                    space_used = False
 
         pygame.display.flip()
 
