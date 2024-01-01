@@ -161,17 +161,21 @@ class Bird:
         check_radius(new_radius)
         self._radius = new_radius
 
-    def set_speed(self, pressed_keys, mouse_pos, screen, last_mouse_pos):
+    def set_speed(self, pressed_keys, mouse_pos, screen):
         """
         Sets speed of the bird depending on angle and velocity given by user.
         """
         if mouse_pos is None:
             if pressed_keys[K_UP] or pressed_keys[K_w]:
-                if self.angle < 90:
+                if self.angle < 360:
                     self.angle += 1
+                else:
+                    self.angle = 0
             if pressed_keys[K_DOWN] or pressed_keys[K_s]:
                 if self.angle > 0:
                     self.angle -= 1
+                else:
+                    self.angle = 359
             if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
                 self.velocity += 10
             if pressed_keys[K_LEFT] or pressed_keys[K_a]:
@@ -179,18 +183,12 @@ class Bird:
                     self.velocity -= 10
                 else:
                     self.velocity = 0
-        elif mouse_pos[0] <= bird_position[0] and mouse_pos[1] <= bird_position[1]:
+        else:
             distance, angle = calc_distance_and_angle(self.body.position, mouse_pos)
             pygame.draw.line(screen, (0, 0, 0), convert_coords(mouse_pos), convert_coords(bird_position), 3)
             # pygame.draw.line(screen, (0, 0, 0), (0, 0), (200, 200), 3)
             self.velocity = distance * 3
             self.angle = angle
-            return mouse_pos
-        elif last_mouse_pos:
-            print(last_mouse_pos)
-            pygame.draw.line(screen, (0, 0, 0), convert_coords(last_mouse_pos), convert_coords(bird_position), 3)
-            return last_mouse_pos
-            # pygame.draw.line(screen, (0, 0, 0), line[0], line[1], 3)
         self.x_velocity = int(self.velocity * cos(radians(self.angle)))
         self.y_velocity = int(self.velocity * sin(radians(self.angle)))
 

@@ -87,8 +87,6 @@ def main():
 
     bird_clicked = False
 
-    last_mouse_pos = None
-
     while running:
         mouse_pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
@@ -125,9 +123,9 @@ def main():
         pressed_keys = pygame.key.get_pressed()
         if bird_clicked:
             # pygame.draw.line(screen, (0, 0, 0), convert_coords(mouse_pos), convert_coords(bird_position))
-            last_mouse_pos = bird.set_speed(pressed_keys, convert_coords(mouse_pos), screen, last_mouse_pos)
+            bird.set_speed(pressed_keys, convert_coords(mouse_pos), screen)
         else:
-            bird.set_speed(pressed_keys, None, None, None)
+            bird.set_speed(pressed_keys, None, None)
 
         angle_text.set_str(str(bird.angle))
         velocity_text.set_str(str(bird.velocity))
