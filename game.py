@@ -106,10 +106,11 @@ def main():
             elif event.type == QUIT:
                 running = False
 
-        print(bird_clicked)
-
         pressed_keys = pygame.key.get_pressed()
-        bird.set_speed(pressed_keys)
+        if bird_clicked:
+            bird.set_speed(pressed_keys, pygame.mouse.get_pos())
+        else:
+            bird.set_speed(pressed_keys, None)
 
         space.step(1 / FPS)
 

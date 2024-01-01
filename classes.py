@@ -149,23 +149,26 @@ class Bird:
         check_radius(new_radius)
         self._radius = new_radius
 
-    def set_speed(self, pressed_keys):
+    def set_speed(self, pressed_keys, mouse_pos):
         """
         Sets speed of the bird depending on angle and velocity given by user.
         """
-        if pressed_keys[K_UP] or pressed_keys[K_w]:
-            if self.angle < 90:
-                self.angle += 1
-        if pressed_keys[K_DOWN] or pressed_keys[K_s]:
-            if self.angle > 0:
-                self.angle -= 1
-        if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
-            self.velocity += 10
-        if pressed_keys[K_LEFT] or pressed_keys[K_a]:
-            if self.velocity > 10:
-                self.velocity -= 10
-            else:
-                self.velocity = 0
+        if mouse_pos is None:
+            if pressed_keys[K_UP] or pressed_keys[K_w]:
+                if self.angle < 90:
+                    self.angle += 1
+            if pressed_keys[K_DOWN] or pressed_keys[K_s]:
+                if self.angle > 0:
+                    self.angle -= 1
+            if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
+                self.velocity += 10
+            if pressed_keys[K_LEFT] or pressed_keys[K_a]:
+                if self.velocity > 10:
+                    self.velocity -= 10
+                else:
+                    self.velocity = 0
+        else:
+            pass
         self.x_velocity = int(self.velocity * cos(radians(self.angle)))
         self.y_velocity = int(self.velocity * sin(radians(self.angle)))
 
