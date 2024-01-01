@@ -87,7 +87,6 @@ def main():
 
         pressed_keys = pygame.key.get_pressed()
         if bird_clicked:
-            # pygame.draw.line(screen, (0, 0, 0), convert_coords(mouse_pos), convert_coords(bird_position))
             bird.set_speed(pressed_keys, convert_coords(mouse_pos), screen)
         else:
             bird.set_speed(pressed_keys, None, None)

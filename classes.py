@@ -77,7 +77,6 @@ def is_on_circle(circle_position, radius, point):
     """
     a, b = circle_position
     x, y = point
-    print(round((x - a)**2 + (y - b)**2))
     if round((x - a)**2 + (y - b)**2) <= round(radius ** 2):
         return True
     return False
@@ -210,7 +209,6 @@ class Bird:
             else:
                 self.angle = angle
             self.velocity = distance * 4
-            print(self.velocity, self.angle)
         self.x_velocity = int(self.velocity * cos(radians(self.angle)))
         self.y_velocity = int(self.velocity * sin(radians(self.angle)))
 
@@ -282,10 +280,13 @@ class Trajectory:
         """
         Draws circles on trajectory of the bird based of user input.
         """
-        for x in range(100, 800, 50):
-            y = self.a_of_pattern * (x - self.vertex[0]) ** 2 + self.vertex[1]
-            if y >= 100 and self.y_vel:
-                pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 10)
+        if self.y_vel >= 0:
+            interval = int(abs(self.x_vel) / 15) + 1
+            if self.x_vel > 0:
+                for x in range(bird_position[0], 800, interval):
+                    y = self.a_of_pattern * (x - self.vertex[0]) ** 2 + self.vertex[1]
+                    if y >= 100 and self.y_vel:
+                        pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 3)
 
 
 class Pig:
