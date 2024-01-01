@@ -19,6 +19,7 @@ from pygame.locals import (
     K_SPACE,
     KEYDOWN,
     MOUSEBUTTONDOWN,
+    MOUSEBUTTONUP,
     QUIT,
     K_r,
 )
@@ -84,6 +85,8 @@ def main():
 
     space_used = False
 
+    bird_clicked = False
+
     while running:
         for event in pygame.event.get():
             if event.type == KEYDOWN:
@@ -97,11 +100,13 @@ def main():
             elif event.type == MOUSEBUTTONDOWN:
                 if event.button == 1:
                     if is_on_circle(bird.body.position, bird.radius, pygame.mouse.get_pos()):
-                        print('YES')
-                    else:
-                        print('NO')
+                        bird_clicked = True
+            elif event.type == MOUSEBUTTONUP:
+                bird_clicked = False
             elif event.type == QUIT:
                 running = False
+
+        print(bird_clicked)
 
         pressed_keys = pygame.key.get_pressed()
         bird.set_speed(pressed_keys)
