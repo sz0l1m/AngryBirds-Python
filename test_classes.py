@@ -8,6 +8,7 @@ from classes import (
     Text,
     convert_coords,
     check_coords,
+    check_radius,
     calc_distance_and_angle
 )
 from config import (
@@ -521,3 +522,12 @@ def test_calc_distance_and_angle():
     distance, angle = calc_distance_and_angle((100, 200), (50, 120))
     assert distance == pytest.approx(94.3398)
     assert angle == pytest.approx(57.9946)
+
+
+def test_check_radius_valid():
+    check_radius(20)
+
+
+def test_check_radius_invalid():
+    with pytest.raises(ValueError):
+        check_radius(-20)
