@@ -127,6 +127,73 @@
                     }
                 ]
             }
+        },
+        {
+            "level": 4,
+            "objects": {
+                "birds": {
+                    "amount": 3
+                },
+                "pigs": [
+{
+                        "x_position": 200,
+                        "y_position": 20,
+                        "radius": 35
+                    },
+                    {
+                        "x_position": 350,
+                        "y_position": 30,
+                        "radius": 35
+                    },
+                    {
+                        "x_position": 500,
+                        "y_position": 20,
+                        "radius": 35
+                    },
+                    {
+                        "x_position": 300,
+                        "y_position": 45,
+                        "radius": 35
+                    },
+                    {
+                        "x_position": 250,
+                        "y_position": 60,
+                        "radius": 35
+                    }
+                ],
+                "bars": [
+                    {
+                        "x_position": 200,
+                        "y_position": 5,
+                        "x_size": 10,
+                        "y_size": 100
+                    },
+                    {
+                        "x_position": 400,
+                        "y_position": 70,
+                        "x_size": 150,
+                        "y_size": 10
+                    },
+                    {
+                        "x_position": 300,
+                        "y_position": 150,
+                        "x_size": 10,
+                        "y_size": 120
+                    },
+                    {
+                        "x_position": 250,
+                        "y_position": 250,
+                        "x_size": 80,
+                        "y_size": 10
+                    },
+                    {
+                        "x_position": 450,
+                        "y_position": 120,
+                        "x_size": 130,
+                        "y_size": 10
+                    }
+                ]
+            }
         }
     ]
 }
