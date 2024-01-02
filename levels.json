@@ -64,72 +64,59 @@
                 },
                 "pigs": [
                     {
-                        "x_position": 1000,
+                        "x_position": 1200,
                         "y_position": 220,
-                        "radius": 20
-                    },
-                    {
-                        "x_position": 800,
-                        "y_position": 220,
-                        "radius": 30
-                    },
-                    {
-                        "x_position": 1100,
-                        "y_position": 120,
-                        "radius": 20
-                    },
-                    {
-                        "x_position": 500,
-                        "y_position": 20,
-                        "radius": 40
-                    },
-                    {
-                        "x_position": 750,
-                        "y_position": 5,
-                        "radius": 10
-                    },
-                    {
-                        "x_position": 300,
-                        "y_position": 10,
                         "radius": 20
                     }
                 ],
                 "bars": [
                     {
-                        "x_position": 700,
+                        "x_position": 300,
                         "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
-                        "x_position": 900,
+                        "x_position": 500,
                         "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
-                        "x_position": 800,
+                        "x_position": 400,
                         "y_position": 210,
                         "x_size": 220,
                         "y_size": 20
                     },
                     {
-                        "x_position": 1300,
+                        "x_position": 800,
+                        "y_position": 100,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 600,
+                        "y_position": 100,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 700,
+                        "y_position": 210,
+                        "x_size": 220,
+                        "y_size": 20
+                    },
+                    {
+                        "x_position": 1000,
                         "y_position": 200,
                         "x_size": 40,
                         "y_size": 400
-                    },
-                    {
-                        "x_position": 1200,
-                        "y_position": 150,
-                        "x_size": 30,
-                        "y_size": 300
                     }
                 ]
             }
         },
         {
-            "level": 3,
+            "level": 4,
             "objects": {
                 "birds": {
                     "amount": 5
