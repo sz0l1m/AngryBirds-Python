@@ -14,6 +14,7 @@ from config import (
 )
 import pygame
 import pymunk
+import os
 import pymunk.pygame_util
 from pygame.locals import (
     K_ESCAPE,
@@ -30,6 +31,8 @@ import collisions
 def main():
     space = pymunk.Space()
     space.gravity = gravity
+
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0, 0)
 
     pygame.init()
     pygame.display.set_caption('Angry Birds')
