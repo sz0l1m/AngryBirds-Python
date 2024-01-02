@@ -378,7 +378,7 @@ class Bar:
     :param size: size of the bar
     :type size: tuple
     """
-    def __init__(self, space: pymunk.Space, position: tuple, size: tuple, color=(0, 0, 0)):
+    def __init__(self, space: pymunk.Space, position: tuple, size: tuple, body_type='dynamic', color=(0, 0, 0)):
         """
         Creates instance of bar.
 
@@ -391,11 +391,17 @@ class Bar:
         check_coords(position)
         if size[0] <= 0 or size[1] <= 0:
             raise ValueError('Size of the bar has to be positive')
-        self.body = pymunk.Body()
-        self.body.position = position
         self.size = size
-        self._shape = pymunk.Poly.create_box(self.body, self.size, 2)
-        self._shape.color = pygame.Color(color)
+        if body_type == 'dynamic':
+            self.body = pymunk.Body()
+            self._shape = pymunk.Poly.create_box(self.body, self.size, 2)
+            self._shape.color = pygame.Color(color)
+        elif body_type == 'static':
+            self.body = pymunk.Body(body_type=pymunk.Body.STATIC)
+            self._shape = pymunk.Poly.create_box(self.body, self.size)
+        else:
+            raise ValueError('Invalid body_type, has to be static or dynamic')
+        self.body.position = position
         self._shape.density = 0.7
         self._shape.elasticity = 0.4
         self._shape.friction = 0.6

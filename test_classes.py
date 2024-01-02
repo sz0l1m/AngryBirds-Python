@@ -331,16 +331,16 @@ def test_trajectory_calc():
 
 
 def test_bar_create_normal():
-    bar = Bar(space, (width, height), (10, 20), (0, 0, 0))
+    bar = Bar(space, (width, height), (10, 20), 'static', (0, 0, 0))
     assert bar.body.position == (width, height)
     assert bar.size == (10, 20)
-    assert bar.shape.color == (0, 0, 0)
     assert bar.shape.density == 0.7
     assert bar.shape.elasticity == 0.4
     assert bar.shape.friction == 0.6
+    assert bar.body.body_type == 2
 
 
-def test_bar_create_default_valuse():
+def test_bar_create_default_values():
     bar = Bar(space, (width, height), (10, 20))
     assert bar.body.position == (width, height)
     assert bar.size == (10, 20)
@@ -348,6 +348,12 @@ def test_bar_create_default_valuse():
     assert bar.shape.density == 0.7
     assert bar.shape.elasticity == 0.4
     assert bar.shape.friction == 0.6
+    assert bar.body.body_type == 0
+
+
+def test_bar_create_invalid_bor_type():
+    with pytest.raises(ValueError):
+        Bar(space, (width, height), (10, 20), 'asdas')
 
 
 def test_bar_create_negative_position():
