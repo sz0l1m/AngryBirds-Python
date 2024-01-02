@@ -39,7 +39,7 @@ def main():
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    level, bird, trajectory = load_level(space, 0)
+    level, bird, trajectory = load_level(space, 2)
 
     angle_text = Text('0', (20, 20), 30)
     velocity_text = Text('0', (20, 100), 30)

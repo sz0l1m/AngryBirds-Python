@@ -8,7 +8,7 @@
                 },
                 "pigs": [
                     {
-                        "x_position": 1200,
+                        "x_position": 300,
                         "y_position": 30,
                         "radius": 30
                     }
@@ -24,31 +24,31 @@
                 },
                 "pigs": [
                     {
-                        "x_position": 1100,
+                        "x_position": 300,
                         "y_position": 220,
                         "radius": 20
                     },
                     {
-                        "x_position": 1100,
+                        "x_position": 300,
                         "y_position": 20,
                         "radius": 30
                     }
                 ],
                 "bars": [
                     {
-                        "x_position": 1000,
+                        "x_position": 200,
                         "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
-                        "x_position": 1200,
+                        "x_position": 400,
                         "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
-                        "x_position": 1100,
+                        "x_position": 300,
                         "y_position": 210,
                         "x_size": 220,
                         "y_size": 20
@@ -129,67 +129,94 @@
             }
         },
         {
-            "level": 4,
+            "level": 3,
             "objects": {
                 "birds": {
-                    "amount": 3
+                    "amount": 5
                 },
                 "pigs": [
-{
-                        "x_position": 200,
-                        "y_position": 20,
-                        "radius": 35
-                    },
                     {
-                        "x_position": 350,
+                        "x_position": 375,
                         "y_position": 30,
-                        "radius": 35
+                        "radius": 30
                     },
                     {
-                        "x_position": 500,
+                        "x_position": 525,
+                        "y_position": 30,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 675,
                         "y_position": 20,
-                        "radius": 35
+                        "radius": 20
                     },
                     {
-                        "x_position": 300,
-                        "y_position": 45,
-                        "radius": 35
+                        "x_position": 225,
+                        "y_position": 20,
+                        "radius": 20
                     },
                     {
-                        "x_position": 250,
-                        "y_position": 60,
-                        "radius": 35
+                        "x_position": 565,
+                        "y_position": 130,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 335,
+                        "y_position": 130,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 450,
+                        "y_position": 140,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 450,
+                        "y_position": 295,
+                        "radius": 20
                     }
                 ],
                 "bars": [
                     {
-                        "x_position": 200,
-                        "y_position": 5,
-                        "x_size": 10,
+                        "x_position": 300,
+                        "y_position": 50,
+                        "x_size": 20,
                         "y_size": 100
                     },
                     {
-                        "x_position": 400,
-                        "y_position": 70,
-                        "x_size": 150,
-                        "y_size": 10
-                    },
-                    {
-                        "x_position": 300,
-                        "y_position": 150,
-                        "x_size": 10,
-                        "y_size": 120
-                    },
-                    {
-                        "x_position": 250,
-                        "y_position": 250,
-                        "x_size": 80,
-                        "y_size": 10
+                        "x_position": 600,
+                        "y_position": 50,
+                        "x_size": 20,
+                        "y_size": 100
                     },
                     {
                         "x_position": 450,
-                        "y_position": 120,
-                        "x_size": 130,
+                        "y_position": 50,
+                        "x_size": 20,
+                        "y_size": 100
+                    },
+                    {
+                        "x_position": 450,
+                        "y_position": 110,
+                        "x_size": 320,
+                        "y_size": 10
+                    },
+                    {
+                        "x_position": 525,
+                        "y_position": 190,
+                        "x_size": 20,
+                        "y_size": 150
+                    },
+                    {
+                        "x_position": 375,
+                        "y_position": 190,
+                        "x_size": 20,
+                        "y_size": 150
+                    },
+                    {
+                        "x_position": 450,
+                        "y_position": 270,
+                        "x_size": 170,
                         "y_size": 10
                     }
                 ]
