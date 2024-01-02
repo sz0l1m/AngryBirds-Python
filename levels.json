@@ -64,8 +64,23 @@
                 },
                 "pigs": [
                     {
-                        "x_position": 1200,
+                        "x_position": 400,
+                        "y_position": 30,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 700,
+                        "y_position": 30,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 900,
                         "y_position": 20,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 1000,
+                        "y_position": 420,
                         "radius": 20
                     }
                 ],
