@@ -8,31 +8,47 @@
                 },
                 "pigs": [
                     {
-                        "x_position": 800,
+                        "x_position": 1200,
+                        "y_position": 30,
+                        "radius": 30
+                    }
+                ],
+                "bars": []
+            }
+        },
+        {
+            "level": 2,
+            "objects": {
+                "birds": {
+                    "amount": 2
+                },
+                "pigs": [
+                    {
+                        "x_position": 1100,
                         "y_position": 220,
                         "radius": 20
                     },
                     {
-                        "x_position": 850,
+                        "x_position": 1100,
                         "y_position": 20,
                         "radius": 30
                     }
                 ],
                 "bars": [
                     {
-                        "x_position": 700,
+                        "x_position": 1000,
                         "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
-                        "x_position": 900,
+                        "x_position": 1200,
                         "y_position": 100,
                         "x_size": 20,
                         "y_size": 200
                     },
                     {
-                        "x_position": 800,
+                        "x_position": 1100,
                         "y_position": 210,
                         "x_size": 220,
                         "y_size": 20
@@ -41,7 +57,7 @@
             }
         },
         {
-            "level": 2,
+            "level": 3,
             "objects": {
                 "birds": {
                     "amount": 3
