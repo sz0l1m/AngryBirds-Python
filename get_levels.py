@@ -144,7 +144,7 @@ class Level:
         self.pigs = [
             Pig(
                 space,
-                (pig['x_position'], pig['y_position'] + floor_height),
+                (SCREEN_WIDTH - pig['x_position'], pig['y_position'] + floor_height),
                 pig['radius']
             )
             for pig in self._objects['pigs']
@@ -152,7 +152,7 @@ class Level:
         self.bars = [
             Bar(
                 space,
-                (bar['x_position'], bar['y_position'] + floor_height),
+                (SCREEN_WIDTH - bar['x_position'], bar['y_position'] + floor_height),
                 (bar['x_size'], bar['y_size'])
             )
             for bar in self._objects['bars']
