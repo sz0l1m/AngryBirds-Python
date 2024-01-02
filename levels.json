@@ -65,7 +65,7 @@
                 "pigs": [
                     {
                         "x_position": 1200,
-                        "y_position": 220,
+                        "y_position": 20,
                         "radius": 20
                     }
                 ],

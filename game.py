@@ -101,19 +101,19 @@ def main():
 
         collisions.rolling_resistance(space)
 
-        if space_used:
-            match handle_level(space, level):
-                case 'Next level':
-                    level, bird, trajectory = load_level(space, level.number)
-                    space_used = False
-                case 'Next attempt':
+        match handle_level(space, level):
+            case 'Next level':
+                level, bird, trajectory = load_level(space, level.number)
+                space_used = False
+            case 'Next attempt':
+                if space_used:
                     level.load_bird(space)
                     bird = level.bird
                     trajectory = Trajectory(bird)
                     space_used = False
-                case 'Restart':
-                    level, bird, trajectory = load_level(space, level.number - 1)
-                    space_used = False
+            case 'Restart':
+                level, bird, trajectory = load_level(space, level.number - 1)
+                space_used = False
 
         pygame.display.flip()
 
