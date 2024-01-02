@@ -57,81 +57,6 @@
             }
         },
         {
-            "level": 3,
-            "objects": {
-                "birds": {
-                    "amount": 3
-                },
-                "pigs": [
-                    {
-                        "x_position": 400,
-                        "y_position": 30,
-                        "radius": 30
-                    },
-                    {
-                        "x_position": 700,
-                        "y_position": 30,
-                        "radius": 30
-                    },
-                    {
-                        "x_position": 900,
-                        "y_position": 20,
-                        "radius": 20
-                    },
-                    {
-                        "x_position": 1000,
-                        "y_position": 420,
-                        "radius": 20
-                    }
-                ],
-                "bars": [
-                    {
-                        "x_position": 300,
-                        "y_position": 100,
-                        "x_size": 20,
-                        "y_size": 200
-                    },
-                    {
-                        "x_position": 500,
-                        "y_position": 100,
-                        "x_size": 20,
-                        "y_size": 200
-                    },
-                    {
-                        "x_position": 400,
-                        "y_position": 210,
-                        "x_size": 220,
-                        "y_size": 20
-                    },
-                    {
-                        "x_position": 800,
-                        "y_position": 100,
-                        "x_size": 20,
-                        "y_size": 200
-                    },
-                    {
-                        "x_position": 600,
-                        "y_position": 100,
-                        "x_size": 20,
-                        "y_size": 200
-                    },
-                    {
-                        "x_position": 700,
-                        "y_position": 210,
-                        "x_size": 220,
-                        "y_size": 20
-                    },
-                    {
-                        "x_position": 1000,
-                        "y_position": 200,
-                        "x_size": 40,
-                        "y_size": 400,
-                        "type": "static"
-                    }
-                ]
-            }
-        },
-        {
             "level": 4,
             "objects": {
                 "birds": {
@@ -221,6 +146,81 @@
                         "y_position": 270,
                         "x_size": 170,
                         "y_size": 10
+                    }
+                ]
+            }
+        },
+        {
+            "level": 3,
+            "objects": {
+                "birds": {
+                    "amount": 3
+                },
+                "pigs": [
+                    {
+                        "x_position": 400,
+                        "y_position": 30,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 700,
+                        "y_position": 30,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 900,
+                        "y_position": 20,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 1000,
+                        "y_position": 420,
+                        "radius": 20
+                    }
+                ],
+                "bars": [
+                    {
+                        "x_position": 300,
+                        "y_position": 100,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 500,
+                        "y_position": 100,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 400,
+                        "y_position": 210,
+                        "x_size": 220,
+                        "y_size": 20
+                    },
+                    {
+                        "x_position": 800,
+                        "y_position": 100,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 600,
+                        "y_position": 100,
+                        "x_size": 20,
+                        "y_size": 200
+                    },
+                    {
+                        "x_position": 700,
+                        "y_position": 210,
+                        "x_size": 220,
+                        "y_size": 20
+                    },
+                    {
+                        "x_position": 1000,
+                        "y_position": 200,
+                        "x_size": 40,
+                        "y_size": 400,
+                        "type": "static"
                     }
                 ]
             }
