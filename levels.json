@@ -110,7 +110,8 @@
                         "x_position": 1000,
                         "y_position": 200,
                         "x_size": 40,
-                        "y_size": 400
+                        "y_size": 400,
+                        "type": "static"
                     }
                 ]
             }
