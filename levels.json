@@ -57,7 +57,7 @@
             }
         },
         {
-            "level": 4,
+            "level": 3,
             "objects": {
                 "birds": {
                     "amount": 5
@@ -151,7 +151,7 @@
             }
         },
         {
-            "level": 3,
+            "level": 4,
             "objects": {
                 "birds": {
                     "amount": 3

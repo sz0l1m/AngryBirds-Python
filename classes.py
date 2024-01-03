@@ -215,7 +215,7 @@ class Bird:
                 pygame.draw.line(screen, (0, 0, 0), convert_coords(mouse_pos), convert_coords(bird_position), 3)
             else:
                 pygame.draw.line(screen, (0, 0, 0), convert_coords(line_point), convert_coords(bird_position), 3)
-            self.velocity = distance * 4
+            self.velocity = distance * SCREEN_WIDTH / 400
         self.x_velocity = int(self.velocity * cos(radians(self.angle)))
         self.y_velocity = int(self.velocity * sin(radians(self.angle)))
 
