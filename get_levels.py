@@ -9,7 +9,9 @@ from classes import (
     Bar,
     Floor,
     Trajectory,
-    Text
+    Text,
+    convert_coords,
+    is_on_circle
 )
 from config import (
     SCREEN_WIDTH,
@@ -18,6 +20,15 @@ from config import (
     bird_radius,
     floor_height,
     gravity
+)
+from pygame.locals import (
+    K_ESCAPE,
+    K_SPACE,
+    KEYDOWN,
+    MOUSEBUTTONDOWN,
+    MOUSEBUTTONUP,
+    QUIT,
+    K_r
 )
 
 
@@ -132,6 +143,29 @@ class Game:
         Returns True if bird was clicked with LMP and was not released.
         """
         return self._bird_clicked
+
+    def handle_events(self):
+        mouse_pos = pygame.mouse.get_pos()
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self.running = False
+                elif event.key == K_SPACE and not self.bird_shot:
+                    self.bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
+                    self.bird_shot = True
+                elif event.key == K_r:
+                    self.level, self.bird, self.trajectory = load_level(self.space, self.level.number - 1)
+            elif event.type == MOUSEBUTTONDOWN and event.button == 1:
+                if is_on_circle(bird_position, bird_radius, convert_coords(mouse_pos)):
+                    self.bird_clicked = True
+            elif event.type == MOUSEBUTTONUP and self.bird_clicked and not self.bird_shot and event.button == 1:
+                self.bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
+                self.bird_shot = True
+                self.bird_clicked = False
+            elif event.type == MOUSEBUTTONUP:
+                self.bird_clicked = False
+            elif event.type == QUIT:
+                self.running = False
 
 
 class Level:
