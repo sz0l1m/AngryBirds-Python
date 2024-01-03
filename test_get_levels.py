@@ -4,7 +4,11 @@ from get_levels import (
 from io import StringIO
 import json
 import pymunk
-import config
+from config import (
+    SCREEN_WIDTH,
+    bird_position,
+    floor_height
+)
 
 
 space = pymunk.Space()
@@ -83,7 +87,7 @@ def test_level_create():
 def test_level_create_objects_check_bird():
     level = Level(data[0], len(data))
     level.create_objects(space)
-    assert level.bird.body.position == config.bird_position
+    assert level.bird.body.position == bird_position
     assert level.bird.radius == 30
     assert level.bird.shape.radius == 30
     assert level.bird.shape.density == 0.7
@@ -94,7 +98,7 @@ def test_level_create_objects_check_bird():
 def test_level_create_objects_check_pig():
     level = Level(data[0], len(data))
     level.create_objects(space)
-    assert level.pigs[1].body.position == (850, 320)
+    assert level.pigs[1].body.position == (SCREEN_WIDTH - 850, 320)
     assert level.pigs[1].radius == 30
     assert level.pigs[1].shape.radius == 30
     assert level.pigs[1].shape.density == 0.8
@@ -105,7 +109,7 @@ def test_level_create_objects_check_pig():
 def test_level_create_objects_check_bar():
     level = Level(data[0], len(data))
     level.create_objects(space)
-    assert level.bars[0].body.position == (700, 400)
+    assert level.bars[0].body.position == (SCREEN_WIDTH - 700, 400)
     assert level.bars[0].size == (20, 200)
     assert level.bars[0].shape.color == (0, 0, 0)
     assert level.bars[0].shape.density == 0.7
@@ -117,8 +121,8 @@ def test_level_create_objects_check_floor():
     level = Level(data[0], len(data))
     level.create_objects(space)
     assert level.floor.shape.a == (-500, 0)
-    assert level.floor.shape.b == (config.SCREEN_WIDTH + 500, 0)
-    assert level.floor.shape.radius == config.floor_height
+    assert level.floor.shape.b == (SCREEN_WIDTH + 500, 0)
+    assert level.floor.shape.radius == floor_height
     assert level.floor.shape.elasticity == 0.6
 
 
@@ -133,7 +137,7 @@ def test_get_level():
 
 def test_get_level_check_bird():
     level = get_level(space, 0)
-    assert level.bird.body.position == config.bird_position
+    assert level.bird.body.position == bird_position
     assert level.bird.radius == 30
     assert level.bird.shape.radius == 30
     assert level.bird.shape.density == 0.7
@@ -143,7 +147,7 @@ def test_get_level_check_bird():
 
 def test_get_level_check_pig():
     level = get_level(space, 0)
-    assert level.pigs[1].body.position == (850, 320)
+    assert level.pigs[1].body.position == (SCREEN_WIDTH - 850, 320)
     assert level.pigs[1].radius == 30
     assert level.pigs[1].shape.radius == 30
     assert level.pigs[1].shape.density == 0.8
@@ -153,7 +157,7 @@ def test_get_level_check_pig():
 
 def test_get_level_check_bar():
     level = get_level(space, 0)
-    assert level.bars[0].body.position == (700, 400)
+    assert level.bars[0].body.position == (SCREEN_WIDTH - 700, 400)
     assert level.bars[0].size == (20, 200)
     assert level.bars[0].shape.color == (0, 0, 0)
     assert level.bars[0].shape.density == 0.7
@@ -164,6 +168,6 @@ def test_get_level_check_bar():
 def test_get_level_check_floor():
     level = get_level(space, 0)
     assert level.floor.shape.a == (-500, 0)
-    assert level.floor.shape.b == (config.SCREEN_WIDTH + 500, 0)
-    assert level.floor.shape.radius == config.floor_height
+    assert level.floor.shape.b == (SCREEN_WIDTH + 500, 0)
+    assert level.floor.shape.radius == floor_height
     assert level.floor.shape.elasticity == 0.6
