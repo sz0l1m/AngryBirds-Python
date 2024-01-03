@@ -91,6 +91,27 @@ class Game:
         self._space_used = False
         self._bird_clicked = False
 
+    @property
+    def level(self):
+        """
+        Returns current level of the game.
+        """
+        return self._level
+
+    @property
+    def bird(self):
+        """
+        Returns currently used bird.
+        """
+        return self._bird
+
+    @property
+    def trajectory(self):
+        """
+        Returns current trajectory of the bird.
+        """
+        return self._trajectory
+
 
 class Level:
     """

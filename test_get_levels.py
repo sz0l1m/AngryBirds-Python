@@ -1,4 +1,5 @@
 from get_levels import (
+    Game,
     Level
 )
 from io import StringIO
@@ -6,8 +7,10 @@ import json
 import pymunk
 from config import (
     SCREEN_WIDTH,
+    SCREEN_HEIGHT,
     bird_position,
-    floor_height
+    floor_height,
+    gravity
 )
 
 
@@ -69,6 +72,19 @@ def get_level(space: pymunk.Space, level):
     level = Level(data[level], len(data))
     level.create_objects(space)
     return level
+
+
+def test_game_create():
+    game = Game()
+    assert game.space.gravity == gravity
+    assert game.screen.get_width() == SCREEN_WIDTH
+    assert game.screen.get_height() == SCREEN_HEIGHT
+    assert type(game.level) is Level
+    assert game.level.number == 1
+    assert game.bird.body.position == bird_position
+    assert game.trajectory.start_point[0] == bird_position[0]
+    assert game.trajectory.start_point[1] == bird_position[1]
+    assert game.trajectory.bird == game.bird
 
 
 def test_level_create():
