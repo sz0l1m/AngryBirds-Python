@@ -11,11 +11,13 @@ from classes import (
     Trajectory,
     Text,
     convert_coords,
-    is_on_circle
+    is_on_circle,
+    space_draw
 )
 from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
+    FPS,
     bird_position,
     bird_radius,
     floor_height,
@@ -164,7 +166,7 @@ class Game:
                 self._level.load_bird(self.space)
                 self._bird = self.level.bird
                 self._trajectory = Trajectory(self.bird)
-                self.bird_shot = False
+                self._bird_shot = False
         elif pigs != 0 and self._level.attempts == 1:
             self.load_level(self._level.number - 1)
 
@@ -181,15 +183,37 @@ class Game:
                     self.load_level(self.level.number - 1)
             elif event.type == MOUSEBUTTONDOWN and event.button == 1:
                 if is_on_circle(bird_position, bird_radius, convert_coords(mouse_pos)):
-                    self.bird_clicked = True
+                    self._bird_clicked = True
             elif event.type == MOUSEBUTTONUP and self.bird_clicked and not self.bird_shot and event.button == 1:
-                self.bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
-                self.bird_shot = True
-                self.bird_clicked = False
+                self._bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
+                self._bird_shot = True
+                self._bird_clicked = False
             elif event.type == MOUSEBUTTONUP:
-                self.bird_clicked = False
+                self._bird_clicked = False
             elif event.type == QUIT:
-                self.running = False
+                self._running = False
+
+    def step(self):
+        self.handle_events()
+        self.space.step(1 / FPS)
+        self.screen.fill((255, 255, 255))
+        self._trajectory.calc()
+        self._trajectory.draw(self.screen)
+        space_draw(self.space, self._draw_options)
+        pressed_keys = pygame.key.get_pressed()
+        mouse_pos = pygame.mouse.get_pos()
+        if self._bird_clicked:
+            self._bird.set_speed(pressed_keys, convert_coords(mouse_pos), self.screen)
+        else:
+            self._bird.set_speed(pressed_keys, None, None)
+        self._angle_text.set_str(str(self._bird.angle))
+        self._velocity_text.set_str(str(self._bird.velocity))
+        self._angle_text.draw(self.screen)
+        self._velocity_text.draw(self.screen)
+        collisions.rolling_resistance(self.space)
+        self.handle_level()
+        pygame.display.flip()
+        self._clock.tick(FPS)
 
 
 class Level:
