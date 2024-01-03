@@ -73,13 +73,6 @@ def handle_level(space: pymunk.Space, level):
         return 'Restart'
 
 
-def load_level(space, level_number):
-    level = get_level(space, level_number)
-    bird = level.bird
-    trajectory = Trajectory(bird)
-    return level, bird, trajectory
-
-
 class Game:
     def __init__(self):
         self.space = pymunk.Space()
@@ -89,10 +82,11 @@ class Game:
         pygame.display.set_caption('Angry Birds')
         self._clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        level, bird, trajectory = load_level(self.space, 0)
-        self._level = level
-        self._bird = bird
-        self._trajectory = trajectory
+        self.load_level(0)
+        # level, bird, trajectory = self.load_level(self.space, 0)
+        # self._level = level
+        # self._bird = bird
+        # self._trajectory = trajectory
         self._angle_text = Text('0', (20, 20), 30)
         self._velocity_text = Text('0', (20, 100), 30)
         pymunk.pygame_util.positive_y_is_up = True
@@ -144,6 +138,11 @@ class Game:
         """
         return self._bird_clicked
 
+    def load_level(self, level_number):
+        self._level = get_level(self.space, level_number)
+        self._bird = self._level.bird
+        self._trajectory = Trajectory(self._bird)
+
     def handle_events(self):
         mouse_pos = pygame.mouse.get_pos()
         for event in pygame.event.get():
@@ -154,7 +153,7 @@ class Game:
                     self.bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
                     self.bird_shot = True
                 elif event.key == K_r:
-                    self.level, self.bird, self.trajectory = load_level(self.space, self.level.number - 1)
+                    self.load_level(self.level.number - 1)
             elif event.type == MOUSEBUTTONDOWN and event.button == 1:
                 if is_on_circle(bird_position, bird_radius, convert_coords(mouse_pos)):
                     self.bird_clicked = True
