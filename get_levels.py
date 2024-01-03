@@ -112,6 +112,27 @@ class Game:
         """
         return self._trajectory
 
+    @property
+    def running(self):
+        """
+        Returns True if the game is running.
+        """
+        return self._running
+
+    @property
+    def bird_shot(self):
+        """
+        Returns True if bird was shot in current attempt.
+        """
+        return self._bird_shot
+
+    @property
+    def bird_clicked(self):
+        """
+        Returns True if bird was clicked with LMP and was not released.
+        """
+        return self._bird_clicked
+
 
 class Level:
     """

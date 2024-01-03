@@ -85,6 +85,9 @@ def test_game_create():
     assert game.trajectory.start_point[0] == bird_position[0]
     assert game.trajectory.start_point[1] == bird_position[1]
     assert game.trajectory.bird == game.bird
+    assert game.running is True
+    assert game.bird_shot is False
+    assert game.bird_clicked is False
 
 
 def test_level_create():
