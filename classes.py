@@ -1,6 +1,10 @@
 import pygame
 import pymunk
+import pymunk.pygame_util
 from math import sin, cos, asin, radians, degrees, sqrt
+import os
+from get_levels import load_level
+import collisions
 from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
@@ -98,6 +102,29 @@ class CoordinatesError(Exception):
         """
         super().__init__('Invalid coordinates')
         self.coordinates = coords
+
+
+class Game:
+    def __init__(self):
+        self.space = pymunk.Space()
+        self.space.gravity = gravity
+        os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0, 0)
+        pygame.init()
+        pygame.display.set_caption('Angry Birds')
+        self._clock = pygame.time.Clock()
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        level, bird, trajectory = load_level(self.space, 0)
+        self._level = level
+        self._bird = bird
+        self._trajectory = trajectory
+        self._angle_text = Text('0', (20, 20), 30)
+        self._velocity_text = Text('0', (20, 100), 30)
+        pymunk.pygame_util.positive_y_is_up = True
+        self._draw_options = pymunk.pygame_util.DrawOptions(self.screen)
+        collisions.create_handlers(self.space)
+        self._running = True
+        self._space_used = False
+        self._bird_clicked = False
 
 
 class Bird:
