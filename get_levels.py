@@ -52,25 +52,25 @@ def get_level(space: pymunk.Space, level):
     return level
 
 
-def handle_level(space: pymunk.Space, level):
-    pigs = 0
-    for body, shape in zip(space.bodies, space.shapes):
-        if body.position[0] > SCREEN_WIDTH + 50 or body.position[0] < -50:
-            if shape.collision_type == 3:
-                space.remove(body, shape)
-            else:
-                body.position = (SCREEN_WIDTH + 50, floor_height)
-                body.velocity = (0, 0)
-        if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
-            return None
-        if shape.collision_type == 3:
-            pigs += 1
-    if pigs == 0 and level.number < level.amount_of_levels:
-        return 'Next level'
-    elif pigs != 0 and level.attempts > 1:
-        return 'Next attempt'
-    elif pigs != 0 and level.attempts == 1:
-        return 'Restart'
+# def handle_level(space: pymunk.Space, level):
+#     pigs = 0
+#     for body, shape in zip(space.bodies, space.shapes):
+#         if body.position[0] > SCREEN_WIDTH + 50 or body.position[0] < -50:
+#             if shape.collision_type == 3:
+#                 space.remove(body, shape)
+#             else:
+#                 body.position = (SCREEN_WIDTH + 50, floor_height)
+#                 body.velocity = (0, 0)
+#         if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
+#             return None
+#         if shape.collision_type == 3:
+#             pigs += 1
+#     if pigs == 0 and level.number < level.amount_of_levels:
+#         return 'Next level'
+#     elif pigs != 0 and level.attempts > 1:
+#         return 'Next attempt'
+#     elif pigs != 0 and level.attempts == 1:
+#         return 'Restart'
 
 
 class Game:
@@ -142,6 +142,31 @@ class Game:
         self._level = get_level(self.space, level_number)
         self._bird = self._level.bird
         self._trajectory = Trajectory(self._bird)
+
+    def handle_level(self):
+        pigs = 0
+        for body, shape in zip(self.space.bodies, self.space.shapes):
+            if body.position[0] > SCREEN_WIDTH + 50 or body.position[0] < -50:
+                if shape.collision_type == 3:
+                    self.space.remove(body, shape)
+                else:
+                    body.position = (SCREEN_WIDTH + 50, floor_height)
+                    body.velocity = (0, 0)
+            if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
+                return None
+            if shape.collision_type == 3:
+                pigs += 1
+        if pigs == 0 and self._level.number < self._level.amount_of_levels:
+            self.load_level(self.level.number)
+            self._bird_shot = False
+        elif pigs != 0 and self._level.attempts > 1:
+            if self._bird_shot:
+                self._level.load_bird(self.space)
+                self._bird = self.level.bird
+                self._trajectory = Trajectory(self.bird)
+                self.bird_shot = False
+        elif pigs != 0 and self._level.attempts == 1:
+            self.load_level(self._level.number - 1)
 
     def handle_events(self):
         mouse_pos = pygame.mouse.get_pos()
