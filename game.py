@@ -51,7 +51,7 @@ def main():
 
     running = True
 
-    space_used = False
+    bird_shot = False
 
     bird_clicked = False
 
@@ -61,17 +61,17 @@ def main():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     running = False
-                elif event.key == K_SPACE and not space_used:
+                elif event.key == K_SPACE and not bird_shot:
                     bird.body.velocity = (bird.x_velocity, bird.y_velocity)
-                    space_used = True
+                    bird_shot = True
                 elif event.key == K_r:
                     level, bird, trajectory = load_level(space, level.number - 1)
             elif event.type == MOUSEBUTTONDOWN and event.button == 1:
                 if is_on_circle(bird.body.position, bird.radius, convert_coords(mouse_pos)):
                     bird_clicked = True
-            elif event.type == MOUSEBUTTONUP and bird_clicked and not space_used and event.button == 1:
+            elif event.type == MOUSEBUTTONUP and bird_clicked and not bird_shot and event.button == 1:
                 bird.body.velocity = (bird.x_velocity, bird.y_velocity)
-                space_used = True
+                bird_shot = True
                 bird_clicked = False
             elif event.type == MOUSEBUTTONUP:
                 bird_clicked = False
@@ -104,16 +104,16 @@ def main():
         match handle_level(space, level):
             case 'Next level':
                 level, bird, trajectory = load_level(space, level.number)
-                space_used = False
+                bird_shot = False
             case 'Next attempt':
-                if space_used:
+                if bird_shot:
                     level.load_bird(space)
                     bird = level.bird
                     trajectory = Trajectory(bird)
-                    space_used = False
+                    bird_shot = False
             case 'Restart':
                 level, bird, trajectory = load_level(space, level.number - 1)
-                space_used = False
+                bird_shot = False
 
         pygame.display.flip()
 

@@ -88,7 +88,7 @@ class Game:
         self._draw_options = pymunk.pygame_util.DrawOptions(self.screen)
         collisions.create_handlers(self.space)
         self._running = True
-        self._space_used = False
+        self._bird_shot = False
         self._bird_clicked = False
 
     @property
