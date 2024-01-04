@@ -506,11 +506,26 @@ class Skin:
 
     @property
     def default_image(self):
+        """
+        Returns default image of the skin.
+        """
         return self._default_image
 
     @property
     def image(self):
+        """
+        Returns image of the skin.
+        """
         return self._image
+
+    def update(self, screen, object):
+        """
+        Rotetes image, changes its position and draws on the screen depending
+        on object.
+        """
+        self._image = pygame.transform.rotate(self._default_image, degrees(object.body.angle))
+        self._rect = self._image.get_rect(center=object.body.position)
+        screen.blit(self._image, convert_coords(self._rect.bottomleft))
 
 
 class Text:
