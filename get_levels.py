@@ -67,11 +67,16 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.load_level(0)
         self._texts = {
-            'attempts': Text('0', (20, 20), 30),
+            'attempts': Text('0', (130, 70), 40),
             'info': Text(
                 'Press space to start',
                 (SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT - 100), 30
                 )
+        }
+        self._images = {
+            'background': Skin(None, 'background.jpg', (2131, 1146)),
+            'title': Skin(None, 'title.png', (512, 295)),
+            'bird_amount': Skin(None, 'red_bird.png', (80, 80))
         }
         pymunk.pygame_util.positive_y_is_up = True
         self._draw_options = pymunk.pygame_util.DrawOptions(self.screen)
@@ -81,10 +86,6 @@ class Game:
         self._bird_clicked = False
         self._timer = 0
         self._start = False
-        self._images = {
-            'background': Skin(None, 'background.jpg', (2131, 1146)),
-            'title': Skin(None, 'title.png', (512, 295))
-        }
 
     @property
     def level(self):
@@ -235,12 +236,13 @@ class Game:
         space_draw(self.space, self._draw_options)
         self.update_skins()
         self.draw_grass()
+        self.screen.blit(self._images['bird_amount'].default_image, (50, 50))
+        self._texts['attempts'].set_str(self.screen, str(f'x{self._level.attempts}'))
         pressed_keys = pygame.key.get_pressed()
         if self._bird_clicked:
             self._bird.set_speed(pressed_keys, convert_coords(mouse_pos), self.screen)
         else:
             self._bird.set_speed(pressed_keys, None, None)
-            self._texts['attempts'].set_str(self.screen, str(self._level.attempts))
         collisions.rolling_resistance(self.space)
         self.handle_level()
         pygame.display.flip()
