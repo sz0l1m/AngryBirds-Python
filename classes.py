@@ -68,7 +68,10 @@ def calc_distance_and_angle(point1: int, point2: int):
     x1, y1 = point1
     x2, y2 = point2
     distance = sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
-    angle = degrees(asin(abs(y1 - y2) / distance))
+    try:
+        angle = degrees(asin(abs(y1 - y2) / distance))
+    except ZeroDivisionError:
+        angle = 0
     return min(distance, aiming_range), angle
 
 
