@@ -55,27 +55,6 @@ def get_level(space: pymunk.Space, level):
     return level
 
 
-# def handle_level(space: pymunk.Space, level):
-#     pigs = 0
-#     for body, shape in zip(space.bodies, space.shapes):
-#         if body.position[0] > SCREEN_WIDTH + 50 or body.position[0] < -50:
-#             if shape.collision_type == 3:
-#                 space.remove(body, shape)
-#             else:
-#                 body.position = (SCREEN_WIDTH + 50, floor_height)
-#                 body.velocity = (0, 0)
-#         if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
-#             return None
-#         if shape.collision_type == 3:
-#             pigs += 1
-#     if pigs == 0 and level.number < level.amount_of_levels:
-#         return 'Next level'
-#     elif pigs != 0 and level.attempts > 1:
-#         return 'Next attempt'
-#     elif pigs != 0 and level.attempts == 1:
-#         return 'Restart'
-
-
 class Game:
     def __init__(self):
         self.space = pymunk.Space()
@@ -202,6 +181,7 @@ class Game:
         self._trajectory.calc()
         self._trajectory.draw(self.screen)
         space_draw(self.space, self._draw_options)
+        self._bird.body.skin.update(self.screen)
         pressed_keys = pygame.key.get_pressed()
         if self._bird_clicked:
             self._bird.set_speed(pressed_keys, convert_coords(mouse_pos), self.screen)
