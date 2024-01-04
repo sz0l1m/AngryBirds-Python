@@ -711,4 +711,5 @@ class Text:
         """
         Draws text on pygame display.
         """
+        self._surf.set_colorkey((255, 255, 255))
         screen.blit(self._surf, self._position)

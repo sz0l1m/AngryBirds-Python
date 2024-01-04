@@ -66,6 +66,13 @@ class Game:
         self._clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.load_level(0)
+        self._texts = {
+            'attempts': Text('0', (20, 20), 30),
+            'info': Text(
+                'Press space to start',
+                (SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT - 100), 30
+                )
+        }
         self._angle_text = Text('0', (20, 20), 30)
         self._velocity_text = Text('0', (20, 100), 30)
         pymunk.pygame_util.positive_y_is_up = True
@@ -147,6 +154,7 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.screen.blit(self._background.default_image, (0, -7))
         self.screen.blit(self._title.default_image, (SCREEN_WIDTH / 2 - 256, 220))
+        self._texts['info'].draw(self.screen)
         pygame.display.flip()
         self._clock.tick(FPS)
 
@@ -232,9 +240,7 @@ class Game:
             self._bird.set_speed(pressed_keys, convert_coords(mouse_pos), self.screen)
         else:
             self._bird.set_speed(pressed_keys, None, None)
-        self._angle_text.set_str(self.screen, str(self._level.attempts))
-        # self._angle_text.set_str(self.screen, str(self._bird.angle))
-        self._velocity_text.set_str(self.screen, str(self._bird.velocity))
+            self._texts['attempts'].set_str(self.screen, str(self._level.attempts))
         collisions.rolling_resistance(self.space)
         self.handle_level()
         pygame.display.flip()
