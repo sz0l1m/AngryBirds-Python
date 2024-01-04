@@ -77,6 +77,7 @@ class Game:
         self._timer = 0
         self._background = Skin(None, 'background.jpg', (2131, 1146))
         self._start = False
+        self._title = Skin(None, 'title.png', (512, 295))
 
     @property
     def level(self):
@@ -144,7 +145,8 @@ class Game:
 
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))
-        self.screen.blit(self._background.default_image, (0, 0))
+        self.screen.blit(self._background.default_image, (0, -7))
+        self.screen.blit(self._title.default_image, (SCREEN_WIDTH / 2 - 256, 220))
         pygame.display.flip()
         self._clock.tick(FPS)
 
