@@ -178,6 +178,13 @@ class Game:
             if shape.collision_type == 1 or shape.collision_type == 3:
                 body.skin.update(self.screen)
 
+    def draw_grass(self):
+        for x in range(SCREEN_WIDTH + 310 // 300):
+            self.screen.blit(
+                self._level.floor.body.skin.default_image,
+                convert_coords((-10 + 300 * x, 218))
+                )
+
     def step(self):
         mouse_pos = pygame.mouse.get_pos()
         self.handle_events()
@@ -187,7 +194,7 @@ class Game:
         self._trajectory.draw(self.screen)
         space_draw(self.space, self._draw_options)
         self.update_skins()
-        # self._bird.body.skin.update(self.screen)
+        self.draw_grass()
         pressed_keys = pygame.key.get_pressed()
         if self._bird_clicked:
             self._bird.set_speed(pressed_keys, convert_coords(mouse_pos), self.screen)

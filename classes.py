@@ -481,6 +481,8 @@ class Floor:
         self._shape.elasticity = 0.6
         self._shape.friction = 0.8
         self._shape.collision_type = 2
+        self._shape.color = pygame.Color((0, 160, 0))
+        self.body.skin = Skin(self, 'grass.png', (300, 30))
         space.add(self.body, self.shape)
 
     @property
