@@ -159,21 +159,23 @@ class Game:
                 if event.key == K_ESCAPE:
                     self._running = False
                 elif event.key == K_SPACE and not self._bird_shot:
-                    self._bird.body.velocity = (self._bird.x_velocity, self._bird.y_velocity)
-                    self._bird_shot = True
+                    self.shoot_bird()
                 elif event.key == K_r:
                     self.load_level(self.level.number - 1)
             elif event.type == MOUSEBUTTONDOWN and event.button == 1:
                 if is_on_circle(bird_position, bird_radius, convert_coords(mouse_pos)):
                     self._bird_clicked = True
             elif event.type == MOUSEBUTTONUP and self.bird_clicked and not self.bird_shot and event.button == 1:
-                self._bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
-                self._bird_shot = True
+                self.shoot_bird()
                 self._bird_clicked = False
             elif event.type == MOUSEBUTTONUP:
                 self._bird_clicked = False
             elif event.type == QUIT:
                 self._running = False
+
+    def shoot_bird(self):
+        self._bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
+        self._bird_shot = True
 
     def update_skins(self):
         for body, shape in zip(self.space.bodies, self.space.shapes):
@@ -203,7 +205,8 @@ class Game:
             self._bird.set_speed(pressed_keys, convert_coords(mouse_pos), self.screen)
         else:
             self._bird.set_speed(pressed_keys, None, None)
-        self._angle_text.set_str(self.screen, str(self._bird.angle))
+        self._angle_text.set_str(self.screen, str(self._level.attempts))
+        # self._angle_text.set_str(self.screen, str(self._bird.angle))
         self._velocity_text.set_str(self.screen, str(self._bird.velocity))
         collisions.rolling_resistance(self.space)
         self.handle_level()
