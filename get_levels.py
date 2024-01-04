@@ -73,8 +73,6 @@ class Game:
                 (SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT - 100), 30
                 )
         }
-        self._angle_text = Text('0', (20, 20), 30)
-        self._velocity_text = Text('0', (20, 100), 30)
         pymunk.pygame_util.positive_y_is_up = True
         self._draw_options = pymunk.pygame_util.DrawOptions(self.screen)
         collisions.create_handlers(self.space)
@@ -82,9 +80,11 @@ class Game:
         self._bird_shot = False
         self._bird_clicked = False
         self._timer = 0
-        self._background = Skin(None, 'background.jpg', (2131, 1146))
         self._start = False
-        self._title = Skin(None, 'title.png', (512, 295))
+        self._images = {
+            'background': Skin(None, 'background.jpg', (2131, 1146)),
+            'title': Skin(None, 'title.png', (512, 295))
+        }
 
     @property
     def level(self):
@@ -152,8 +152,8 @@ class Game:
 
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))
-        self.screen.blit(self._background.default_image, (0, -7))
-        self.screen.blit(self._title.default_image, (SCREEN_WIDTH / 2 - 256, 220))
+        self.screen.blit(self._images['background'].default_image, (0, -7))
+        self.screen.blit(self._images['title'].default_image, (SCREEN_WIDTH / 2 - 256, 220))
         self._texts['info'].draw(self.screen)
         pygame.display.flip()
         self._clock.tick(FPS)
@@ -229,7 +229,7 @@ class Game:
         mouse_pos = pygame.mouse.get_pos()
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))
-        self.screen.blit(self._background.default_image, (0, -7))
+        self.screen.blit(self._images['background'].default_image, (0, -7))
         self._trajectory.calc()
         self._trajectory.draw(self.screen)
         space_draw(self.space, self._draw_options)
