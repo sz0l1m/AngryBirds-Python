@@ -54,11 +54,12 @@ def check_radius(radius):
         raise ValueError('Radius has to be positive')
 
 
-def space_draw(space: pymunk.Space, options):
+def space_draw(space: pymunk.Space, options: pymunk.pygame_util.DrawOptions):
     """
     Draws all elements in pymunk's space on pygame's display.
     """
     options.flags = pymunk.SpaceDebugDrawOptions.DRAW_SHAPES
+    options.shape_outline_color = (60, 30, 15)
     space.debug_draw(options)
 
 
@@ -419,6 +420,7 @@ class Bar:
         self._shape.elasticity = 0.4
         self._shape.friction = 0.6
         self._shape.collision_type = 4
+        self._shape.color = pygame.Color((110, 50, 20))
         space.add(self.body, self.shape)
 
     @property
