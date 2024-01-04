@@ -179,10 +179,14 @@ class Game:
                 body.skin.update(self.screen)
 
     def draw_grass(self):
+        self.screen.blit(
+                self._level.floor.body.ground.default_image,
+                convert_coords((-10, floor_height - 10))
+                )
         for x in range(SCREEN_WIDTH + 310 // 300):
             self.screen.blit(
-                self._level.floor.body.skin.default_image,
-                convert_coords((-10 + 300 * x, 218))
+                self._level.floor.body.grass.default_image,
+                convert_coords((-10 + 300 * x, floor_height + 18))
                 )
 
     def step(self):
