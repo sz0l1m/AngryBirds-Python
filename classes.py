@@ -336,6 +336,8 @@ class Pig:
         self._shape.friction = 0.8
         self._shape.color = pygame.Color("green")
         self._shape.collision_type = 3
+        skin_radius = self._radius * 2 + 20
+        self.body.skin = Skin(self, 'red_bird.png', (skin_radius, skin_radius))
         space.add(self.body, self._shape)
 
     @property
