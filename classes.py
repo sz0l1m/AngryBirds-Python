@@ -58,6 +58,7 @@ def space_draw(space: pymunk.Space, options):
     """
     Draws all elements in pymunk's space on pygame's display.
     """
+    options.flags = pymunk.SpaceDebugDrawOptions.DRAW_SHAPES
     space.debug_draw(options)
 
 
