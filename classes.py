@@ -487,6 +487,24 @@ class Floor:
         return self._shape
 
 
+class Image:
+    """
+    Class Image. Contains attributes:
+    :param default_image: image loaded from file and in given size
+    :type default_image: pygame.Image
+
+    :param image: image after rotation
+    :type image: pygame.Image
+    """
+    def __init__(self, file, size):
+        """
+        Creates instance of image compressed to given size.
+        """
+        image = pygame.image.load(f'images/{file}').convert_alpha()
+        self._default_image = pygame.transform.smoothscale(image, size)
+        self._image = None
+
+
 class Text:
     """
     Class Text. Contains attributes:
