@@ -143,13 +143,13 @@ class Game:
         if pigs == 0 and self._level.number < self._level.amount_of_levels:
             self.load_level(self.level.number)
             self._bird_shot = False
-        elif pigs != 0 and self._level.attempts > 1:
+        elif pigs != 0 and self._level.attempts >= 1:
             if self._bird_shot:
                 self._level.load_bird(self.space)
                 self._bird = self.level.bird
                 self._trajectory = Trajectory(self.bird)
                 self._bird_shot = False
-        elif pigs != 0 and self._level.attempts == 1 and time.time() - self._timer > 2:
+        elif pigs != 0 and self._level.attempts == 0 and time.time() - self._timer > 1:
             self.load_level(self._level.number - 1)
 
     def handle_events(self):
