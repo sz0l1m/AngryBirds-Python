@@ -5,6 +5,7 @@ from classes import (
     Bar,
     Trajectory,
     Floor,
+    Image,
     Text,
     convert_coords,
     check_coords,
@@ -548,3 +549,16 @@ def test_is_on_circle_true():
 
 def test_is_on_circle_false():
     assert not is_on_circle((100, 100), 30, (130, 105))
+
+
+def test_image_create_normal():
+    pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    image = Image('red_bird.png', (40, 50))
+    assert image.default_image.get_rect()[2] == 40
+    assert image.default_image.get_rect()[3] == 50
+    assert image.image is None
+
+
+def test_image_create_invalid_file():
+    with pytest.raises(FileNotFoundError):
+        Image('123', (100, 200))

@@ -496,13 +496,21 @@ class Image:
     :param image: image after rotation
     :type image: pygame.Image
     """
-    def __init__(self, file, size):
+    def __init__(self, file: str, size: tuple):
         """
         Creates instance of image compressed to given size.
         """
         image = pygame.image.load(f'images/{file}').convert_alpha()
         self._default_image = pygame.transform.smoothscale(image, size)
         self._image = None
+
+    @property
+    def default_image(self):
+        return self._default_image
+
+    @property
+    def image(self):
+        return self._image
 
 
 class Text:
