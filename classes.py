@@ -583,12 +583,13 @@ class Text:
         """
         return self._font_type
 
-    def set_str(self, new_str):
+    def set_str(self, screen, new_str):
         """
-        Changes str of the text to new_str.
+        Changes str of the text to new_str and draws new text.
         """
         self._str = new_str
         self._surf = self._font.render(self._str, True, self._color, self._background)
+        screen.blit(self._surf, self._position)
 
     def set_position(self, new_position):
         """

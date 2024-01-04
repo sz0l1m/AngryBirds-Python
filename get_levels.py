@@ -207,10 +207,8 @@ class Game:
             self._bird.set_speed(pressed_keys, convert_coords(mouse_pos), self.screen)
         else:
             self._bird.set_speed(pressed_keys, None, None)
-        self._angle_text.set_str(str(self._bird.angle))
-        self._velocity_text.set_str(str(self._bird.velocity))
-        self._angle_text.draw(self.screen)
-        self._velocity_text.draw(self.screen)
+        self._angle_text.set_str(self.screen, str(self._bird.angle))
+        self._velocity_text.set_str(self.screen, str(self._bird.velocity))
         collisions.rolling_resistance(self.space)
         self.handle_level()
         pygame.display.flip()
