@@ -657,6 +657,7 @@ class Text:
         """
         self._str = new_str
         self._surf = self._font.render(self._str, True, self._color, self._background)
+        self._surf.set_colorkey((255, 255, 255))
         screen.blit(self._surf, self._position)
 
     def set_position(self, new_position):
