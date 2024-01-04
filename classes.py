@@ -149,13 +149,15 @@ class Bird:
         self._shape.elasticity = elasticity
         self._shape.friction = friction
         self._shape.collision_type = 1
+        self.shape.color = pygame.Color((210, 0, 0))
         self._radius = radius
         self.velocity = 0
         self.angle = 0
         self.x_velocity = 0
         self.y_velocity = 0
         self.body.velocity = (self.x_velocity, self.y_velocity)
-        self.body.skin = Skin(self, 'red_bird.png', (self._radius * 2, self._radius * 2))
+        skin_radius = bird_radius * 2 + 20
+        self.body.skin = Skin(self, 'red_bird.png', (skin_radius, skin_radius))
         space.add(self.body, self.shape)
 
     @property
