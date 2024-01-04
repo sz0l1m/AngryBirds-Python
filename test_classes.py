@@ -189,17 +189,19 @@ def test_text_create_invalid_background():
 
 def test_text_set_str():
     pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     text = Text('WASD123', (width, height))
     assert text.str == 'WASD123'
-    text.set_str('123')
+    text.set_str(screen, '123')
     assert text.str == '123'
 
 
 def test_text_set_str_empty():
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.init()
     text = Text('WASD123', (width, height))
     assert text.str == 'WASD123'
-    text.set_str('')
+    text.set_str(screen, '')
     assert text.str == ''
 
 
