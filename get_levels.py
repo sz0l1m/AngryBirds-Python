@@ -173,6 +173,11 @@ class Game:
             elif event.type == QUIT:
                 self._running = False
 
+    def update_skins(self):
+        for body, shape in zip(self.space.bodies, self.space.shapes):
+            if shape.collision_type == 1 or shape.collision_type == 3:
+                body.skin.update(self.screen)
+
     def step(self):
         mouse_pos = pygame.mouse.get_pos()
         self.handle_events()
@@ -181,7 +186,8 @@ class Game:
         self._trajectory.calc()
         self._trajectory.draw(self.screen)
         space_draw(self.space, self._draw_options)
-        self._bird.body.skin.update(self.screen)
+        self.update_skins()
+        # self._bird.body.skin.update(self.screen)
         pressed_keys = pygame.key.get_pressed()
         if self._bird_clicked:
             self._bird.set_speed(pressed_keys, convert_coords(mouse_pos), self.screen)
