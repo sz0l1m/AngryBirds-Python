@@ -176,6 +176,7 @@ class Game:
     def shoot_bird(self):
         self._bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
         self._bird_shot = True
+        self._level.reduce_attempts()
 
     def update_skins(self):
         for body, shape in zip(self.space.bodies, self.space.shapes):
@@ -279,6 +280,9 @@ class Level:
         """
         return self._attempts
 
+    def reduce_attempts(self):
+        self._attempts -= 1
+
     def create_objects(self, space):
         """
         Creates instances of all objects and returns them.
@@ -315,6 +319,5 @@ class Level:
         """
         Loads new bird on the screen.
         """
-        self._attempts -= 1
         space.remove(self.bird.body, self.bird.shape)
         self.bird = Bird(space, bird_position, bird_radius, 0.7, 0.7, 0.8)
