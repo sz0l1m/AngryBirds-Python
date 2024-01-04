@@ -553,7 +553,9 @@ def test_is_on_circle_false():
 
 def test_skin_create_normal():
     pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    skin = Skin('red_bird.png', (40, 50))
+    bird = Bird(space, (width, height), 20)
+    skin = Skin(bird, 'red_bird.png', (40, 50))
+    assert skin.object == bird
     assert skin.default_image.get_rect()[2] == 40
     assert skin.default_image.get_rect()[3] == 50
     assert skin.image is None
@@ -561,15 +563,15 @@ def test_skin_create_normal():
 
 def test_skin_create_invalid_file():
     with pytest.raises(FileNotFoundError):
-        Skin('123', (100, 200))
+        Skin('sada', '123', (100, 200))
 
 
 def test_skin_update():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pig = Bird(space, (width, height), 20)
-    skin = Skin('red_bird.png', (20, 20))
+    bird = Bird(space, (width, height), 20)
+    skin = Skin(bird, 'red_bird.png', (20, 20))
     assert skin.default_image.get_rect()[2] == 20
     assert skin.default_image.get_rect()[3] == 20
     assert skin.image is None
-    skin.update(screen, pig)
+    skin.update(screen)
     assert skin.image.get_rect().bottomright == (20, 20)

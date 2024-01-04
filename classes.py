@@ -155,6 +155,7 @@ class Bird:
         self.x_velocity = 0
         self.y_velocity = 0
         self.body.velocity = (self.x_velocity, self.y_velocity)
+        self.body.skin = Skin(self, 'red_bird.png', (self._radius * 2, self._radius * 2))
         space.add(self.body, self.shape)
 
     @property
@@ -496,13 +497,21 @@ class Skin:
     :param image: image after rotation
     :type image: pygame.Image
     """
-    def __init__(self, file: str, size: tuple):
+    def __init__(self, object, file: str, size: tuple):
         """
         Creates instance of image compressed to given size.
         """
+        self._object = object
         image = pygame.image.load(f'images/{file}').convert_alpha()
         self._default_image = pygame.transform.smoothscale(image, size)
         self._image = None
+
+    @property
+    def object(self):
+        """
+        Returns object of which this is a skin.
+        """
+        return self._object
 
     @property
     def default_image(self):
@@ -518,13 +527,13 @@ class Skin:
         """
         return self._image
 
-    def update(self, screen, object):
+    def update(self, screen):
         """
         Rotetes image, changes its position and draws on the screen depending
         on object.
         """
-        self._image = pygame.transform.rotate(self._default_image, degrees(object.body.angle))
-        self._rect = self._image.get_rect(center=object.body.position)
+        self._image = pygame.transform.rotate(self._default_image, degrees(self._object.body.angle))
+        self._rect = self._image.get_rect(center=self._object.body.position)
         screen.blit(self._image, convert_coords(self._rect.bottomleft))
 
 
