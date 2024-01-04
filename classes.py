@@ -487,9 +487,9 @@ class Floor:
         return self._shape
 
 
-class Image:
+class Skin:
     """
-    Class Image. Contains attributes:
+    Class Skin. Contains attributes:
     :param default_image: image loaded from file and in given size
     :type default_image: pygame.Image
 
