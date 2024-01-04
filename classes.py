@@ -501,6 +501,8 @@ class Skin:
         """
         Creates instance of image compressed to given size.
         """
+        if size[0] <= 0 or size[1] <= 0:
+            raise ValueError('Size has to be positive')
         self._object = object
         image = pygame.image.load(f'images/{file}').convert_alpha()
         self._default_image = pygame.transform.smoothscale(image, size)

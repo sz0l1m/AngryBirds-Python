@@ -23,6 +23,8 @@ import pygame
 import pymunk
 
 space = pymunk.Space()
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
 
 width = SCREEN_WIDTH - 1
 height = SCREEN_HEIGHT - 1
@@ -190,7 +192,6 @@ def test_text_create_invalid_background():
 
 def test_text_set_str():
     pygame.init()
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     text = Text('WASD123', (width, height))
     assert text.str == 'WASD123'
     text.set_str(screen, '123')
@@ -198,7 +199,6 @@ def test_text_set_str():
 
 
 def test_text_set_str_empty():
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     pygame.init()
     text = Text('WASD123', (width, height))
     assert text.str == 'WASD123'
@@ -552,7 +552,6 @@ def test_is_on_circle_false():
 
 
 def test_skin_create_normal():
-    pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     bird = Bird(space, (width, height), 20)
     skin = Skin(bird, 'red_bird.png', (40, 50))
     assert skin.object == bird
@@ -561,13 +560,22 @@ def test_skin_create_normal():
     assert skin.image is None
 
 
+def test_skin_create_negative_size():
+    with pytest.raises(ValueError):
+        Skin('sada', '123', (-100, 200))
+
+
+def test_skin_create_zero_size():
+    with pytest.raises(ValueError):
+        Skin('sada', '123', (100, 0))
+
+
 def test_skin_create_invalid_file():
     with pytest.raises(FileNotFoundError):
         Skin('sada', '123', (100, 200))
 
 
 def test_skin_update():
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     bird = Bird(space, (width, height), 20)
     skin = Skin(bird, 'red_bird.png', (20, 20))
     assert skin.default_image.get_rect()[2] == 20
