@@ -156,7 +156,7 @@ class Bird:
         self.x_velocity = 0
         self.y_velocity = 0
         self.body.velocity = (self.x_velocity, self.y_velocity)
-        skin_radius = bird_radius * 2 + 20
+        skin_radius = bird_radius * 2 + 21
         self.body.skin = Skin(self, 'red_bird.png', (skin_radius, skin_radius))
         space.add(self.body, self.shape)
 
@@ -336,8 +336,11 @@ class Pig:
         self._shape.friction = 0.8
         self._shape.color = pygame.Color("green")
         self._shape.collision_type = 3
-        skin_radius = self._radius * 2 + 20
-        self.body.skin = Skin(self, 'red_bird.png', (skin_radius, skin_radius))
+        if self._radius == 20:
+            skin_radius = self._radius * 2 + 10
+        else:
+            skin_radius = self._radius * 2 + 10
+        self.body.skin = Skin(self, 'pig.png', (skin_radius, skin_radius))
         space.add(self.body, self._shape)
 
     @property
@@ -538,8 +541,13 @@ class Skin:
         Rotetes image, changes its position and draws on the screen depending
         on object.
         """
+        if self._object.shape.collision_type == 3:
+            image_center = (self._object.body.position[0],
+                            self._object.body.position[1] + 2)
+        else:
+            image_center = self._object.body.position
         self._image = pygame.transform.rotate(self._default_image, degrees(self._object.body.angle))
-        self._rect = self._image.get_rect(center=self._object.body.position)
+        self._rect = self._image.get_rect(center=image_center)
         screen.blit(self._image, convert_coords(self._rect.bottomleft))
 
 
