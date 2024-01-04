@@ -3,6 +3,7 @@ import pygame
 import pymunk
 import os
 import collisions
+import time
 from classes import (
     Bird,
     Pig,
@@ -93,6 +94,7 @@ class Game:
         self._running = True
         self._bird_shot = False
         self._bird_clicked = False
+        self._timer = 0
 
     @property
     def level(self):
@@ -151,9 +153,12 @@ class Game:
                     body.position = (SCREEN_WIDTH + 50, floor_height)
                     body.velocity = (0, 0)
             if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
+                self._timer = 0
                 return None
             if shape.collision_type == 3:
                 pigs += 1
+        if self._timer == 0:
+            self._timer = time.time()
         if pigs == 0 and self._level.number < self._level.amount_of_levels:
             self.load_level(self.level.number)
             self._bird_shot = False
@@ -163,7 +168,7 @@ class Game:
                 self._bird = self.level.bird
                 self._trajectory = Trajectory(self.bird)
                 self._bird_shot = False
-        elif pigs != 0 and self._level.attempts == 1:
+        elif pigs != 0 and self._level.attempts == 1 and time.time() - self._timer > 2:
             self.load_level(self._level.number - 1)
 
     def handle_events(self):
