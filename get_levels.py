@@ -9,6 +9,7 @@ from classes import (
     Pig,
     Bar,
     Floor,
+    Skin,
     Trajectory,
     Text,
     convert_coords,
@@ -74,6 +75,7 @@ class Game:
         self._bird_shot = False
         self._bird_clicked = False
         self._timer = 0
+        self._background = Skin(None, 'background.jpg', (2131, 1146))
 
     @property
     def level(self):
@@ -182,7 +184,7 @@ class Game:
         for x in range(SCREEN_WIDTH + 310 // 300):
             self.screen.blit(
                 self._level.floor.body.grass.default_image,
-                convert_coords((-10 + 300 * x, floor_height + 18))
+                convert_coords((-10 + 300 * x, floor_height + 20))
                 )
 
     def step(self):
@@ -190,6 +192,7 @@ class Game:
         self.handle_events()
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))
+        self.screen.blit(self._background.default_image, (0, 0))
         self._trajectory.calc()
         self._trajectory.draw(self.screen)
         space_draw(self.space, self._draw_options)
