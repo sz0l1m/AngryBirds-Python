@@ -9,22 +9,6 @@
                 "pigs": [
                     {
                         "x_position": 300,
-                        "y_position": 30,
-                        "radius": 30
-                    }
-                ],
-                "bars": []
-            }
-        },
-        {
-            "level": 2,
-            "objects": {
-                "birds": {
-                    "amount": 2
-                },
-                "pigs": [
-                    {
-                        "x_position": 300,
                         "y_position": 220,
                         "radius": 20
                     },
@@ -57,7 +41,7 @@
             }
         },
         {
-            "level": 3,
+            "level": 2,
             "objects": {
                 "birds": {
                     "amount": 5
@@ -151,7 +135,7 @@
             }
         },
         {
-            "level": 4,
+            "level": 3,
             "objects": {
                 "birds": {
                     "amount": 3
@@ -174,7 +158,7 @@
                     },
                     {
                         "x_position": 1000,
-                        "y_position": 420,
+                        "y_position": 320,
                         "radius": 20
                     }
                 ],
@@ -217,9 +201,9 @@
                     },
                     {
                         "x_position": 1000,
-                        "y_position": 200,
+                        "y_position": 150,
                         "x_size": 40,
-                        "y_size": 400,
+                        "y_size": 300,
                         "type": "static"
                     }
                 ]
