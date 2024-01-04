@@ -142,6 +142,12 @@ class Game:
             elif event.type == QUIT:
                 self._running = False
 
+        self.space.step(1 / FPS)
+        self.screen.fill((255, 255, 255))
+        self.screen.blit(self._background.default_image, (0, 0))
+        pygame.display.flip()
+        self._clock.tick(FPS)
+
     def handle_level(self):
         pigs = 0
         for body, shape in zip(self.space.bodies, self.space.shapes):
@@ -209,11 +215,11 @@ class Game:
                 )
 
     def step(self):
-        mouse_pos = pygame.mouse.get_pos()
         self.handle_events()
+        mouse_pos = pygame.mouse.get_pos()
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))
-        self.screen.blit(self._background.default_image, (0, 0))
+        self.screen.blit(self._background.default_image, (0, -7))
         self._trajectory.calc()
         self._trajectory.draw(self.screen)
         space_draw(self.space, self._draw_options)
