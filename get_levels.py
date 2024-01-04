@@ -175,10 +175,10 @@ class Game:
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
-                    self.running = False
-                elif event.key == K_SPACE and not self.bird_shot:
-                    self.bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
-                    self.bird_shot = True
+                    self._running = False
+                elif event.key == K_SPACE and not self._bird_shot:
+                    self._bird.body.velocity = (self._bird.x_velocity, self._bird.y_velocity)
+                    self._bird_shot = True
                 elif event.key == K_r:
                     self.load_level(self.level.number - 1)
             elif event.type == MOUSEBUTTONDOWN and event.button == 1:
@@ -194,6 +194,7 @@ class Game:
                 self._running = False
 
     def step(self):
+        mouse_pos = pygame.mouse.get_pos()
         self.handle_events()
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))
@@ -201,7 +202,6 @@ class Game:
         self._trajectory.draw(self.screen)
         space_draw(self.space, self._draw_options)
         pressed_keys = pygame.key.get_pressed()
-        mouse_pos = pygame.mouse.get_pos()
         if self._bird_clicked:
             self._bird.set_speed(pressed_keys, convert_coords(mouse_pos), self.screen)
         else:
