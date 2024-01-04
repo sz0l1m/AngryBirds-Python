@@ -4,6 +4,7 @@ from get_levels import (
 )
 from io import StringIO
 import json
+import pygame
 import pymunk
 from config import (
     SCREEN_WIDTH,
@@ -16,6 +17,7 @@ from config import (
 
 
 space = pymunk.Space()
+pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 file = """
 {
@@ -131,7 +133,7 @@ def test_level_create_objects_check_bar():
     level.create_objects(space)
     assert level.bars[0].body.position == (SCREEN_WIDTH - 700, 400)
     assert level.bars[0].size == (20, 200)
-    assert level.bars[0].shape.color == (0, 0, 0)
+    assert level.bars[0].shape.color == (110, 50, 20)
     assert level.bars[0].shape.density == 0.7
     assert level.bars[0].shape.elasticity == 0.4
     assert level.bars[0].shape.friction == 0.6
@@ -179,7 +181,7 @@ def test_get_level_check_bar():
     level = get_level(space, 0)
     assert level.bars[0].body.position == (SCREEN_WIDTH - 700, 400)
     assert level.bars[0].size == (20, 200)
-    assert level.bars[0].shape.color == (0, 0, 0)
+    assert level.bars[0].shape.color == (110, 50, 20)
     assert level.bars[0].shape.density == 0.7
     assert level.bars[0].shape.elasticity == 0.4
     assert level.bars[0].shape.friction == 0.6
