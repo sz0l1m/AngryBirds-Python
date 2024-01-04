@@ -175,9 +175,14 @@ class Game:
                 pigs += 1
         if self._timer == 0:
             self._timer = time.time()
-        if pigs == 0 and self._level.number < self._level.amount_of_levels:
-            self.load_level(self.level.number)
-            self._bird_shot = False
+        if pigs == 0:
+            if self._level.number < self._level.amount_of_levels:
+                self.load_level(self.level.number)
+                self._bird_shot = False
+            else:
+                self.__init__()
+                self.start_screen()
+                self._bird_shot = False
         elif pigs != 0 and self._level.attempts >= 1:
             if self._bird_shot:
                 self._level.load_bird(self.space)
