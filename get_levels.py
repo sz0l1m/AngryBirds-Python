@@ -76,6 +76,7 @@ class Game:
         self._bird_clicked = False
         self._timer = 0
         self._background = Skin(None, 'background.jpg', (2131, 1146))
+        self._start = False
 
     @property
     def level(self):
@@ -119,10 +120,27 @@ class Game:
         """
         return self._bird_clicked
 
+    @property
+    def start(self):
+        """
+        Returns True if game should be started.
+        """
+        return self._start
+
     def load_level(self, level_number):
         self._level = get_level(self.space, level_number)
         self._bird = self._level.bird
         self._trajectory = Trajectory(self._bird)
+
+    def start_screen(self):
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self._running = False
+                elif event.key == K_SPACE:
+                    self._start = True
+            elif event.type == QUIT:
+                self._running = False
 
     def handle_level(self):
         pigs = 0
