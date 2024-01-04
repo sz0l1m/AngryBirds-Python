@@ -483,7 +483,6 @@ class Floor:
         self._shape.collision_type = 2
         self._shape.color = pygame.Color((0, 160, 0))
         self.body.grass = Skin(self, 'grass.png', (300, 30))
-        self.body.ground = Skin(self, 'ground.png', (600, 300))
         space.add(self.body, self.shape)
 
     @property
