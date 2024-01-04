@@ -302,7 +302,8 @@ class Level:
                 space,
                 (SCREEN_WIDTH - bar['x_position'], bar['y_position'] + floor_height),
                 (bar['x_size'], bar['y_size']),
-                bar['type'] if 'type' in bar.keys() else 'dynamic'
+                bar['type'] if 'type' in bar.keys() else 'dynamic',
+                (110, 50, 20, 255)
             )
             for bar in self._objects['bars']
         ]

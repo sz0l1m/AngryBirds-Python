@@ -341,7 +341,7 @@ class Pig:
         if self._radius == 20:
             skin_radius = self._radius * 2 + 10
         else:
-            skin_radius = self._radius * 2 + 10
+            skin_radius = self._radius * 2 + 13
         self.body.skin = Skin(self, 'pig.png', (skin_radius, skin_radius))
         space.add(self.body, self._shape)
 
@@ -420,7 +420,6 @@ class Bar:
         self._shape.elasticity = 0.4
         self._shape.friction = 0.6
         self._shape.collision_type = 4
-        self._shape.color = pygame.Color((110, 50, 20))
         space.add(self.body, self.shape)
 
     @property
@@ -481,7 +480,7 @@ class Floor:
         self._shape.elasticity = 0.6
         self._shape.friction = 0.8
         self._shape.collision_type = 2
-        self._shape.color = pygame.Color((0, 160, 0))
+        self._shape.color = pygame.Color((80, 180, 30, 255))
         self.body.grass = Skin(self, 'grass.png', (300, 32))
         space.add(self.body, self.shape)
 
@@ -548,7 +547,7 @@ class Skin:
         """
         if self._object.shape.collision_type == 3:
             image_center = (self._object.body.position[0],
-                            self._object.body.position[1] + 2)
+                            self._object.body.position[1] + 3)
         else:
             image_center = self._object.body.position
         self._image = pygame.transform.rotate(self._default_image, degrees(self._object.body.angle))
