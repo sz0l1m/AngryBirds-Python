@@ -9,6 +9,7 @@ from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     bird_position,
+    bird_radius,
     floor_height,
     gravity
 )
@@ -107,8 +108,8 @@ def test_level_create_objects_check_bird():
     level = Level(data[0], len(data))
     level.create_objects(space)
     assert level.bird.body.position == bird_position
-    assert level.bird.radius == 30
-    assert level.bird.shape.radius == 30
+    assert level.bird.radius == bird_radius
+    assert level.bird.shape.radius == bird_radius
     assert level.bird.shape.density == 0.7
     assert level.bird.shape.elasticity == 0.7
     assert level.bird.shape.friction == 0.8
@@ -157,8 +158,8 @@ def test_get_level():
 def test_get_level_check_bird():
     level = get_level(space, 0)
     assert level.bird.body.position == bird_position
-    assert level.bird.radius == 30
-    assert level.bird.shape.radius == 30
+    assert level.bird.radius == bird_radius
+    assert level.bird.shape.radius == bird_radius
     assert level.bird.shape.density == 0.7
     assert level.bird.shape.elasticity == 0.7
     assert level.bird.shape.friction == 0.8

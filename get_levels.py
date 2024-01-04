@@ -85,10 +85,6 @@ class Game:
         self._clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.load_level(0)
-        # level, bird, trajectory = self.load_level(self.space, 0)
-        # self._level = level
-        # self._bird = bird
-        # self._trajectory = trajectory
         self._angle_text = Text('0', (20, 20), 30)
         self._velocity_text = Text('0', (20, 100), 30)
         pymunk.pygame_util.positive_y_is_up = True
