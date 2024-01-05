@@ -200,6 +200,102 @@
             "level": 4,
             "objects": {
                 "birds": {
+                    "amount": 3
+                },
+                "pigs": [
+                    {
+                        "x_position": 300,
+                        "y_position": 430,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 500,
+                        "y_position": 230,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 700,
+                        "y_position": 30,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 500,
+                        "y_position": 350,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 700,
+                        "y_position": 150,
+                        "radius": 20
+                    }
+                ],
+                "bars": [
+                    {
+                        "x_position": 90,
+                        "y_position": 300,
+                        "x_size": 220,
+                        "y_size": 600,
+                        "type": "static"
+                    },
+                    {
+                        "x_position": 300,
+                        "y_position": 200,
+                        "x_size": 200,
+                        "y_size": 400,
+                        "type": "static"
+                    },
+                    {
+                        "x_position": 500,
+                        "y_position": 100,
+                        "x_size": 200,
+                        "y_size": 200,
+                        "type": "static"
+                    },
+                    {
+                        "x_position": 550,
+                        "y_position": 250,
+                        "x_size": 20,
+                        "y_size": 100
+                    },
+                    {
+                        "x_position": 450,
+                        "y_position": 250,
+                        "x_size": 20,
+                        "y_size": 100
+                    },
+                    {
+                        "x_position": 500,
+                        "y_position": 310,
+                        "x_size": 120,
+                        "y_size": 20,
+                        "type": "stone"
+                    },
+                    {
+                        "x_position": 750,
+                        "y_position": 50,
+                        "x_size": 20,
+                        "y_size": 100
+                    },
+                    {
+                        "x_position": 650,
+                        "y_position": 50,
+                        "x_size": 20,
+                        "y_size": 100
+                    },
+                    {
+                        "x_position": 700,
+                        "y_position": 110,
+                        "x_size": 120,
+                        "y_size": 20,
+                        "type": "stone"
+                    }
+                ]
+            }
+        },
+        {
+            "level": 5,
+            "objects": {
+                "birds": {
                     "amount": 2
                 },
                 "pigs": [
