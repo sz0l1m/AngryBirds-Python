@@ -9,6 +9,7 @@ from classes import (
     Pig,
     Bar,
     Wooden_bar,
+    Stone_bar,
     Floor,
     Skin,
     Trajectory,
@@ -338,7 +339,13 @@ class Level:
             return Wooden_bar(
                 space,
                 (SCREEN_WIDTH - bar['x_position'], bar['y_position'] + floor_height),
-                (bar['x_size'], bar['y_size']),
+                (bar['x_size'], bar['y_size'])
+            )
+        elif bar['type'] == 'stone':
+            return Stone_bar(
+                space,
+                (SCREEN_WIDTH - bar['x_position'], bar['y_position'] + floor_height),
+                (bar['x_size'], bar['y_size'])
             )
         else:
             return Bar(
