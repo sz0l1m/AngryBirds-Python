@@ -134,8 +134,8 @@ def test_level_create_objects_check_bar():
     assert level.bars[0].body.position == (SCREEN_WIDTH - 700, 400)
     assert level.bars[0].size == (20, 200)
     assert level.bars[0].shape.color == (110, 50, 20)
-    assert level.bars[0].shape.density == 0.7
-    assert level.bars[0].shape.elasticity == 0.4
+    assert level.bars[0].shape.density == 0.6
+    assert level.bars[0].shape.elasticity == 0.5
     assert level.bars[0].shape.friction == 0.6
 
 
@@ -182,8 +182,8 @@ def test_get_level_check_bar():
     assert level.bars[0].body.position == (SCREEN_WIDTH - 700, 400)
     assert level.bars[0].size == (20, 200)
     assert level.bars[0].shape.color == (110, 50, 20)
-    assert level.bars[0].shape.density == 0.7
-    assert level.bars[0].shape.elasticity == 0.4
+    assert level.bars[0].shape.density == 0.6
+    assert level.bars[0].shape.elasticity == 0.5
     assert level.bars[0].shape.friction == 0.6
 
 
