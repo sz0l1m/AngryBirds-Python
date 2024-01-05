@@ -333,7 +333,7 @@ class Level:
             space,
             bird_position,
             bird_radius,
-            0.7,
+            0.6,
             0.7,
             0.8
         )
