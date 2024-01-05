@@ -472,6 +472,18 @@ class Wooden_bar(Bar):
         space.add(self.body, self.shape)
 
 
+class Stone_bar(Bar):
+    def __init__(self, space: pymunk.Space, position: tuple, size: tuple):
+        super().__init__(space, position, size)
+        self.body.position = position
+        self._shape.density = 0.9
+        self._shape.elasticity = 0.3
+        self._shape.friction = 0.7
+        self._shape.collision_type = 6
+        self._shape.color = pygame.Color(((84, 84, 84)))
+        space.add(self.body, self.shape)
+
+
 class Floor:
     """
     Class Floor. Contains attributes:
