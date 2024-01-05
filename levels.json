@@ -368,11 +368,18 @@
                     },
                     {
                         "x_position": 1040,
-                        "y_position": 370,
+                        "y_position": 350,
                         "radius": 20
                     }
                 ],
                 "bars": [
+                    {
+                        "x_position": 1040,
+                        "y_position": 165,
+                        "x_size": 40,
+                        "y_size": 330,
+                        "type": "static"
+                    },
                     {
                         "x_position": 300,
                         "y_position": 100,
@@ -411,13 +418,6 @@
                         "x_size": 220,
                         "y_size": 20,
                         "type": "stone"
-                    },
-                    {
-                        "x_position": 1040,
-                        "y_position": 175,
-                        "x_size": 40,
-                        "y_size": 350,
-                        "type": "static"
                     }
                 ]
             }
