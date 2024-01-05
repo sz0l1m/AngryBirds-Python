@@ -145,10 +145,11 @@ class Game:
         """
         Loads new bird on the screen.
         """
-        self.space.remove(self._bird.body, self._bird.shape)
-        self._bird = Bird(self.space, bird_position, bird_radius, 0.7, 0.7, 0.8)
-        self._trajectory = Trajectory(self.bird)
-        self._bird_shot = False
+        if self._level.attempts > 0:
+            self.space.remove(self._bird.body, self._bird.shape)
+            self._bird = Bird(self.space, bird_position, bird_radius, 0.7, 0.7, 0.8)
+            self._trajectory = Trajectory(self.bird)
+            self._bird_shot = False
 
     def shoot_bird(self):
         self._bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
@@ -211,13 +212,9 @@ class Game:
                 self.__init__()
                 self.start_screen()
                 self._bird_shot = False
-        elif pigs != 0 and self._level.attempts >= 1:
-            if self._bird_shot:
-                self.load_bird()
-                # self._bird = self.level.bird
-                # self._trajectory = Trajectory(self.bird)
-                # self._bird_shot = False
-        elif pigs != 0 and self._level.attempts == 0 and time.time() - self._timer > 1:
+        elif pigs != 0 and self._bird_shot:
+            self.load_bird()
+        if pigs != 0 and self._level.attempts == 0 and time.time() - self._timer > 1:
             self.load_level(self._level.number - 1)
 
     def handle_events(self):
@@ -228,6 +225,8 @@ class Game:
                     self._running = False
                 elif event.key == K_SPACE and not self._bird_shot and self._bird.velocity:
                     self.shoot_bird()
+                elif event.key == K_SPACE and self._bird_shot:
+                    self.load_bird()
                 elif event.key == K_r:
                     self.load_level(self.level.number - 1)
             elif event.type == MOUSEBUTTONDOWN and event.button == 1:
