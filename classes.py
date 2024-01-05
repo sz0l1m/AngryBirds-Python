@@ -478,7 +478,7 @@ class Stone_bar(Bar):
         self.body.position = position
         self._shape.density = 0.9
         self._shape.elasticity = 0.3
-        self._shape.friction = 0.7
+        self._shape.friction = 0.6
         self._shape.collision_type = 6
         self._shape.color = pygame.Color(((84, 84, 84)))
         space.add(self.body, self.shape)

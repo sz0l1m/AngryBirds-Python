@@ -4,6 +4,7 @@ from classes import (
     Pig,
     Bar,
     Wooden_bar,
+    Stone_bar,
     Trajectory,
     Floor,
     Skin,
@@ -467,22 +468,54 @@ def test_wooden_bar_create():
 
 def test_wooden_bar_create_negative_position():
     with pytest.raises(CoordinatesError):
-        Bar(space, (-width, height), (10, 20))
+        Wooden_bar(space, (-width, height), (10, 20))
 
 
 def test_wooden_bar_create_invalid_position():
     with pytest.raises(CoordinatesError):
-        Bar(space, (width, height + 2), (10, 20))
+        Wooden_bar(space, (width, height + 2), (10, 20))
 
 
 def test_wooden_bar_create_negative_size_1():
     with pytest.raises(ValueError):
-        Bar(space, (width, height), (-10, 20))
+        Wooden_bar(space, (width, height), (-10, 20))
 
 
 def test_wooden_bar_create_size_zero():
     with pytest.raises(ValueError):
-        Bar(space, (width, height), (10, 0))
+        Wooden_bar(space, (width, height), (10, 0))
+
+
+def test_stone_bar_create():
+    bar = Stone_bar(space, (width, height), (10, 20))
+    assert bar.body.position == (width, height)
+    assert bar.size == (10, 20)
+    assert bar.shape.color == (84, 84, 84)
+    assert bar.shape.density == 0.9
+    assert bar.shape.elasticity == 0.3
+    assert bar.shape.friction == 0.6
+    assert bar.body.body_type == 0
+    assert bar.shape.collision_type == 6
+
+
+def test_stone_bar_create_negative_position():
+    with pytest.raises(CoordinatesError):
+        Stone_bar(space, (-width, height), (10, 20))
+
+
+def test_stone_bar_create_invalid_position():
+    with pytest.raises(CoordinatesError):
+        Stone_bar(space, (width, height + 2), (10, 20))
+
+
+def test_stone_bar_create_negative_size_1():
+    with pytest.raises(ValueError):
+        Stone_bar(space, (width, height), (-10, 20))
+
+
+def test_stone_bar_create_size_zero():
+    with pytest.raises(ValueError):
+        Stone_bar(space, (width, height), (10, 0))
 
 
 def test_pig_create_normal():
