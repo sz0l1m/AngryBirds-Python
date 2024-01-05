@@ -141,6 +141,24 @@ class Game:
         self._bird = self._level.bird
         self._trajectory = Trajectory(self._bird)
 
+    def shoot_bird(self):
+        self._bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
+        self._bird_shot = True
+        self._bird_clicked = False
+        self._level.reduce_attempts()
+
+    def update_skins(self):
+        for body, shape in zip(self.space.bodies, self.space.shapes):
+            if shape.collision_type == 1 or shape.collision_type == 3:
+                body.skin.update(self.screen)
+
+    def draw_grass(self):
+        for x in range(SCREEN_WIDTH + 310 // 300):
+            self.screen.blit(
+                self._level.floor.body.grass.default_image,
+                convert_coords((-10 + 300 * x, floor_height + 20))
+            )
+
     def start_screen(self):
         for event in pygame.event.get():
             if event.type == KEYDOWN:
@@ -213,24 +231,6 @@ class Game:
                 self._bird_clicked = False
             elif event.type == QUIT:
                 self._running = False
-
-    def shoot_bird(self):
-        self._bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
-        self._bird_shot = True
-        self._bird_clicked = False
-        self._level.reduce_attempts()
-
-    def update_skins(self):
-        for body, shape in zip(self.space.bodies, self.space.shapes):
-            if shape.collision_type == 1 or shape.collision_type == 3:
-                body.skin.update(self.screen)
-
-    def draw_grass(self):
-        for x in range(SCREEN_WIDTH + 310 // 300):
-            self.screen.blit(
-                self._level.floor.body.grass.default_image,
-                convert_coords((-10 + 300 * x, floor_height + 20))
-                )
 
     def step(self):
         self.handle_events()

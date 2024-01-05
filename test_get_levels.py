@@ -112,7 +112,7 @@ def test_level_create_objects_check_bird():
     assert level.bird.body.position == bird_position
     assert level.bird.radius == bird_radius
     assert level.bird.shape.radius == bird_radius
-    assert level.bird.shape.density == 0.7
+    assert level.bird.shape.density == 0.6
     assert level.bird.shape.elasticity == 0.7
     assert level.bird.shape.friction == 0.8
 
@@ -162,7 +162,7 @@ def test_get_level_check_bird():
     assert level.bird.body.position == bird_position
     assert level.bird.radius == bird_radius
     assert level.bird.shape.radius == bird_radius
-    assert level.bird.shape.density == 0.7
+    assert level.bird.shape.density == 0.6
     assert level.bird.shape.elasticity == 0.7
     assert level.bird.shape.friction == 0.8
 
