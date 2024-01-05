@@ -8,6 +8,7 @@ from classes import (
     Bird,
     Pig,
     Bar,
+    Wooden_bar,
     Floor,
     Skin,
     Trajectory,
@@ -332,6 +333,22 @@ class Level:
     def reduce_attempts(self):
         self._attempts -= 1
 
+    def create_bar(self, space, bar):
+        if 'type' not in bar.keys():
+            return Wooden_bar(
+                space,
+                (SCREEN_WIDTH - bar['x_position'], bar['y_position'] + floor_height),
+                (bar['x_size'], bar['y_size']),
+            )
+        else:
+            return Bar(
+                space,
+                (SCREEN_WIDTH - bar['x_position'], bar['y_position'] + floor_height),
+                (bar['x_size'], bar['y_size']),
+                bar['type'] if 'type' in bar.keys() else 'dynamic',
+                (110, 50, 20, 255)
+            )
+
     def create_objects(self, space):
         """
         Creates instances of all objects and returns them.
@@ -354,12 +371,6 @@ class Level:
             for pig in self._objects['pigs']
             ]
         self.bars = [
-            Bar(
-                space,
-                (SCREEN_WIDTH - bar['x_position'], bar['y_position'] + floor_height),
-                (bar['x_size'], bar['y_size']),
-                bar['type'] if 'type' in bar.keys() else 'dynamic',
-                (110, 50, 20, 255)
-            )
+            self.create_bar(space, bar)
             for bar in self._objects['bars']
         ]
