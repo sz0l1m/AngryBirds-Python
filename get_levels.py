@@ -176,7 +176,7 @@ class Game:
                     self._running = False
                 elif event.key == K_SPACE:
                     self._start = True
-                    self.load_level(1)
+                    self.load_level(0)
             elif event.type == QUIT:
                 self._running = False
 

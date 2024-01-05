@@ -8,10 +8,10 @@ def calculate_collision(arbiter: pymunk.Arbiter, space: pymunk.Space, data):
             space.remove(shape_2.body, shape_2)
             return False
         case (2, 3):
-            if arbiter.total_ke > 50000000:
+            if arbiter.total_ke > 70000000:
                 space.remove(shape_2.body, shape_2)
         case (3, 4):
-            if arbiter.total_ke > 50000000:
+            if arbiter.total_ke > 70000000:
                 space.remove(shape_1.body, shape_1)
         case (3, 3):
             if arbiter.total_ke > 25000000:

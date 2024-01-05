@@ -299,7 +299,7 @@ class Trajectory:
         if self.y_vel >= 0:
             interval = int(abs(self.x_vel) / 15) + 1
             if self.x_vel > 0:
-                for x in range(bird_position[0], 800, interval):
+                for x in range(bird_position[0], 700, interval):
                     y = self.a_of_pattern * (x - self.vertex[0]) ** 2 + self.vertex[1]
                     if y >= 100 and self.y_vel:
                         pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 3)
