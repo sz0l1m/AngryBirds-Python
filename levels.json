@@ -300,6 +300,73 @@
                 },
                 "pigs": [
                     {
+                        "x_position": 325,
+                        "y_position": 70,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 365,
+                        "y_position": 70,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 325,
+                        "y_position": 110,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 365,
+                        "y_position": 110,
+                        "radius": 20
+                    }
+                ],
+                "bars": [
+                    {
+                        "x_position": 90,
+                        "y_position": 600,
+                        "x_size": 220,
+                        "y_size": 1200,
+                        "type": "static"
+                    },
+                    {
+                        "x_position": 270,
+                        "y_position": 200,
+                        "x_size": 30,
+                        "y_size": 400,
+                        "type": "static"
+                    },
+                    {
+                        "x_position": 420,
+                        "y_position": 200,
+                        "x_size": 30,
+                        "y_size": 400,
+                        "type": "static"
+                    },
+                    {
+                        "x_position": 345,
+                        "y_position": 25,
+                        "x_size": 120,
+                        "y_size": 50,
+                        "type": "static"
+                    },
+                    {
+                        "x_position": 345,
+                        "y_position": 400,
+                        "x_size": 160,
+                        "y_size": 20,
+                        "type": "stone"
+                    }
+                ]
+            }
+        },
+        {
+            "level": 6,
+            "objects": {
+                "birds": {
+                    "amount": 2
+                },
+                "pigs": [
+                    {
                         "x_position": 400,
                         "y_position": 30,
                         "radius": 30
