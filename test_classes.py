@@ -3,6 +3,7 @@ from classes import (
     Bird,
     Pig,
     Bar,
+    Wooden_bar,
     Trajectory,
     Floor,
     Skin,
@@ -354,7 +355,7 @@ def test_bar_create_default_values():
     assert bar.body.body_type == 0
 
 
-def test_bar_create_invalid_bor_type():
+def test_bar_create_invalid_body_type():
     with pytest.raises(ValueError):
         Bar(space, (width, height), (10, 20), 'asdas')
 
@@ -450,6 +451,38 @@ def test_bar_set_color_zero():
     assert bar.shape.color == ((0, 0, 0))
     with pytest.raises(ValueError):
         bar.set_color((256, 0, 0))
+
+
+def test_wooden_bar_create():
+    bar = Wooden_bar(space, (width, height), (10, 20))
+    assert bar.body.position == (width, height)
+    assert bar.size == (10, 20)
+    assert bar.shape.color == (110, 50, 20)
+    assert bar.shape.density == 0.6
+    assert bar.shape.elasticity == 0.5
+    assert bar.shape.friction == 0.6
+    assert bar.body.body_type == 0
+    assert bar.shape.collision_type == 5
+
+
+def test_wooden_bar_create_negative_position():
+    with pytest.raises(CoordinatesError):
+        Bar(space, (-width, height), (10, 20))
+
+
+def test_wooden_bar_create_invalid_position():
+    with pytest.raises(CoordinatesError):
+        Bar(space, (width, height + 2), (10, 20))
+
+
+def test_wooden_bar_create_negative_size_1():
+    with pytest.raises(ValueError):
+        Bar(space, (width, height), (-10, 20))
+
+
+def test_wooden_bar_create_size_zero():
+    with pytest.raises(ValueError):
+        Bar(space, (width, height), (10, 0))
 
 
 def test_pig_create_normal():

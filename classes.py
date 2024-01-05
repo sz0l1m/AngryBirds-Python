@@ -421,7 +421,8 @@ class Bar:
         self._shape.elasticity = 0.4
         self._shape.friction = 0.6
         self._shape.collision_type = 4
-        space.add(self.body, self.shape)
+        if body_type == 'static':
+            space.add(self.body, self.shape)
 
     @property
     def shape(self):
@@ -457,6 +458,18 @@ class Bar:
         Raises ValueError if color is invalid.
         """
         self._shape.color = pygame.Color(new_color)
+
+
+class Wooden_bar(Bar):
+    def __init__(self, space: pymunk.Space, position: tuple, size: tuple):
+        super().__init__(space, position, size)
+        self.body.position = position
+        self._shape.density = 0.6
+        self._shape.elasticity = 0.5
+        self._shape.friction = 0.6
+        self._shape.collision_type = 5
+        self._shape.color = pygame.Color(((110, 50, 20)))
+        space.add(self.body, self.shape)
 
 
 class Floor:
