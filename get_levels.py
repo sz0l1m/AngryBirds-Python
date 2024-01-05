@@ -199,7 +199,7 @@ class Game:
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     self._running = False
-                elif event.key == K_SPACE and not self._bird_shot:
+                elif event.key == K_SPACE and not self._bird_shot and self._bird.velocity:
                     self.shoot_bird()
                 elif event.key == K_r:
                     self.load_level(self.level.number - 1)
@@ -217,6 +217,7 @@ class Game:
     def shoot_bird(self):
         self._bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
         self._bird_shot = True
+        self._bird_clicked = False
         self._level.reduce_attempts()
 
     def update_skins(self):
