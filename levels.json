@@ -44,7 +44,65 @@
             "level": 2,
             "objects": {
                 "birds": {
-                    "amount": 5
+                    "amount": 1
+                },
+                "pigs": [
+                    {
+                        "x_position": 520,
+                        "y_position": 575,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 280,
+                        "y_position": 575,
+                        "radius": 20
+                    },
+                    {
+                        "x_position": 400,
+                        "y_position": 585,
+                        "radius": 30
+                    },
+                    {
+                        "x_position": 100,
+                        "y_position": 30,
+                        "radius": 30
+                    }
+                ],
+                "bars": [
+                    {
+                        "x_position": 400,
+                        "y_position": 200,
+                        "x_size": 300,
+                        "y_size": 400,
+                        "type": "static"
+                    },
+                    {
+                        "x_position": 280,
+                        "y_position": 485,
+                        "x_size": 20,
+                        "y_size": 150
+                    },
+                    {
+                        "x_position": 520,
+                        "y_position": 485,
+                        "x_size": 20,
+                        "y_size": 150
+                    },
+                    {
+                        "x_position": 400,
+                        "y_position": 485,
+                        "x_size": 20,
+                        "y_size": 150
+                    }
+
+                ]
+            }
+        },
+        {
+            "level": 3,
+            "objects": {
+                "birds": {
+                    "amount": 3
                 },
                 "pigs": [
                     {
@@ -135,10 +193,10 @@
             }
         },
         {
-            "level": 3,
+            "level": 4,
             "objects": {
                 "birds": {
-                    "amount": 3
+                    "amount": 2
                 },
                 "pigs": [
                     {

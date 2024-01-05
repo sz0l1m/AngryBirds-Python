@@ -412,7 +412,8 @@ class Bar:
             self._shape.color = pygame.Color(color)
         elif body_type == 'static':
             self.body = pymunk.Body(body_type=pymunk.Body.STATIC)
-            self._shape = pymunk.Poly.create_box(self.body, self.size)
+            self._shape = pymunk.Poly.create_box(self.body, self.size, 5)
+            self._shape.color = pygame.Color((84, 57, 45))
         else:
             raise ValueError('Invalid body_type, has to be static or dynamic')
         self.body.position = position
