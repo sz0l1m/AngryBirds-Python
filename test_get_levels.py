@@ -6,6 +6,7 @@ from io import StringIO
 import json
 import pygame
 import pymunk
+import colors
 from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
@@ -117,6 +118,7 @@ def test_level_create_objects_check_bird():
     assert level.bird.shape.density == 0.6
     assert level.bird.shape.elasticity == 0.7
     assert level.bird.shape.friction == 0.8
+    assert level.bird.shape.color == colors.bird
 
 
 def test_level_create_objects_check_pig():
@@ -128,6 +130,7 @@ def test_level_create_objects_check_pig():
     assert level.pigs[1].shape.density == 0.8
     assert level.pigs[1].shape.elasticity == 0.7
     assert level.pigs[1].shape.friction == 0.8
+    assert level.pigs[1].shape.color == colors.pig
 
 
 def test_level_create_objects_check_bar_wooden():
@@ -135,7 +138,7 @@ def test_level_create_objects_check_bar_wooden():
     level.create_objects(space)
     assert level.bars[0].body.position == (SCREEN_WIDTH - 700, floor_height + 200)
     assert level.bars[0].size == (20, 200)
-    assert level.bars[0].shape.color == (110, 50, 20)
+    assert level.bars[0].shape.color == colors.wooden_bar
     assert level.bars[0].shape.density == 0.6
     assert level.bars[0].shape.elasticity == 0.5
     assert level.bars[0].shape.friction == 0.6
@@ -146,7 +149,7 @@ def test_level_create_objects_check_bar_stone():
     level.create_objects(space)
     assert level.bars[1].body.position == (SCREEN_WIDTH - 900, floor_height + 200)
     assert level.bars[1].size == (20, 200)
-    assert level.bars[1].shape.color == (84, 84, 84)
+    assert level.bars[1].shape.color == colors.stone_bar
     assert level.bars[1].shape.density == 0.9
     assert level.bars[1].shape.elasticity == 0.3
     assert level.bars[1].shape.friction == 0.6
@@ -157,7 +160,7 @@ def test_level_create_objects_check_bar_static():
     level.create_objects(space)
     assert level.bars[2].body.position == (SCREEN_WIDTH - 800, floor_height + 300)
     assert level.bars[2].size == (220, 20)
-    assert level.bars[2].shape.color == (84, 57, 45)
+    assert level.bars[2].shape.color == colors.static_bar
     assert level.bars[2].shape.density == 0.7
     assert level.bars[2].shape.elasticity == 0.4
     assert level.bars[2].shape.friction == 0.6
@@ -170,6 +173,7 @@ def test_level_create_objects_check_floor():
     assert level.floor.shape.b == (SCREEN_WIDTH + 500, 0)
     assert level.floor.shape.radius == floor_height
     assert level.floor.shape.elasticity == 0.6
+    assert level.floor.shape.color == colors.ground
 
 
 def test_get_level():
@@ -189,6 +193,7 @@ def test_get_level_check_bird():
     assert level.bird.shape.density == 0.6
     assert level.bird.shape.elasticity == 0.7
     assert level.bird.shape.friction == 0.8
+    assert level.bird.shape.color == colors.bird
 
 
 def test_get_level_check_pig():
@@ -199,13 +204,14 @@ def test_get_level_check_pig():
     assert level.pigs[1].shape.density == 0.8
     assert level.pigs[1].shape.elasticity == 0.7
     assert level.pigs[1].shape.friction == 0.8
+    assert level.pigs[1].shape.color == colors.pig
 
 
 def test_get_level_check_bar():
     level = get_level(space, 0)
     assert level.bars[0].body.position == (SCREEN_WIDTH - 700, floor_height + 200)
     assert level.bars[0].size == (20, 200)
-    assert level.bars[0].shape.color == (110, 50, 20)
+    assert level.bars[0].shape.color == colors.wooden_bar
     assert level.bars[0].shape.density == 0.6
     assert level.bars[0].shape.elasticity == 0.5
     assert level.bars[0].shape.friction == 0.6
@@ -215,7 +221,7 @@ def test_get_level_check_bar_stone():
     level = get_level(space, 0)
     assert level.bars[1].body.position == (SCREEN_WIDTH - 900, floor_height + 200)
     assert level.bars[1].size == (20, 200)
-    assert level.bars[1].shape.color == (84, 84, 84)
+    assert level.bars[1].shape.color == colors.stone_bar
     assert level.bars[1].shape.density == 0.9
     assert level.bars[1].shape.elasticity == 0.3
     assert level.bars[1].shape.friction == 0.6
@@ -226,7 +232,7 @@ def test_get_level_check_bar_static():
     level.create_objects(space)
     assert level.bars[2].body.position == (SCREEN_WIDTH - 800, floor_height + 300)
     assert level.bars[2].size == (220, 20)
-    assert level.bars[2].shape.color == (84, 57, 45)
+    assert level.bars[2].shape.color == colors.static_bar
     assert level.bars[2].shape.density == 0.7
     assert level.bars[2].shape.elasticity == 0.4
     assert level.bars[2].shape.friction == 0.6
@@ -238,3 +244,4 @@ def test_get_level_check_floor():
     assert level.floor.shape.b == (SCREEN_WIDTH + 500, 0)
     assert level.floor.shape.radius == floor_height
     assert level.floor.shape.elasticity == 0.6
+    assert level.floor.shape.color == colors.ground

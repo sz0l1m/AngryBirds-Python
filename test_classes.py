@@ -20,6 +20,7 @@ from config import (
     SCREEN_WIDTH,
     floor_height
 )
+import colors
 import pytest
 import pygame
 import pymunk
@@ -39,6 +40,7 @@ def test_bird_create_normal():
     assert bird.shape.radius == 30
     assert bird.shape.density == 2
     assert bird.shape.elasticity == 3
+    assert bird.shape.color == colors.bird
 
 
 def test_bird_create_default_values():
@@ -48,6 +50,7 @@ def test_bird_create_default_values():
     assert bird.shape.radius == 30
     assert bird.shape.density == 1
     assert bird.shape.elasticity == 1
+    assert bird.shape.color == colors.bird
 
 
 def test_bird_create_negative_coordinates():
@@ -107,6 +110,7 @@ def test_floor_create():
     assert floor.shape.b == (SCREEN_WIDTH + 500, 0)
     assert floor.shape.radius == floor_height
     assert floor.shape.elasticity == 0.6
+    assert floor.shape.color == colors.ground
 
 
 def test_convert_coords():
@@ -343,6 +347,7 @@ def test_bar_create_normal():
     assert bar.shape.elasticity == 0.4
     assert bar.shape.friction == 0.6
     assert bar.body.body_type == 2
+    assert bar.shape.color == colors.static_bar
 
 
 def test_bar_create_default_values():
@@ -354,6 +359,7 @@ def test_bar_create_default_values():
     assert bar.shape.elasticity == 0.4
     assert bar.shape.friction == 0.6
     assert bar.body.body_type == 0
+    assert bar.shape.color == (0, 0, 0)
 
 
 def test_bar_create_invalid_body_type():
@@ -458,7 +464,7 @@ def test_wooden_bar_create():
     bar = Wooden_bar(space, (width, height), (10, 20))
     assert bar.body.position == (width, height)
     assert bar.size == (10, 20)
-    assert bar.shape.color == (110, 50, 20)
+    assert bar.shape.color == colors.wooden_bar
     assert bar.shape.density == 0.6
     assert bar.shape.elasticity == 0.5
     assert bar.shape.friction == 0.6
@@ -490,7 +496,7 @@ def test_stone_bar_create():
     bar = Stone_bar(space, (width, height), (10, 20))
     assert bar.body.position == (width, height)
     assert bar.size == (10, 20)
-    assert bar.shape.color == (84, 84, 84)
+    assert bar.shape.color == colors.stone_bar
     assert bar.shape.density == 0.9
     assert bar.shape.elasticity == 0.3
     assert bar.shape.friction == 0.6
@@ -526,6 +532,7 @@ def test_pig_create_normal():
     assert pig.shape.density == 0.8
     assert pig.shape.elasticity == 0.7
     assert pig.shape.friction == 0.8
+    assert pig.shape.color == colors.pig
 
 
 def test_pig_create_negative_position():

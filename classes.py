@@ -2,6 +2,7 @@ import pygame
 import pymunk
 import pymunk.pygame_util
 from math import sin, cos, asin, radians, degrees, sqrt
+import colors
 from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
@@ -59,7 +60,7 @@ def space_draw(space: pymunk.Space, options: pymunk.pygame_util.DrawOptions):
     Draws all elements in pymunk's space on pygame's display.
     """
     options.flags = pymunk.SpaceDebugDrawOptions.DRAW_SHAPES
-    options.shape_outline_color = (60, 30, 15)
+    options.shape_outline_color = colors.outline_color
     space.debug_draw(options)
 
 
@@ -151,7 +152,7 @@ class Bird:
         self._shape.elasticity = elasticity
         self._shape.friction = friction
         self._shape.collision_type = 1
-        self.shape.color = pygame.Color((210, 0, 0))
+        self.shape.color = pygame.Color(colors.bird)
         self._radius = radius
         self.velocity = 0
         self.angle = 0
@@ -331,7 +332,7 @@ class Pig:
         self._shape.density = 0.8
         self._shape.elasticity = 0.7
         self._shape.friction = 0.8
-        self._shape.color = pygame.Color("green")
+        self._shape.color = pygame.Color(colors.pig)
         self._shape.collision_type = 3
         if self._radius == 20:
             skin_radius = self._radius * 2 + 10
@@ -408,7 +409,7 @@ class Bar:
         elif body_type == 'static':
             self.body = pymunk.Body(body_type=pymunk.Body.STATIC)
             self._shape = pymunk.Poly.create_box(self.body, self.size, 5)
-            self._shape.color = pygame.Color((84, 57, 45))
+            self._shape.color = pygame.Color(colors.static_bar)
         else:
             raise ValueError('Invalid body_type, has to be static or dynamic')
         self.body.position = position
@@ -471,7 +472,7 @@ class Wooden_bar(Bar):
         self._shape.elasticity = 0.5
         self._shape.friction = 0.6
         self._shape.collision_type = 5
-        self._shape.color = pygame.Color(((110, 50, 20)))
+        self._shape.color = pygame.Color(colors.wooden_bar)
         space.add(self.body, self.shape)
 
 
@@ -491,7 +492,7 @@ class Stone_bar(Bar):
         self._shape.elasticity = 0.3
         self._shape.friction = 0.6
         self._shape.collision_type = 6
-        self._shape.color = pygame.Color(((84, 84, 84)))
+        self._shape.color = pygame.Color(colors.stone_bar)
         space.add(self.body, self.shape)
 
 
@@ -517,7 +518,7 @@ class Floor:
         self._shape.elasticity = 0.6
         self._shape.friction = 0.8
         self._shape.collision_type = 2
-        self._shape.color = pygame.Color((80, 180, 30, 255))
+        self._shape.color = pygame.Color(colors.ground)
         self.body.grass = Skin(self, 'grass.png', (300, 32))
         space.add(self.body, self.shape)
 
