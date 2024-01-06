@@ -49,7 +49,7 @@ def get_data():
         return json.load(fp)
 
 
-def get_level(space: pymunk.Space, level):
+def get_level(space: pymunk.Space, level: int):
     """
     Creates instance of Level and calls create_objects method.
     """
@@ -142,7 +142,7 @@ class Game:
         """
         return self._start
 
-    def load_level(self, level_number):
+    def load_level(self, level_number: int):
         self._level = get_level(self.space, level_number)
         self._bird = self._level.bird
         self._trajectory = Trajectory(self._bird)
@@ -228,7 +228,7 @@ class Game:
         if pigs != 0 and self._level.attempts == 0 and time.time() - self._timer > 1:
             self.load_level(self._level.number - 1)
 
-    def handle_events(self, mouse_pos):
+    def handle_events(self, mouse_pos: tuple):
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
@@ -300,7 +300,7 @@ class Level:
     :param floor: floor of the level
     :type floor: Floor
     """
-    def __init__(self, level_data: dict, amount_of_levels):
+    def __init__(self, level_data: dict, amount_of_levels: int):
         """
         Creates instance of the level.
         """
@@ -344,7 +344,7 @@ class Level:
     def reduce_attempts(self):
         self._attempts -= 1
 
-    def create_bar(self, space, bar):
+    def create_bar(self, space: pymunk.Space, bar: Bar):
         if 'type' not in bar.keys():
             return Wooden_bar(
                 space,
@@ -366,7 +366,7 @@ class Level:
                 (110, 50, 20, 255)
             )
 
-    def create_objects(self, space):
+    def create_objects(self, space: pymunk.Space):
         """
         Creates instances of all objects and returns them.
         """
