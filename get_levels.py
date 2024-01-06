@@ -22,6 +22,7 @@ from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     FPS,
+    screen_factor,
     bird_position,
     bird_radius,
     floor_height,
@@ -226,8 +227,7 @@ class Game:
         if pigs != 0 and self._level.attempts == 0 and time.time() - self._timer > 1:
             self.load_level(self._level.number - 1)
 
-    def handle_events(self):
-        mouse_pos = pygame.mouse.get_pos()
+    def handle_events(self, mouse_pos):
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
@@ -250,8 +250,9 @@ class Game:
                 self._running = False
 
     def step(self):
-        self.handle_events()
         mouse_pos = pygame.mouse.get_pos()
+        mouse_pos = (mouse_pos[0] * screen_factor, mouse_pos[1] * screen_factor)
+        self.handle_events(mouse_pos)
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))
         self.screen.blit(self._images['background'].default_image, (0, -30))
