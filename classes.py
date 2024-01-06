@@ -27,7 +27,7 @@ def convert_coords(coords):
     """
     Converts coordinates in such a way that it moves horizontal axis
     from the bottom of display to the top or vice versa.
-    Vertical axis stays the same and it is located on the left of the diplay.
+    Vertical axis stays the same and it is located on the left of the display.
     The function is needed because pygame has its horizontal axis at the top of display,
     while pymunk on the bottom.
     """
@@ -65,7 +65,7 @@ def space_draw(space: pymunk.Space, options: pymunk.pygame_util.DrawOptions):
 
 def calc_distance_and_angle(point1: int, point2: int):
     """
-    Calculates distance between two points.
+    Calculates distance between two points and angle of inclination.
     """
     x1, y1 = point1
     x2, y2 = point2
@@ -187,7 +187,8 @@ class Bird:
 
     def set_speed(self, pressed_keys, mouse_pos, screen):
         """
-        Sets speed of the bird depending on angle and velocity given by user.
+        Sets speed of the bird depending on angle and velocity given by user by keyboard keys
+        or depending on mouse position.
         """
         max_speed = aiming_range * 1913 / 400
         if mouse_pos is None:
@@ -277,7 +278,7 @@ class Trajectory:
 
     def draw(self, screen):
         """
-        Draws circles on trajectory of the bird based of user input.
+        Draws trajectory of the bird based of user input.
         """
         if self.y_vel >= 0:
             interval = int(abs(self.x_vel) / 15) + 1
@@ -302,6 +303,17 @@ class Trajectory:
 
 
 class Pig:
+    """
+    Class Pig. Contains attributes:
+    :param body: pymunk's body of the pig
+    :type body: pymunk.Body
+
+    :param shape: pymunk's shape of the pig
+    :type shape: pymunk.Circle
+
+    :param radius: radius of the pig
+    :type radius: int
+    """
     def __init__(self, space: pymunk.Space, position: tuple, radius: int):
         """
         Creates instance of pig.
