@@ -1,3 +1,7 @@
+import pygame
+import pymunk
+import pytest
+import configs.colors as colors
 from game_logic.classes import (
     SizeError,
     CoordinatesError,
@@ -21,10 +25,6 @@ from configs.config import (
     SCREEN_WIDTH,
     floor_height
 )
-import configs.colors as colors
-import pytest
-import pygame
-import pymunk
 
 space = pymunk.Space()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
