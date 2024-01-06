@@ -86,7 +86,7 @@ def calc_distance_and_angle(point1: int, point2: int):
     return min(distance, aiming_range), angle
 
 
-def is_on_circle(circle_position, radius, point):
+def is_on_circle(circle_position: tuple, radius: int, point: tuple):
     """
     Returns True if given point is inside a circle with the center in circle_position
     and given radius.
@@ -107,7 +107,7 @@ class CoordinatesError(Exception):
     :param coordinates: invalid coordinates
     :type coordinates: tuple
     """
-    def __init__(self, coords):
+    def __init__(self, coords: tuple):
         """
         Creates instance of error.
         """
@@ -123,7 +123,7 @@ class SizeError(Exception):
     :param size: invalid size
     :type size: tuple
     """
-    def __init__(self, size, message):
+    def __init__(self, size, message: str):
         """
         Creates instance of error.
         """
@@ -201,7 +201,7 @@ class Bird:
         """
         return self._radius
 
-    def set_radius(self, new_radius):
+    def set_radius(self, new_radius: int):
         """
         Changes radius of the bird to new_radius.
 
@@ -210,7 +210,7 @@ class Bird:
         check_radius(new_radius)
         self._radius = new_radius
 
-    def set_speed(self, pressed_keys, mouse_pos, screen):
+    def set_speed(self, pressed_keys: list, mouse_pos: tuple, screen: pygame.Surface):
         """
         Sets speed of the bird depending on angle and velocity given by user by keyboard keys
         or depending on mouse position.
@@ -301,7 +301,7 @@ class Trajectory:
             self.vertex[1] = ((self.y_vel ** 2) / (2 * -gravity[1])) + self.start_point[1]
             self.a_of_pattern = (self.start_point[1] - self.vertex[1]) / ((self.start_point[0] - self.vertex[0]) ** 2)
 
-    def draw(self, screen):
+    def draw(self, screen: pygame.Surface):
         """
         Draws trajectory of the bird based of user input.
         """
@@ -379,7 +379,7 @@ class Pig:
         """
         return self._radius
 
-    def set_position(self, new_position):
+    def set_position(self, new_position: tuple):
         """
         Sets position of the pig to new_position.
 
@@ -389,7 +389,7 @@ class Pig:
         self.body.position = new_position
         self._shape = pymunk.Circle(self.body, self._radius)
 
-    def set_radius(self, new_radius):
+    def set_radius(self, new_radius: int):
         """
         Sets radius of the pig to new_radius.
 
@@ -450,7 +450,7 @@ class Bar:
         """
         return self._shape
 
-    def set_position(self, new_position):
+    def set_position(self, new_position: tuple):
         """
         Changes position of the bar to new_position.
 
@@ -459,7 +459,7 @@ class Bar:
         check_coords(new_position)
         self.body.position = new_position
 
-    def set_size(self, new_size):
+    def set_size(self, new_size: tuple):
         """
         Changes size of the bar to new_size.
 
@@ -469,7 +469,7 @@ class Bar:
         self.size = new_size
         self._shape = pymunk.Poly.create_box(self.body, self.size, 1)
 
-    def set_color(self, new_color):
+    def set_color(self, new_color: tuple):
         """
         Changes color of the bar to new_color.
 
@@ -604,7 +604,7 @@ class Skin:
         """
         return self._image
 
-    def update(self, screen):
+    def update(self, screen: pygame.Surface):
         """
         Rotates skin's image, changes its position and draws on the screen depending
         on object's position and rotation.
@@ -715,7 +715,7 @@ class Text:
         """
         return self._font_type
 
-    def set_str(self, screen, new_str):
+    def set_str(self, screen: pygame.Surface, new_str: str):
         """
         Changes str of the text to new_str and draws new text.
         """
@@ -724,7 +724,7 @@ class Text:
         self._surf.set_colorkey((255, 255, 255))
         screen.blit(self._surf, self._position)
 
-    def set_position(self, new_position):
+    def set_position(self, new_position: tuple):
         """
         Changes position of the text to new_position.
 
@@ -733,7 +733,7 @@ class Text:
         check_coords(new_position)
         self._position = new_position
 
-    def set_size(self, new_size):
+    def set_size(self, new_size: int):
         """
         Changes size of the text to new_size.
 
@@ -745,7 +745,7 @@ class Text:
         self._font = pygame.font.SysFont(self._font_type, self._size)
         self._surf = self._font.render(self._str, True, self._color, self._background)
 
-    def set_color(self, new_color):
+    def set_color(self, new_color: tuple):
         """
         Changes color of the text to new_color.
 
@@ -754,7 +754,7 @@ class Text:
         self._color = new_color
         self._surf = self._font.render(self._str, True, self._color, self._background)
 
-    def set_background(self, new_background):
+    def set_background(self, new_background: tuple):
         """
         Changes background of the text to new_background.
 
@@ -763,7 +763,7 @@ class Text:
         self._background = new_background
         self._surf = self._font.render(self._str, True, self._color, self._background)
 
-    def set_font_type(self, new_font_type):
+    def set_font_type(self, new_font_type: str):
         """
         Changes font_type of the text to new_font_type.
         """
@@ -771,7 +771,7 @@ class Text:
         self._font = pygame.font.SysFont(self._font_type, self._size)
         self._surf = self._font.render(self._str, True, self._color, self._background)
 
-    def draw(self, screen):
+    def draw(self, screen: pygame.Surface):
         """
         Draws text on pygame display.
         """
