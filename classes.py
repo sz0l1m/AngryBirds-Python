@@ -456,7 +456,15 @@ class Bar:
 
 
 class Wooden_bar(Bar):
+    """
+    Class Wooden_bar.
+    Inherits all attributes and methods from Bar class.
+    It doesn't have any additional attributes and it only overwrites Bar's attributes.
+    """
     def __init__(self, space: pymunk.Space, position: tuple, size: tuple):
+        """
+        Creates instance of wooden bar.
+        """
         super().__init__(space, position, size)
         self.body.position = position
         self._shape.density = 0.6
@@ -468,7 +476,15 @@ class Wooden_bar(Bar):
 
 
 class Stone_bar(Bar):
+    """
+    Class Wooden_bar.
+    Inherits all attributes and methods from Bar class.
+    It doesn't have any additional attributes and it only overwrites Bar's attributes.
+    """
     def __init__(self, space: pymunk.Space, position: tuple, size: tuple):
+        """
+        Creates instance of wooden bar.
+        """
         super().__init__(space, position, size)
         self.body.position = position
         self._shape.density = 0.9
@@ -523,6 +539,9 @@ class Floor:
 class Skin:
     """
     Class Skin. Contains attributes:
+    :param object: object which the skin is attached to.
+    :type object: unknown
+
     :param default_image: image loaded from file and in given size
     :type default_image: pygame.Image
 
@@ -531,7 +550,9 @@ class Skin:
     """
     def __init__(self, object, file: str, size: tuple):
         """
-        Creates instance of image compressed to given size.
+        Creates instance of skin with image compressed to given size.
+
+        Raises ValueError if size is not positive.
         """
         if size[0] <= 0 or size[1] <= 0:
             raise ValueError('Size has to be positive')
@@ -563,8 +584,8 @@ class Skin:
 
     def update(self, screen):
         """
-        Rotetes image, changes its position and draws on the screen depending
-        on object.
+        Rotates skin's image, changes its position and draws on the screen depending
+        on object's position and rotation.
         """
         if self._object.shape.collision_type == 3:
             image_center = (self._object.body.position[0],
