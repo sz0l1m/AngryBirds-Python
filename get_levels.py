@@ -66,8 +66,8 @@ class Game:
         pygame.init()
         pygame.display.set_caption('Angry Birds')
         self._clock = pygame.time.Clock()
-        # self.screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-        # self.display = pygame.display.set_mode((SCREEN_WIDTH / 1, SCREEN_HEIGHT / 1))
+        self.screen = pygame.Surface((1913, 1050))
+        self.display = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.load_level(0)
         self._texts = {
@@ -173,6 +173,11 @@ class Game:
                 convert_coords((-10 + 300 * x, floor_height + 20))
             )
 
+    def scale_screen(self):
+        self.frame = pygame.transform.scale(self.screen, (SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.display.blit(self.frame, self.frame.get_rect())
+        pygame.display.flip()
+
     def start_screen(self):
         for event in pygame.event.get():
             if event.type == KEYDOWN:
@@ -189,7 +194,7 @@ class Game:
         self.screen.blit(self._images['background'].default_image, (0, -30))
         self.screen.blit(self._images['title'].default_image, (SCREEN_WIDTH / 2 - 256, 200))
         self._texts['info'].draw(self.screen)
-        pygame.display.flip()
+        self.scale_screen()
         self._clock.tick(FPS)
 
     def handle_level(self):
@@ -264,9 +269,7 @@ class Game:
             self._bird.set_speed(pressed_keys, None, None)
         collisions.rolling_resistance(self.space)
         self.handle_level()
-        # self.frame = pygame.transform.scale(self.screen, (SCREEN_WIDTH / 1, SCREEN_HEIGHT / 1))
-        # self.display.blit(self.frame, self.frame.get_rect())
-        pygame.display.flip()
+        self.scale_screen()
         self._clock.tick(FPS)
 
 
