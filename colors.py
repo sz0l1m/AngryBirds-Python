@@ -1,0 +1,7 @@
+bird = (210, 0, 0)
+pig = (0, 255, 0)
+static_bar = (84, 57, 45)
+wooden_bar = (110, 50, 20)
+stone_bar = (84, 84, 84)
+ground = (80, 180, 30)
+outline_color = (60, 30, 15)
