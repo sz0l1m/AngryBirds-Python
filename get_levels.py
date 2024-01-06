@@ -21,6 +21,8 @@ from classes import (
 from config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
+    DISPLAY_WIDTH,
+    DISPLAY_HEIGHT,
     FPS,
     screen_factor,
     bird_position,
@@ -68,8 +70,7 @@ class Game:
         pygame.display.set_caption('Angry Birds')
         self._clock = pygame.time.Clock()
         self.screen = pygame.Surface((1913, 1050))
-        self.display = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
         self.load_level(0)
         self._texts = {
             'attempts': Text('0', (130, 70), 40),
@@ -175,7 +176,7 @@ class Game:
             )
 
     def scale_screen(self):
-        self.frame = pygame.transform.scale(self.screen, (SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.frame = pygame.transform.scale(self.screen, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
         self.display.blit(self.frame, self.frame.get_rect())
         pygame.display.flip()
 
@@ -244,14 +245,15 @@ class Game:
             elif event.type == MOUSEBUTTONUP and self.bird_clicked and not self.bird_shot and event.button == 1:
                 self.shoot_bird()
                 self._bird_clicked = False
-            elif event.type == MOUSEBUTTONUP:
+            elif event.type == MOUSEBUTTONUP and event.button == 3:
+                self._bird.velocity = 0
                 self._bird_clicked = False
             elif event.type == QUIT:
                 self._running = False
 
     def step(self):
         mouse_pos = pygame.mouse.get_pos()
-        mouse_pos = (mouse_pos[0] * screen_factor, mouse_pos[1] * screen_factor)
+        mouse_pos = (mouse_pos[0] / screen_factor, mouse_pos[1] / screen_factor)
         self.handle_events(mouse_pos)
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))

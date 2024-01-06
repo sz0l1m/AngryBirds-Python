@@ -16,8 +16,10 @@ def get_screen_size():
 
 pygame.init()
 screen = get_screen_size()
-SCREEN_WIDTH = int(screen[0]) - 7
-SCREEN_HEIGHT = int(screen[1]) - 30
+SCREEN_WIDTH = 1913
+SCREEN_HEIGHT = 1050
+DISPLAY_WIDTH = int(screen[0]) - 7
+DISPLAY_HEIGHT = int(screen[1]) - 30
 screen_factor = screen[2]
 FPS = 30
 gravity = (0, -500)
