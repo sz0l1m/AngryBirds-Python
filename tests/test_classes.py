@@ -1,4 +1,4 @@
-from classes import (
+from game_logic.classes import (
     SizeError,
     CoordinatesError,
     Bird,

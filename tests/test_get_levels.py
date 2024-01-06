@@ -1,4 +1,4 @@
-from get_levels import (
+from game_logic.get_levels import (
     Game,
     Level
 )
