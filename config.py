@@ -2,6 +2,10 @@ import pygame
 
 
 def get_screen_size():
+    """
+    Calculates display width and height so it is in 16/9 ratio
+    and the factor by which it was resized compared to 1080p resolution.
+    """
     screen = pygame.display.Info()
     width = screen.current_w
     height = screen.current_h
