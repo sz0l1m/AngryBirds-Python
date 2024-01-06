@@ -1,10 +1,21 @@
 import pygame
+
+
+def get_screen_size():
+    screen = pygame.display.Info()
+    width = screen.current_w
+    height = screen.current_h
+    print(width / height)
+    if width / height > 16 / 9:
+        return (1920 * (height / 1080), height)
+    else:
+        return (width, 1080 * (width / 1920))
+
+
 pygame.init()
-# pygame_info = pygame.display.Info()
-# SCREEN_WIDTH = pygame_info.current_w - 7
-# SCREEN_HEIGHT = pygame_info.current_h - 30
-SCREEN_WIDTH = 1920 - 7
-SCREEN_HEIGHT = 1080 - 30
+screen = get_screen_size()
+SCREEN_WIDTH = int(screen[0]) - 7
+SCREEN_HEIGHT = int(screen[1]) - 30
 FPS = 30
 gravity = (0, -500)
 bird_radius = 20
