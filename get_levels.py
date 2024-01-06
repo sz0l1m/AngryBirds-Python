@@ -66,6 +66,8 @@ class Game:
         pygame.init()
         pygame.display.set_caption('Angry Birds')
         self._clock = pygame.time.Clock()
+        # self.screen = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
+        # self.display = pygame.display.set_mode((SCREEN_WIDTH / 1, SCREEN_HEIGHT / 1))
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.load_level(0)
         self._texts = {
@@ -76,7 +78,7 @@ class Game:
                 )
         }
         self._images = {
-            'background': Skin(None, 'background.jpg', (2131, 1146)),
+            'background': Skin(None, 'background.jpg', (1914, 1029)),
             'title': Skin(None, 'title.png', (512, 295)),
             'bird_amount': Skin(None, 'red_bird.png', (80, 80))
         }
@@ -184,8 +186,8 @@ class Game:
 
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))
-        self.screen.blit(self._images['background'].default_image, (0, -7))
-        self.screen.blit(self._images['title'].default_image, (SCREEN_WIDTH / 2 - 256, 220))
+        self.screen.blit(self._images['background'].default_image, (0, -30))
+        self.screen.blit(self._images['title'].default_image, (SCREEN_WIDTH / 2 - 256, 200))
         self._texts['info'].draw(self.screen)
         pygame.display.flip()
         self._clock.tick(FPS)
@@ -247,7 +249,7 @@ class Game:
         mouse_pos = pygame.mouse.get_pos()
         self.space.step(1 / FPS)
         self.screen.fill((255, 255, 255))
-        self.screen.blit(self._images['background'].default_image, (0, -7))
+        self.screen.blit(self._images['background'].default_image, (0, -30))
         self._trajectory.calc()
         self._trajectory.draw(self.screen)
         space_draw(self.space, self._draw_options)
@@ -262,6 +264,8 @@ class Game:
             self._bird.set_speed(pressed_keys, None, None)
         collisions.rolling_resistance(self.space)
         self.handle_level()
+        # self.frame = pygame.transform.scale(self.screen, (SCREEN_WIDTH / 1, SCREEN_HEIGHT / 1))
+        # self.display.blit(self.frame, self.frame.get_rect())
         pygame.display.flip()
         self._clock.tick(FPS)
 

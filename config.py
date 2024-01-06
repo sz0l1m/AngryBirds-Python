@@ -1,8 +1,10 @@
 import pygame
 pygame.init()
-pygame_info = pygame.display.Info()
-SCREEN_WIDTH = pygame_info.current_w - 7
-SCREEN_HEIGHT = pygame_info.current_h - 30
+# pygame_info = pygame.display.Info()
+# SCREEN_WIDTH = pygame_info.current_w - 7
+# SCREEN_HEIGHT = pygame_info.current_h - 30
+SCREEN_WIDTH = 1920 - 7
+SCREEN_HEIGHT = 1080 - 30
 FPS = 30
 gravity = (0, -500)
 bird_radius = 20
