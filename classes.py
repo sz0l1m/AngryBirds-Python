@@ -189,6 +189,7 @@ class Bird:
         """
         Sets speed of the bird depending on angle and velocity given by user.
         """
+        max_speed = aiming_range * 1913 / 400
         if mouse_pos is None:
             if pressed_keys[K_UP] or pressed_keys[K_w]:
                 if self.angle < 360:
@@ -201,7 +202,8 @@ class Bird:
                 else:
                     self.angle = 359
             if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
-                self.velocity += 10
+                if self.x_velocity < max_speed:
+                    self.velocity = min(self.velocity + 10, max_speed)
             if pressed_keys[K_LEFT] or pressed_keys[K_a]:
                 if self.velocity > 10:
                     self.velocity -= 10
@@ -224,28 +226,9 @@ class Bird:
                 pygame.draw.line(screen, (0, 0, 0), convert_coords(mouse_pos), convert_coords(bird_position), 3)
             else:
                 pygame.draw.line(screen, (0, 0, 0), convert_coords(line_point), convert_coords(bird_position), 3)
-            self.velocity = distance * SCREEN_WIDTH / 400
+            self.velocity = distance * 1913 / 400
         self.x_velocity = int(self.velocity * cos(radians(self.angle)))
         self.y_velocity = int(self.velocity * sin(radians(self.angle)))
-
-    # def set_speed(self, pressed_keys):
-    #     """
-    #     Sets speed of the bird depending on what key has been pressed.
-    #     """
-    #     if pressed_keys[K_UP] or pressed_keys[K_w]:
-    #         self.y_velocity += 10
-    #     if pressed_keys[K_DOWN] or pressed_keys[K_s]:
-    #         if self.y_velocity > 10:
-    #             self.y_velocity -= 10
-    #         else:
-    #             self.y_velocity = 0
-    #     if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
-    #         self.x_velocity += 10
-    #     if pressed_keys[K_LEFT] or pressed_keys[K_a]:
-    #         if self.x_velocity > 10:
-    #             self.x_velocity -= 10
-    #         else:
-    #             self.x_velocity = 0
 
 
 class Trajectory:
