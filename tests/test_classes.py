@@ -1,4 +1,5 @@
 from classes import (
+    SizeError,
     CoordinatesError,
     Bird,
     Pig,
@@ -64,12 +65,12 @@ def test_bird_create_invalid_coordinates():
 
 
 def test_bird_create_negative_radius():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Bird(space, (width, height), -10, 4)
 
 
 def test_bird_create_zero_radius():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Bird(space, (width, height), 0, 4)
 
 
@@ -93,14 +94,14 @@ def test_bird_set_radius():
 def test_bird_set_radius_negative_radius():
     bird = Bird(space, (width, height), 30)
     assert bird.radius == 30
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         bird.set_radius(-10)
 
 
 def test_bird_set_radius_zero_radius():
     bird = Bird(space, (width, height), 30)
     assert bird.radius == 30
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         bird.set_radius(0)
 
 
@@ -378,12 +379,12 @@ def test_bar_create_invalid_position():
 
 
 def test_bar_create_negative_size_1():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Bar(space, (width, height), (-10, 20))
 
 
 def test_bar_create_size_zero():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Bar(space, (width, height), (10, 0))
 
 
@@ -428,14 +429,14 @@ def test_bar_set_size():
 def test_bar_set_size_negative():
     bar = Bar(space, (width, height), (10, 20))
     assert bar.size == (10, 20)
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         bar.set_size((-1, 2))
 
 
 def test_bar_set_size_zero():
     bar = Bar(space, (width, height), (10, 20))
     assert bar.size == (10, 20)
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         bar.set_size((1, 0))
 
 
@@ -483,12 +484,12 @@ def test_wooden_bar_create_invalid_position():
 
 
 def test_wooden_bar_create_negative_size_1():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Wooden_bar(space, (width, height), (-10, 20))
 
 
 def test_wooden_bar_create_size_zero():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Wooden_bar(space, (width, height), (10, 0))
 
 
@@ -515,12 +516,12 @@ def test_stone_bar_create_invalid_position():
 
 
 def test_stone_bar_create_negative_size_1():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Stone_bar(space, (width, height), (-10, 20))
 
 
 def test_stone_bar_create_size_zero():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Stone_bar(space, (width, height), (10, 0))
 
 
@@ -546,12 +547,12 @@ def test_pig_create_invalid_position():
 
 
 def test_pig_create_negative_radius():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Pig(space, (width, height), -10)
 
 
 def test_pig_create_zero_radius():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Pig(space, (width, height), 0)
 
 
@@ -589,7 +590,7 @@ def test_pig_set_radius_negative_radius():
     pig = Pig(space, (width, height), 10)
     assert pig.radius == 10
     assert pig.shape.radius == 10
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         pig.set_radius(-1)
 
 
@@ -597,7 +598,7 @@ def test_pig_set_radius_zero_radius():
     pig = Pig(space, (width, height), 10)
     assert pig.radius == 10
     assert pig.shape.radius == 10
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         pig.set_radius(0)
 
 
@@ -612,7 +613,7 @@ def test_check_radius_valid():
 
 
 def test_check_radius_invalid():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         check_radius(-20)
 
 
@@ -634,12 +635,12 @@ def test_skin_create_normal():
 
 
 def test_skin_create_negative_size():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Skin('sada', '123', (-100, 200))
 
 
 def test_skin_create_zero_size():
-    with pytest.raises(ValueError):
+    with pytest.raises(SizeError):
         Skin('sada', '123', (100, 0))
 
 

@@ -24,7 +24,7 @@ from pygame.locals import (
 )
 
 
-def convert_coords(coords):
+def convert_coords(coords: tuple):
     """
     Converts coordinates in such a way that it moves horizontal axis
     from the bottom of display to the top or vice versa.
@@ -36,7 +36,7 @@ def convert_coords(coords):
     return (x, SCREEN_HEIGHT - y)
 
 
-def check_coords(coords):
+def check_coords(coords: tuple):
     """
     If given coordinates are invalid raises CoordinatesError.
     Coordinates are invlaid when one of them is negative
@@ -47,12 +47,20 @@ def check_coords(coords):
         raise CoordinatesError(coords)
 
 
-def check_radius(radius):
+def check_radius(radius: float):
     """
-    Raises ValueError if radius is not positive.
+    Raises SizeError if radius is not positive.
     """
     if radius <= 0:
-        raise ValueError('Radius has to be positive')
+        raise SizeError(radius, 'Radius has to be positive')
+
+
+def check_size(size: tuple):
+    """
+    Raises SizeError if vertical or horizontal size is not positive.
+    """
+    if size[0] <= 0 or size[1] <= 0:
+        raise SizeError(size, 'Size has to be positive')
 
 
 def space_draw(space: pymunk.Space, options: pymunk.pygame_util.DrawOptions):
@@ -105,6 +113,22 @@ class CoordinatesError(Exception):
         """
         super().__init__('Invalid coordinates')
         self.coordinates = coords
+
+
+class SizeError(Exception):
+    """
+    Class SizeError.
+    Class inherits attributes from Exception class.
+    Contains attributes:
+    :param size: invalid size
+    :type size: tuple
+    """
+    def __init__(self, size, message):
+        """
+        Creates instance of error.
+        """
+        super().__init__(message)
+        self.size = size
 
 
 class Bird:
@@ -399,8 +423,7 @@ class Bar:
         Raises ValueError if color is invalid.
         """
         check_coords(position)
-        if size[0] <= 0 or size[1] <= 0:
-            raise ValueError('Size of the bar has to be positive')
+        check_size(size)
         self.size = size
         if body_type == 'dynamic':
             self.body = pymunk.Body()
@@ -442,8 +465,7 @@ class Bar:
 
         Raises ValueError if size is not positive.
         """
-        if new_size[0] <= 0 or new_size[1] <= 0:
-            raise ValueError('Size of the bar has to be positive')
+        check_size(new_size)
         self.size = new_size
         self._shape = pymunk.Poly.create_box(self.body, self.size, 1)
 
@@ -555,8 +577,7 @@ class Skin:
 
         Raises ValueError if size is not positive.
         """
-        if size[0] <= 0 or size[1] <= 0:
-            raise ValueError('Size has to be positive')
+        check_size(size)
         self._object = object
         image = pygame.image.load(f'images/{file}').convert_alpha()
         self._default_image = pygame.transform.smoothscale(image, size)
