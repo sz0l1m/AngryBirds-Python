@@ -6,8 +6,8 @@ from io import StringIO
 import json
 import pygame
 import pymunk
-import colors
-from config import (
+import configs.colors as colors
+from configs.config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     bird_position,

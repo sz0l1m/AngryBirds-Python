@@ -15,12 +15,12 @@ from classes import (
     calc_distance_and_angle,
     is_on_circle
 )
-from config import (
+from configs.config import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
     floor_height
 )
-import colors
+import configs.colors as colors
 import pytest
 import pygame
 import pymunk

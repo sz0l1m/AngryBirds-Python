@@ -18,7 +18,7 @@ from classes import (
     is_on_circle,
     space_draw
 )
-from config import (
+from configs.config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     DISPLAY_WIDTH,
@@ -187,7 +187,7 @@ class Game:
                     self._running = False
                 elif event.key == K_SPACE:
                     self._start = True
-                    self.load_level(0)
+                    self.load_level(3)
             elif event.type == QUIT:
                 self._running = False
 
