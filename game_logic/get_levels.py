@@ -63,6 +63,58 @@ def get_level(space: pymunk.Space, level: int):
 
 
 class Game:
+    """
+    Class Game.
+    The main class of the game which brings everything together.
+    Contains attributes:
+    :param space: pymunk space of the game which contains all objects that obey the laws of physics
+    :type space: pymunk.Space
+
+    :param clock: counts time between frames and sets frame rate
+    :type clock: pygame.time.Clock
+
+    :param screen: pygame surface that contains all objects that are drawn on the display. Its resolution is 1080p
+    :type screen: pygame.Surface
+
+    :param frame: pygame surface which is a copy of the screen resized to user's resolution
+    :type frame: pygame.Surface
+
+    :param display: pygame surface that is displayed on user's monitor. It is a copy of frame
+    :type display: pygame.Surface
+
+    :param texts: dictionary of all texts used in the game
+    :type texts: dict
+
+    :param images: dictionary of all images used in the game stored as Skin class
+    :type images: dict
+
+    :param draw_options: options that allow pymunk to draw objects in pygame
+    :type draw_options: pymunk.pygame_util.DrawOptions
+
+    :param running: is True if the game is running
+    :type running: bool
+
+    :param bird_shot: is True if the bird was shot in currunt attempt
+    :type bird_shot: bool
+
+    :param bird_clicked: is True if the bird was clicked before the shot and not released
+    :type bird_clicked: bool
+
+    :param timer: counts time after every object stopped moving and restarts the level after certain amount of time
+    :type timer: time.Time
+
+    :param start: is True if the game is started, is False if the game is in start screen
+    :type start: bool
+
+    :param level: current level
+    :type level: Level
+
+    :param bird: currently used bird
+    :type bird: Bird
+
+    :param trajectory: trajectory of curruntly used bird
+    :type trajectory: Trajectory
+    """
     def __init__(self):
         """
         Creates instance of Game.
