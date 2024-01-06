@@ -1,9 +1,9 @@
-import json
 import pygame
 import pymunk
+import json
 import os
-import game_logic.collisions as collisions
 import time
+import game_logic.collisions as collisions
 from game_logic.classes import (
     Bird,
     Pig,
@@ -51,7 +51,8 @@ def get_data():
 
 def get_level(space: pymunk.Space, level: int):
     """
-    Creates instance of Level and calls create_objects method.
+    Removes all objects from space.
+    Creates and returns instance of Level and calls create_objects method.
     """
     for body, shape in zip(space.bodies, space.shapes):
         space.remove(body, shape)
@@ -63,6 +64,15 @@ def get_level(space: pymunk.Space, level: int):
 
 class Game:
     def __init__(self):
+        """
+        Creates instance of Game.
+        Creates pymunk space.
+        Initializes pygame, sets pygame clock and display with calculated size.
+        Creates instances of texts and skins used in the game.
+        Sets draw_options for pymunk.pygame_util module.
+        Creates collision handlers for all collision types.
+        Sets other attributes to starting values.
+        """
         self.space = pymunk.Space()
         self.space.gravity = gravity
         os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0, 0)
@@ -131,25 +141,28 @@ class Game:
     @property
     def bird_clicked(self):
         """
-        Returns True if bird was clicked with LMP and was not released.
+        Returns True if bird was clicked with before the shot LMP and was not released.
         """
         return self._bird_clicked
 
     @property
     def start(self):
         """
-        Returns True if game should be started.
+        Returns True if game should be started after the start screen.
         """
         return self._start
 
     def load_level(self, level_number: int):
+        """
+        Loads level with the given number by calling get_level function and sets level, bird and trajectory attributes.
+        """
         self._level = get_level(self.space, level_number)
         self._bird = self._level.bird
         self._trajectory = Trajectory(self._bird)
 
     def load_bird(self):
         """
-        Loads new bird on the screen.
+        Makes another attempt by removing old bird and creating new.
         """
         if self._level.attempts > 0:
             self.space.remove(self._bird.body, self._bird.shape)
@@ -158,17 +171,26 @@ class Game:
             self._bird_shot = False
 
     def shoot_bird(self):
+        """
+        Shoots the bird with speed set by user.
+        """
         self._bird.body.velocity = (self.bird.x_velocity, self.bird.y_velocity)
         self._bird_shot = True
         self._bird_clicked = False
         self._level.reduce_attempts()
 
     def update_skins(self):
+        """
+        Updates skins of all objects by calling update method of each skin.
+        """
         for body, shape in zip(self.space.bodies, self.space.shapes):
             if shape.collision_type == 1 or shape.collision_type == 3:
                 body.skin.update(self.screen)
 
     def draw_grass(self):
+        """
+        Draw grass on the screen.
+        """
         for x in range(SCREEN_WIDTH + 310 // 300):
             self.screen.blit(
                 self._level.floor.body.grass.default_image,
@@ -176,18 +198,25 @@ class Game:
             )
 
     def scale_screen(self):
+        """
+        Sets frame as screen resized to user's resoltion and displays it on pygame display.
+        """
         self.frame = pygame.transform.scale(self.screen, (DISPLAY_WIDTH, DISPLAY_HEIGHT))
         self.display.blit(self.frame, self.frame.get_rect())
         pygame.display.flip()
 
     def start_screen(self):
+        """
+        Draws start screen on display and handles user events.
+        Loads level 1 after starting the game by pressing space.
+        """
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     self._running = False
                 elif event.key == K_SPACE:
                     self._start = True
-                    self.load_level(3)
+                    self.load_level(0)
             elif event.type == QUIT:
                 self._running = False
 
@@ -200,6 +229,11 @@ class Game:
         self._clock.tick(FPS)
 
     def handle_level(self):
+        """
+        Removes object when it leaves the screen.
+        Decides whether the level is restarted, new attempt is load or new level is load according to
+        number of attempts left and number of pigs left.
+        """
         pigs = 0
         for body, shape in zip(self.space.bodies, self.space.shapes):
             if body.position[0] > SCREEN_WIDTH + 50 or body.position[0] < -50:
@@ -229,6 +263,10 @@ class Game:
             self.load_level(self._level.number - 1)
 
     def handle_events(self, mouse_pos: tuple):
+        """
+        Handles events raised by pygame.
+        Reacts to keyboard inputs, mouse clicks and position of the mouse.
+        """
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
@@ -252,6 +290,11 @@ class Game:
                 self._running = False
 
     def step(self):
+        """
+        Main method of Game class which is called every frame.
+        Updates state of the game by calling Game's methods as well as methods of other classes.
+        Draws every object in pymunk space and other elements on the screen in the rigth order.
+        """
         mouse_pos = pygame.mouse.get_pos()
         mouse_pos = (mouse_pos[0] / screen_factor, mouse_pos[1] / screen_factor)
         self.handle_events(mouse_pos)
@@ -285,7 +328,10 @@ class Level:
     :param objects: all objects of the level
     :type objects: dict
 
-    :param attempts: attempts of the level
+    :param amount_of_levels: total amount of levels in the game
+    :type amount_of_levels: int
+
+    :param attempts: attempts available in the level
     :type attempts: int
 
     :param bird: currently used bird
@@ -303,6 +349,7 @@ class Level:
     def __init__(self, level_data: dict, amount_of_levels: int):
         """
         Creates instance of the level.
+        Sets attribute's values from levels.json
         """
         self._number = level_data["level"]
         self._objects = level_data["objects"]
@@ -342,9 +389,16 @@ class Level:
         return self._attempts
 
     def reduce_attempts(self):
+        """
+        Reduces number of attempts in the level by 1.
+        """
         self._attempts -= 1
 
     def create_bar(self, space: pymunk.Space, bar: Bar):
+        """
+        Creates instance of Bar, Wooden_bar or Stone_bar depending on what was set in the file on the type key.
+        If type of the bar was not set in the it by default set as a wooden bar.
+        """
         if 'type' not in bar.keys():
             return Wooden_bar(
                 space,
@@ -368,7 +422,7 @@ class Level:
 
     def create_objects(self, space: pymunk.Space):
         """
-        Creates instances of all objects and returns them.
+        Creates instances of all objects from objects attribute.
         """
         self.floor = Floor(space)
         self.bird = Bird(
