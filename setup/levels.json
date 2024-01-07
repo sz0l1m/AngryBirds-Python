@@ -365,11 +365,6 @@
                         "x_position": 900,
                         "y_position": 20,
                         "radius": 20
-                    },
-                    {
-                        "x_position": 1040,
-                        "y_position": 350,
-                        "radius": 20
                     }
                 ],
                 "bars": [

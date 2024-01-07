@@ -11,7 +11,6 @@ from setup.config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     bird_position,
-    bird_radius,
     floor_height,
     gravity
 )

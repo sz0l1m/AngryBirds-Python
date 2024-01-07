@@ -288,7 +288,7 @@ class Game:
                     self._running = False
                 elif event.key == K_SPACE:
                     self._status = 1
-                    self.load_level(5)
+                    self.load_level(0)
                     self._stopwatch = time.time()
             elif event.type == QUIT:
                 self._running = False
@@ -304,7 +304,7 @@ class Game:
     def end_screen(self):
         """
         Draws ending screen on display and handles user events.
-        Loads start screen after after pressing space.
+        Loads start screen after pressing space.
         """
         for event in pygame.event.get():
             if event.type == KEYDOWN:
