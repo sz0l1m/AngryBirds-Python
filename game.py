@@ -8,10 +8,12 @@ def main():
     """
     game = Game()
     while game.running:
-        if game.start:
+        if game.status == 0:
+            game.start_screen()
+        elif game.status == 1:
             game.step()
         else:
-            game.start_screen()
+            game.end_screen()
 
 
 if __name__ == '__main__':

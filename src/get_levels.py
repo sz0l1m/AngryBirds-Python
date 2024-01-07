@@ -103,8 +103,8 @@ class Game:
     :param timer: counts time after every object stopped moving and restarts the level after certain amount of time
     :type timer: time.Time
 
-    :param start: is True if the game is started, is False if the game is in start screen
-    :type start: bool
+    :param status: shows status of the game. If 0 game is in start screen, 1 - game in progress, 2 - game in end screen
+    :type status: int
 
     :param level: current level
     :type level: Level
@@ -144,6 +144,7 @@ class Game:
         self._images = {
             'background': Skin(None, 'background.jpg', (1914, 1029)),
             'title': Skin(None, 'title.png', (512, 295)),
+            'the_end': Skin(None, 'the_end.png', (512, 182)),
             'bird_amount': Skin(None, 'red_bird.png', (80, 80))
         }
         pymunk.pygame_util.positive_y_is_up = True
@@ -153,7 +154,7 @@ class Game:
         self._bird_shot = False
         self._bird_clicked = False
         self._timer = 0
-        self._start = False
+        self._status = 0
 
     @property
     def level(self):
@@ -198,11 +199,11 @@ class Game:
         return self._bird_clicked
 
     @property
-    def start(self):
+    def status(self):
         """
-        Returns True if game should be started after the start screen.
+        Returns 0 if game is in start screen, 1 - if game is in progress, 2 - if game is in end screen.
         """
-        return self._start
+        return self._status
 
     def load_level(self, level_number: int):
         """
@@ -257,7 +258,7 @@ class Game:
 
     def start_screen(self):
         """
-        Draws start screen on display and handles user events.
+        Draws start screen on display and handles user events such as pressing escape or space.
         Loads level 1 after starting the game by pressing space.
         """
         for event in pygame.event.get():
@@ -265,8 +266,8 @@ class Game:
                 if event.key == K_ESCAPE:
                     self._running = False
                 elif event.key == K_SPACE:
-                    self._start = True
-                    self.load_level(0)
+                    self._status = 1
+                    self.load_level(5)
             elif event.type == QUIT:
                 self._running = False
 
@@ -274,6 +275,29 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.screen.blit(self._images['background'].default_image, (0, -30))
         self.screen.blit(self._images['title'].default_image, (SCREEN_WIDTH / 2 - 256, 200))
+        self._texts['info'].draw(self.screen)
+        self.scale_screen()
+        self._clock.tick(FPS)
+
+    def end_screen(self):
+        """
+        Draws ending screen on display and handles user events.
+        Loads start screen after after pressing space.
+        """
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    self._running = False
+                elif event.key == K_SPACE:
+                    self._status = 0
+                    self.__init__()
+            elif event.type == QUIT:
+                self._running = False
+
+        self.space.step(1 / FPS)
+        self.screen.fill((255, 255, 255))
+        self.screen.blit(self._images['background'].default_image, (0, -30))
+        self.screen.blit(self._images['the_end'].default_image, (SCREEN_WIDTH / 2 - 256, 200))
         self._texts['info'].draw(self.screen)
         self.scale_screen()
         self._clock.tick(FPS)
@@ -300,9 +324,7 @@ class Game:
                 self.load_level(self.level.number)
                 self._bird_shot = False
             else:
-                self.__init__()
-                self.start_screen()
-                self._bird_shot = False
+                self._status = 2
         elif pigs != 0 and self._bird_shot:
             self.load_bird()
         if pigs != 0 and self._level.attempts == 0 and time.time() - self._timer > 1:
