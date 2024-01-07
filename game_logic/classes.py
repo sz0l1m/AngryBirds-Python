@@ -2,8 +2,8 @@ import pygame
 import pymunk
 import pymunk.pygame_util
 from math import sin, cos, asin, radians, degrees, sqrt
-import configs.colors as colors
-from configs.config import (
+import setup.colors as colors
+from setup.config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     floor_height,

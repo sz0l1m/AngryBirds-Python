@@ -1,7 +1,7 @@
 import pygame
 import pymunk
 import pytest
-import configs.colors as colors
+import setup.colors as colors
 from game_logic.classes import (
     SizeError,
     CoordinatesError,
@@ -20,7 +20,7 @@ from game_logic.classes import (
     calc_distance_and_angle,
     is_on_circle
 )
-from configs.config import (
+from setup.config import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
     floor_height

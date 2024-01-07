@@ -18,7 +18,7 @@ from game_logic.classes import (
     is_on_circle,
     space_draw
 )
-from configs.config import (
+from setup.config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     DISPLAY_WIDTH,

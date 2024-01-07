@@ -2,12 +2,12 @@ import pygame
 import pymunk
 import json
 from io import StringIO
-import configs.colors as colors
+import setup.colors as colors
 from game_logic.get_levels import (
     Game,
     Level
 )
-from configs.config import (
+from setup.config import (
     SCREEN_WIDTH,
     SCREEN_HEIGHT,
     bird_position,
