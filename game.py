@@ -1,4 +1,4 @@
-from game_logic.get_levels import Game
+from src.get_levels import Game
 
 
 def main():

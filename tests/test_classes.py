@@ -2,7 +2,7 @@ import pygame
 import pymunk
 import pytest
 import setup.colors as colors
-from game_logic.classes import (
+from src.classes import (
     SizeError,
     CoordinatesError,
     Bird,

@@ -3,8 +3,8 @@ import pymunk
 import json
 import os
 import time
-import game_logic.collisions as collisions
-from game_logic.classes import (
+import src.collisions as collisions
+from src.classes import (
     Bird,
     Pig,
     Bar,
