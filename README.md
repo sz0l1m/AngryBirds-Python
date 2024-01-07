@@ -1,65 +1,81 @@
 # PIPR-PROJECT
 
+## Autor
+Miłosz Andryszczuk
+nr indeksu 331355
+
+## Opis projektu
+Przedmiotem projektu jest gra 2D w stylu Angry Birds. Gra polega na wystrzeleniu ptaka pod odpowiednim kątem i z odpowiednią siłą, tak aby trafił on bezpośrednio w cele, czyli świnie lub w konstrukcje, których zawalenie spowoduje zlikwidowanie świni. Gra składa się z kilku poziomów o narastającym poziomie trudności. Projekt posiada interfejs graficzny oraz potrafi symulować prawa fizyki.<br>
+Projekt wykorzytuje 2 biblioteki spoza standardowej biblioteki Pythona:
+- Pygame<br>
+Odpowiada za interfej graficzny gry, wyświetlając wszystkie elementy na ekranie.<br>
+[Dokumentacja](https://www.pygame.org/docs/)
+- Pymunk<br>
+Odpowiada za symulacje fizyki wszystkich obiektów w grze.<br>
+[Dokumentacja](https://www.pymunk.org/en/latest/index.html)
 
 
-## Getting started
+## Struktura projektu
+- Folder **src**<br>
+Główny folder zawierający logikę gry: funkcje, klasy i ich metody wykorzystywane w grze.
+    - `get_levels.py`<br>
+    Zawiera klasę Game oraz Level.
+    - `classes.py`<br>
+    Zawiera klasy wszystkich obiektów wyświetlanych w grze, własne błędy oraz funkcje wykorzystywane przez klasy.
+    - `collisions.py`<br>
+    Zarządza kolizjami pomiędzy obiektami i na podstawie energii uderzenia decyduje, kiedy obiekty powinny zniknąć.
+- Folder **setup**<br>
+Zawiera pliki konfiguracyjne, które pozwalaja na szybką zmianę parametrów i ustawień gry.
+    - `levels.json`<br>
+    Zawiera dane o położeniu i wielkości obiektów w poszczególnych poziomach zapisane w formacie *JSON*.
+    - `colors.py`<br>
+    Zawiera wszytkie kolory wykorzystywane w grze.
+    - `config.py`<br>
+    Zawiera globalne zmienne, takie jak na przykład liczba klatek na sekundę czy rozmiar ptaka. Oblicza również wielkość ekranu gry.
+- Folder **tests**
+    - `test_classes.py`<br>
+    Zawiera testy klas i funkcji z pliku `classes.py`.
+    - `test_get_levels.py`<br>
+    Zawiera testy klas z pliku `get_levels.py`.
+- Folder **images**
+    - Zawiera obrazy wykorzystywane w grze w formacie *png* lub *jpg*.
+- `game.py`<br>
+Główny plik całej gry. Tworzy instancje klasy Game i wywołuje jej metody.<br>
+Uruchomienie tego pliku powoduje włączenie gry.
+- `requirements.txt`<br>
+Zawiera biblioteki niezbędne do poprwanego działania gry.
+-  `.gitignore`<br>
+Zawiera informacje o plikach i folderach ignorowanych przez *git*.
+- `README.md`<br>
+Zawiera opis projektu i instrukcje użytkowania.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Podział na klasy
+- **Game**<br>
+Główna klasa, która łączy wszystkie klasy w całość. Stworzenie jej instancji jest równoznaczne z odpaleniem gry i powoduje uruchomienie biblioteki pygame (tym samym urochomienie okna gry), załadowanie używanych obrazów i ustawienie domyślnych wartości atrybutów. Jej metody wywoływane co każdą klatkę pozwalają na wyświetlenie obrazu startowego i końcowego, rysowanie obiektów na ekranie, aktualizowanie położenia obiektów, restartowanie poziomu, wczytywanie kolejnego poziomu, wczytywanie kolejnej próby, a także reagowanie na położenie myszki czy na przyciski wciśnięte przez gracza. Klasa jest również odpowiedzialna za utrzymanie odpowiedniej częstotliwości wyświetlania klatek oraz za wiele innych funkcjonalności.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- **Level**<br>
+Klasa ta jest odpowiedzialna za wczytanie poziomu z pliku oraz zapisanie informacji o nim, takich jak np. liczba prób. Poza tym pozwala na stworzenie wszystkich obiektów potrzebnych do stworzenia poziomu poprzez stworzenie instancji odpowiednich klas z pliku `classes.py`.
 
-## Add your files
+- **Bird**<br>
+Klasa ta reprezentuje ptaka, którym można strzelać. Posiada atrybuty dotyczące kształtu, wielkości, wyglądu, położenia, prędkości, masy i innych cech potrzebnych do symulacji fizyki. Oblicza kąt i prędkość z jaką ptak zostanie wystrzelony na podstawie położenia myszki lub wciśniętych klawiszy.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- **Trajectory**<br>
+Klasa ta pozwala na obliczenie i wyświetlenie trajektorii ptaka na podstawie prędkości i kątu ustawionego przez gracza. Do narysowania trajektorii oblicza współczynniki funkcji kwadratowej, która reprezentuje tą trajektorię.
 
-```
-cd existing_repo
-git remote add origin https://gitlab-stud.elka.pw.edu.pl/wgr/pipr/pipr-project.git
-git branch -M main
-git push -uf origin main
-```
+- **Pig**<br>
+Klasa ta reprezentuje świnie, czyli cele, w które trzeba trafić. Posiada podobne atrybuty jak *Bird* niezbędne do narysowania świni i symulowania jej fizyki.
 
-## Integrate with your tools
+- **Bar**<br>
+Klasa ta reprezentuje belkę, z których można budować konstrukcje. Pozwala na stworzenie belki statycznej, która się nie porusza i belki dynamicznej, która reaguje na zderzenia z innymi obiektami i może się przemieszczać.
 
-- [ ] [Set up project integrations](https://gitlab-stud.elka.pw.edu.pl/wgr/pipr/pipr-project/-/settings/integrations)
+- **Wooden_bar**<br>
+Klasa ta dziedziczy wszystkie atrybuty i metody po klasie *Bar* i nadpisuje niektóre atrybuty. Jest to rodzaj belki dynamicznej, która jest stosunkowo lekka i może ulec zniszczeniu po zderzniu z wystarczającą energią kinetyczną z innym obiektem.
 
-## Collaborate with your team
+- **Stone_bar**<br>
+Klasa ta podobnie jak klasa *Wooden_bar* dziedziczy po klasie *Bar*. Jest to również rodzaj belki dynamicznej, która może się poruszać, jednak w odróznieniu od belki drewnianej, belka ta ma inne parametry fizyczne i nigdy nie ulega zniszczeniu po zderzeniu z innymi obiektami.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+- **Floor**<br>
+Klasa reprezentuje podłogę danego poziomu. Podobnie jak inne klasy reprezentujące obiekty posiada parametry fizyczne dotyczące kształtu, elastyczności itp.
 
 ## Visuals
 Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.

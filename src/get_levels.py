@@ -331,7 +331,7 @@ class Game:
     def handle_level(self):
         """
         Removes object when it leaves the screen.
-        Decides whether the level is restarted, new attempt is load or new level is load according to
+        Decides whether the level is restarted, new attempt is made or new level is loaded according to
         number of attempts left and number of pigs left.
         """
         pigs = 0
