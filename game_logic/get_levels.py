@@ -209,17 +209,15 @@ class Game:
         Loads level with the given number by calling get_level function and sets level, bird and trajectory attributes.
         """
         self._level = get_level(self.space, level_number)
-        self._bird = self._level.bird
-        self._trajectory = Trajectory(self._bird)
+        self.load_bird()
 
     def load_bird(self):
         """
         Makes another attempt by removing old bird and creating new.
         """
         if self._level.attempts > 0:
-            self.space.remove(self._bird.body, self._bird.shape)
-            self._bird = Bird(self.space, bird_position, bird_radius, 0.7, 0.7, 0.8)
-            self._trajectory = Trajectory(self.bird)
+            self._bird = Bird(self.space, bird_position, bird_radius, 0.7, 0.6, 0.8)
+            self._trajectory = Trajectory(self._bird)
             self._bird_shot = False
 
     def shoot_bird(self):
@@ -289,11 +287,7 @@ class Game:
         pigs = 0
         for body, shape in zip(self.space.bodies, self.space.shapes):
             if body.position[0] > SCREEN_WIDTH + 50 or body.position[0] < -50:
-                if shape.collision_type == 3:
-                    self.space.remove(body, shape)
-                else:
-                    body.position = (SCREEN_WIDTH + 50, floor_height)
-                    body.velocity = (0, 0)
+                self.space.remove(body, shape)
             if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
                 self._timer = 0
                 return None
@@ -329,7 +323,7 @@ class Game:
                     self.load_bird()
                 elif event.key == K_r:
                     self.load_level(self.level.number - 1)
-            elif event.type == MOUSEBUTTONDOWN and event.button == 1:
+            elif event.type == MOUSEBUTTONDOWN and event.button == 1 and not self._bird_shot:
                 if is_on_circle(bird_position, bird_radius, convert_coords(mouse_pos)):
                     self._bird_clicked = True
             elif event.type == MOUSEBUTTONUP and self.bird_clicked and not self.bird_shot and event.button == 1:
@@ -477,14 +471,6 @@ class Level:
         Creates instances of all objects from objects attribute.
         """
         self.floor = Floor(space)
-        self.bird = Bird(
-            space,
-            bird_position,
-            bird_radius,
-            0.6,
-            0.7,
-            0.8
-        )
         self.pigs = [
             Pig(
                 space,
