@@ -1,4 +1,4 @@
-# PIPR-PROJECT
+# Angry Birds
 
 ## Autor
 Miłosz Andryszczuk
@@ -51,10 +51,10 @@ Zawiera opis projektu i instrukcje użytkowania.
 
 ## Podział na klasy
 - **Game**<br>
-Główna klasa, która łączy wszystkie klasy w całość. Stworzenie jej instancji jest równoznaczne z odpaleniem gry i powoduje uruchomienie biblioteki pygame (tym samym urochomienie okna gry), załadowanie używanych obrazów i ustawienie domyślnych wartości atrybutów. Jej metody wywoływane co każdą klatkę pozwalają na wyświetlenie obrazu startowego i końcowego, rysowanie obiektów na ekranie, aktualizowanie położenia obiektów, restartowanie poziomu, wczytywanie kolejnego poziomu, wczytywanie kolejnej próby, a także reagowanie na położenie myszki czy na przyciski wciśnięte przez gracza. Klasa jest również odpowiedzialna za utrzymanie odpowiedniej częstotliwości wyświetlania klatek oraz za wiele innych funkcjonalności.
+Główna klasa, która łączy wszystkie klasy w całość. Stworzenie jej instancji jest równoznaczne z odpaleniem gry i powoduje uruchomienie biblioteki pygame (tym samym uruchomienie okna gry), załadowanie używanych obrazów i ustawienie domyślnych wartości atrybutów. Jej metody wywoływane co każdą klatkę pozwalają na wyświetlenie obrazu startowego i końcowego, rysowanie obiektów na ekranie, aktualizowanie położenia obiektów, restartowanie poziomu, wczytywanie kolejnego poziomu, wczytywanie kolejnej próby, a także reagowanie na położenie myszki czy na przyciski wciśnięte przez gracza. Klasa jest również odpowiedzialna za utrzymanie odpowiedniej częstotliwości wyświetlania klatek oraz za wiele innych funkcjonalności.
 
 - **Level**<br>
-Klasa ta jest odpowiedzialna za wczytanie poziomu z pliku oraz zapisanie informacji o nim, takich jak np. liczba prób. Poza tym pozwala na stworzenie wszystkich obiektów potrzebnych do stworzenia poziomu poprzez stworzenie instancji odpowiednich klas z pliku `classes.py`.
+Klasa ta jest odpowiedzialna za wczytanie poziomu z pliku oraz zapisanie informacji o nim, takich jak np. liczba prób. Poza tym pozwala na stworzenie wszystkich obiektów danego poziomu poprzez stworzenie instancji odpowiednich klas z pliku `classes.py`.
 
 - **Bird**<br>
 Klasa ta reprezentuje ptaka, którym można strzelać. Posiada atrybuty dotyczące kształtu, wielkości, wyglądu, położenia, prędkości, masy i innych cech potrzebnych do symulacji fizyki. Oblicza kąt i prędkość z jaką ptak zostanie wystrzelony na podstawie położenia myszki lub wciśniętych klawiszy.
@@ -89,7 +89,7 @@ Klasy te reprezentują błędy, które są zgłaszane kiedy podane dane są niep
 ## Instrukcja użytkowania ##
 
 ### Instalacja ###
-Należy stworzyć folder, w którym gra będzie zapisana i sklonować repozytorium do tego folderu. Pliki gry znajdujować się będą w nowym folderze `23Z-PIPR-PROJECT-Andryszczuk-Milosz`.
+Należy stworzyć folder, w którym gra będzie zapisana i sklonować repozytorium do tego folderu. Pliki gry znajdować się będą w nowym folderze `23Z-PIPR-PROJECT-Andryszczuk-Milosz`.
 ```
 mkdir game
 cd game
@@ -143,34 +143,43 @@ Gra polega na dobraniu takiej trajektorii, aby ptak trafił bezpośrednio w świ
 
 Zrestartować level oraz załadować kolejną próbę można również samodzielnie za pomocą przycisków opisancyh wyżej w sekcji *pozostałe sterowanie*.
 
+Po przejściu wszytkich poziomów wyświetli się ekran końcowy z łącznym czasem rozgrywki. Grę można uruchomić ponownie poprzez `spacje` lub wyłączyć za pomocą `escape`.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
- Ptaka można wystrzelić pod każdym kątem, jednak siła wystrzału jest ograniczona. Zależnie od położenia myszki pokazywać się będzie kawałek trajketorii, po której ptak będzie leciał.
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### Modyfikacja gry ###
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Poziomy gry zapisane są w formacie `JSON` w pliku `levels.json`. Każdy poziom ma swój numer i obiekty, które się w nim znjadują, czyli świnki i belki. Możliwa jest modyfikacja stworzoncyh leveli oraz dodawanie nowych. Każdy obiekt ma swoją pozycję zapisaną w pixelach oraz promień (dla świnek) lub rozmiar w dwóch wymiarach (dla belek) również w pixelach. W belkach w kluczu `type` można wybrać czy ma byc ona statyczna, drewniana lub kamienna (brak klucza `type` oznacza, że belka jest drewniana). W kluczu `bird` `amount` można dobrać liczbę prób. Przy modyfikacji poziomów należy pamiętać, że:
+- pozycja obiektu wskazuje, gdzie znajdować się będzie środek obiektu
+- pozycja pozioma `x_position` liczona jest od prawej krawędzi ekranu
+- nie należy podawać wartości ujemnych oraz `x_position` większego niż 1900 oraz `y_postion` większego niż 1000<br>
+- po dodaniu lub usunięciu levelu należy pamiętać o zmodyfikowaniu numerów leveli
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Trzymanie się powyższych zasad pozwala na łatwe modyfikowanie poziomów wedle uznania.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## Część refleksyjna
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### Potencjalne probelmy ###
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+**Ekran**<br>
+Możliwe jest, że na Pańskim ekranie gra nie będzie wyświetlać się prawidłowo. Gra była tworzona na ekranie o rozmiarach 1920 x 1200 pixeli i zadbałem o to, żeby ekran, i grafika dopasowywała się do każdego ekranu, jednak z powodu ograniczonego dostępu do innych monitorów nie byłem w stanie w pełni tego przetestować. Testowałem to łącznie na 4 komputerach i wszystko działało prawidłowo, jednak mimo to radziłbym, aby urochomić tą grę mając włączony tylko jeden monitor (jeśli korzysta Pan z kilku), ponieważ czasami w przypdaku używania dwóch monitorów okno gry wychodziło częściowo na drugi ekran.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+**Poziom trudności**<br>
+Ciężko jest ocecnić poziom trudności tej gry, ponieważ przeszedłem ją kilkadziesiąt razy i według mnie nie jest trudna. Natomiast jeśli będzie miał Pan trudności z jej przejściem, to zachęcam do zmodyfikowania lub nawet usunięcia danego levelu zgodnie z intrukcją powyżej.
 
-## License
-For open source projects, say how it is licensed.
+### Niezrealizowane pomysły ###
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- stworzenie różnych rodzajów ptaków (jak w prawdziwym Angry Birds)
+- dodanie instrukcji użytkowania w grze
+- dodanie prostych animacji po zabiciu świń lub zniszczeniu belek (coś w stylu wybuchów)
+- dodanie innych rodzajów belek (np. szklancyh)
+- dodanie inncyh kształtów belek (trójkątów, kół, itd)
+- dodanie efektów dźwiękowych i muzyki
+- dodanie większej ilości poziomów
+- i wiele wiele innych<br>
+
+Wszytkie powyższe pomysły nie zostały zrealizowane z powodu ograniczenia czasowego i z pewnością zostały by zaimplemenotwane, gdyby nie termin.
+
+### Zakończenie ###
+Mimo dużej ilości niezrealizowanych pomysłów, to jednak lista tych zrealizowanych, których początkowo kompletnie nie było w planie, jest znacznie dłuższa. Początkowo myślałem o grze, której "grafika" będzie symulowana w konsoli, a jedyna fizyka to będzie kropeczka poruszająca się po paraboli. A jednak udało się stworzyć grę, o której nigdy nie pomyslałbym, że jest w moim zasięgu.
+
+Podczas pisania tego projektu poświęciłem mnóstwo czasu, żeby poznać i nauczyć się korzystać z wykorzystywanych przeze mnie bibliotek i natrafiłem na niezliczoną ilość problemów i błędów, jednak dzięki temu nauczyłem się lepszej organizacji kodu oraz korzytania z bardzo rozbudowanych i przydatnych bibliotekz a także dowiedziałem się jak wiele można dzięki nim osiągnąć.
