@@ -246,6 +246,8 @@ class Bird:
                 self.angle = 360 - angle
             else:
                 self.angle = angle
+            # Calculates the point where the line from bird to mouse position should end so it will represent maximum
+            # force that can be aplied to a bird.
             line_point = (x + aiming_range * cos(radians(self.angle + 180)),
                           y + aiming_range * sin(radians(self.angle + 180)))
             if is_on_circle(bird_position, aiming_range, mouse_pos):
@@ -297,8 +299,10 @@ class Trajectory:
         self.x_vel = self.bird.x_velocity
         self.y_vel = self.bird.y_velocity
         if self.x_vel and self.y_vel > 0:
+            # Calculates vertex of the function
             self.vertex[0] = ((self.x_vel * self.y_vel) / -gravity[1]) + self.start_point[0]
             self.vertex[1] = ((self.y_vel ** 2) / (2 * -gravity[1])) + self.start_point[1]
+            # Calculates 'a' coefficient of the function
             self.a_of_pattern = (self.start_point[1] - self.vertex[1]) / ((self.start_point[0] - self.vertex[0]) ** 2)
 
     def draw(self, screen: pygame.Surface):
@@ -308,16 +312,19 @@ class Trajectory:
         if self.y_vel >= 0:
             interval = int(abs(self.x_vel) / 15) + 1
             if self.x_vel > 0:
+                # Draws trajectory when bird is shot to the right
                 for x in range(bird_position[0], 700, interval):
                     y = self.a_of_pattern * (x - self.vertex[0]) ** 2 + self.vertex[1]
                     if y >= 100 and self.y_vel:
                         pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 3)
             elif self.x_vel < 0:
+                # Draws trajectory when bird is shot to the left
                 for x in range(-100, bird_position[0], interval):
                     y = self.a_of_pattern * (x - self.vertex[0]) ** 2 + self.vertex[1]
                     if y >= 100 and self.y_vel:
                         pygame.draw.circle(screen, (0, 0, 0), convert_coords((x, y)), 3)
             elif self.y_vel > 0:
+                # Draws trajectory when bird is shot straight upwards
                 distance = self.y_vel ** 2 / (2 * -gravity[1])
                 pygame.draw.circle(screen, (0, 0, 0),
                                    (bird_position[0], SCREEN_HEIGHT - (distance + bird_radius + floor_height)), 3)

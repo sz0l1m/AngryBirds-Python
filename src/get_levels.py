@@ -130,11 +130,14 @@ class Game:
         """
         self.space = pymunk.Space()
         self.space.gravity = gravity
+        # Sets pygame display's left corner in the left corner of user's screen.
         os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0, 0)
         pygame.init()
         pygame.display.set_caption('Angry Birds')
         self._clock = pygame.time.Clock()
+        # Creates pygame's surface which everything will be drawn on. It has 1080p resolution.
         self.screen = pygame.Surface((1913, 1050))
+        # Creates pygame's surface which is showed on user's screen. It will be a copy of screen but in different size.
         self.display = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
         self.load_level(0)
         self._texts = {
@@ -336,6 +339,7 @@ class Game:
         """
         pigs = 0
         for body, shape in zip(self.space.bodies, self.space.shapes):
+            # Removes objects when they go out of the screen.
             if body.position[0] > SCREEN_WIDTH + 50 or body.position[0] < -50:
                 self.space.remove(body, shape)
             if round(body.velocity[0]) != 0 or round(body.velocity[1]) != 0:
@@ -346,6 +350,7 @@ class Game:
         if self._timer == 0:
             self._timer = time.time()
         if pigs == 0:
+            # Loads another level.
             if self._level.number < self._level.amount_of_levels:
                 self.load_level(self.level.number)
                 self._bird_shot = False
@@ -353,8 +358,10 @@ class Game:
                 self._status = 2
                 self._stopwatch = time.time() - self._stopwatch
         elif pigs != 0 and self._bird_shot:
+            # Loads another attempt.
             self.load_bird()
         if pigs != 0 and self._level.attempts == 0 and time.time() - self._timer > 1:
+            # Restarts the level.
             self.load_level(self._level.number - 1)
 
     def handle_events(self, mouse_pos: tuple):
