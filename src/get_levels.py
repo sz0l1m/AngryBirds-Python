@@ -103,6 +103,9 @@ class Game:
     :param timer: counts time after every object stopped moving and restarts the level after certain amount of time
     :type timer: time.Time
 
+    :param stopwatch: counts time from the begining of the game to the end
+    :type stopwatch: time.Time
+
     :param status: shows status of the game. If 0 game is in start screen, 1 - game in progress, 2 - game in end screen
     :type status: int
 
@@ -142,11 +145,11 @@ class Game:
                 ),
             'end_info_restart': Text(
                 'Press space to restart',
-                (SCREEN_WIDTH / 2 - 180, SCREEN_HEIGHT - 110), 30
+                (SCREEN_WIDTH / 2 - 160, SCREEN_HEIGHT - 110), 30
             ),
             'end_info_exit': Text(
                 'Press escape to exit',
-                (SCREEN_WIDTH / 2 - 170, SCREEN_HEIGHT - 70), 30
+                (SCREEN_WIDTH / 2 - 147, SCREEN_HEIGHT - 70), 30
             ),
             'author': Text(
                 'Miłosz Andryszczuk',
@@ -154,14 +157,15 @@ class Game:
             ),
             'time': Text(
                 '',
-                (SCREEN_WIDTH - 500, SCREEN_HEIGHT - 500), 25
+                (SCREEN_WIDTH - 1010, SCREEN_HEIGHT - 580), 40
             )
         }
         self._images = {
             'background': Skin(None, 'background.jpg', (1914, 1029)),
+            'bird_amount': Skin(None, 'red_bird.png', (80, 80)),
             'title': Skin(None, 'title.png', (512, 295)),
             'the_end': Skin(None, 'the_end.png', (512, 182)),
-            'bird_amount': Skin(None, 'red_bird.png', (80, 80))
+            'time': Skin(None, 'time.png', (256, 65))
         }
         pymunk.pygame_util.positive_y_is_up = True
         self._draw_options = pymunk.pygame_util.DrawOptions(self.screen)
@@ -316,10 +320,11 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.screen.blit(self._images['background'].default_image, (0, -30))
         self.screen.blit(self._images['the_end'].default_image, (SCREEN_WIDTH / 2 - 256, 200))
+        self.screen.blit(self._images['time'].default_image, (SCREEN_WIDTH / 2 - 130, 400))
         self._texts['end_info_restart'].draw(self.screen)
         self._texts['end_info_exit'].draw(self.screen)
         self._texts['author'].draw(self.screen)
-        self._texts['time'].set_str(self.screen, f'{int(self._stopwatch // 60)}:{int(self._stopwatch % 60)}')
+        self._texts['time'].set_str(self.screen, f'{int(self._stopwatch // 60):02}:{int(self._stopwatch % 60):02}')
         self.scale_screen()
         self._clock.tick(FPS)
 
