@@ -9,7 +9,6 @@ def get_screen_size():
     screen = pygame.display.Info()
     width = screen.current_w
     height = screen.current_h
-    print(width / height)
     if width / height > 16 / 9:
         factor = height / 1080
         return (1920 * factor, height, factor)
