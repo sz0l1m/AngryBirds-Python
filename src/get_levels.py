@@ -151,6 +151,10 @@ class Game:
             'author': Text(
                 'Miłosz Andryszczuk',
                 (SCREEN_WIDTH - 280, SCREEN_HEIGHT - 50), 25
+            ),
+            'time': Text(
+                '',
+                (SCREEN_WIDTH - 500, SCREEN_HEIGHT - 500), 25
             )
         }
         self._images = {
@@ -166,6 +170,7 @@ class Game:
         self._bird_shot = False
         self._bird_clicked = False
         self._timer = 0
+        self._stopwatch = 0
         self._status = 0
 
     @property
@@ -280,6 +285,7 @@ class Game:
                 elif event.key == K_SPACE:
                     self._status = 1
                     self.load_level(5)
+                    self._stopwatch = time.time()
             elif event.type == QUIT:
                 self._running = False
 
@@ -313,6 +319,7 @@ class Game:
         self._texts['end_info_restart'].draw(self.screen)
         self._texts['end_info_exit'].draw(self.screen)
         self._texts['author'].draw(self.screen)
+        self._texts['time'].set_str(self.screen, f'{int(self._stopwatch // 60)}:{int(self._stopwatch % 60)}')
         self.scale_screen()
         self._clock.tick(FPS)
 
@@ -339,6 +346,7 @@ class Game:
                 self._bird_shot = False
             else:
                 self._status = 2
+                self._stopwatch = time.time() - self._stopwatch
         elif pigs != 0 and self._bird_shot:
             self.load_bird()
         if pigs != 0 and self._level.attempts == 0 and time.time() - self._timer > 1:
