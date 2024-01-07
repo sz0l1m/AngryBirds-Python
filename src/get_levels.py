@@ -45,7 +45,7 @@ def get_data():
     """
     Returns data from the file.
     """
-    with open('levels.json') as fp:
+    with open('setup/levels.json') as fp:
         return json.load(fp)
 
 
