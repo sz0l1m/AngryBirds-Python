@@ -150,13 +150,13 @@
                 ],
                 "bars": [
                     {
-                        "x_position": 300,
+                        "x_position": 310,
                         "y_position": 50,
                         "x_size": 20,
                         "y_size": 100
                     },
                     {
-                        "x_position": 600,
+                        "x_position": 590,
                         "y_position": 50,
                         "x_size": 20,
                         "y_size": 100
@@ -384,40 +384,40 @@
                         "x_position": 300,
                         "y_position": 100,
                         "x_size": 20,
-                        "y_size": 200
+                        "y_size": 200,
+                        "type": "stone"
                     },
                     {
                         "x_position": 500,
                         "y_position": 100,
                         "x_size": 20,
-                        "y_size": 200
+                        "y_size": 200,
+                        "type": "stone"
                     },
                     {
                         "x_position": 400,
                         "y_position": 210,
                         "x_size": 220,
-                        "y_size": 20
+                        "y_size": 20,
+                        "type": "stone"
                     },
                     {
                         "x_position": 800,
                         "y_position": 100,
                         "x_size": 20,
-                        "y_size": 200,
-                        "type": "stone"
+                        "y_size": 200
                     },
                     {
                         "x_position": 600,
                         "y_position": 100,
                         "x_size": 20,
-                        "y_size": 200,
-                        "type": "stone"
+                        "y_size": 200
                     },
                     {
                         "x_position": 700,
                         "y_position": 210,
                         "x_size": 220,
-                        "y_size": 20,
-                        "type": "stone"
+                        "y_size": 20
                     }
                 ]
             }
