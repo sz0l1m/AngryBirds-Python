@@ -5,7 +5,7 @@ Miłosz Andryszczuk
 nr indeksu 331355
 
 ## Opis projektu
-Przedmiotem projektu jest gra 2D w stylu Angry Birds. Gra polega na wystrzeleniu ptaka pod odpowiednim kątem i z odpowiednią siłą, tak aby trafił on bezpośrednio w cele, czyli świnie lub w konstrukcje, których zawalenie spowoduje zlikwidowanie świni. Gra składa się z kilku poziomów o narastającym poziomie trudności. Projekt posiada interfejs graficzny oraz potrafi symulować prawa fizyki.<br>
+Przedmiotem projektu jest gra 2D w stylu Angry Birds. Gra polega na wystrzeleniu ptaka pod odpowiednim kątem i z odpowiednią siłą, tak aby trafił on bezpośrednio w cele, czyli świnie lub w konstrukcje, których zawalenie spowoduje zlikwidowanie świni. Gra składa się z szęsciu poziomów o narastającym poziomie trudności. Projekt posiada interfejs graficzny oraz potrafi symulować prawa fizyki.<br>
 Projekt wykorzytuje 2 biblioteki spoza standardowej biblioteki Pythona:
 - Pygame<br>
 Odpowiada za interfejs graficzny gry, wyświetlając wszystkie elementy na ekranie.<br>
@@ -164,7 +164,7 @@ Trzymanie się powyższych zasad pozwala na łatwe modyfikowanie poziomów wedle
 Możliwe jest, że na Pańskim ekranie gra nie będzie wyświetlać się prawidłowo. Gra była tworzona na ekranie o rozmiarach 1920 x 1200 pixeli i zadbałem o to, żeby ekran, i grafika dopasowywała się do każdego ekranu, jednak z powodu ograniczonego dostępu do innych monitorów nie byłem w stanie w pełni tego przetestować. Testowałem to łącznie na 4 komputerach i wszystko działało prawidłowo, jednak mimo to radziłbym, aby urochomić tą grę mając włączony tylko jeden monitor (jeśli korzysta Pan z kilku), ponieważ czasami w przypdaku używania dwóch monitorów okno gry wychodziło częściowo na drugi ekran.
 
 **Poziom trudności**<br>
-Ciężko jest ocecnić poziom trudności tej gry, ponieważ przeszedłem ją kilkadziesiąt razy i według mnie nie jest trudna. Natomiast jeśli będzie miał Pan trudności z jej przejściem, to zachęcam do zmodyfikowania lub nawet usunięcia danego levelu zgodnie z intrukcją powyżej.
+Ciężko jest ocecnić poziom trudności tej gry, ponieważ przeszedłem ją kilkadziesiąt razy i według mnie nie jest trudna. Przez długi czas starałem się zbalansować tą grę, aby była jak najbardziej zbalansowana. Natomiast jeśli będzie miał Pan trudności z jej przejściem, to zachęcam do zmodyfikowania lub nawet usunięcia danego levelu zgodnie z intrukcją powyżej.
 
 ### Niezrealizowane pomysły ###
 
@@ -182,4 +182,4 @@ Wszytkie powyższe pomysły nie zostały zrealizowane z powodu ograniczenia czas
 ### Zakończenie ###
 Mimo dużej ilości niezrealizowanych pomysłów, to jednak lista tych zrealizowanych, których początkowo kompletnie nie było w planie, jest znacznie dłuższa. Początkowo myślałem o grze, której "grafika" będzie symulowana w konsoli, a jedyna fizyka to będzie kropeczka poruszająca się po paraboli. A jednak udało się stworzyć grę, o której nigdy nie pomyslałbym, że jest w moim zasięgu.
 
-Podczas pisania tego projektu poświęciłem mnóstwo czasu, żeby poznać i nauczyć się korzystać z wykorzystywanych przeze mnie bibliotek i natrafiłem na niezliczoną ilość problemów i błędów, jednak dzięki temu nauczyłem się lepszej organizacji kodu oraz korzytania z bardzo rozbudowanych i przydatnych bibliotekz a także dowiedziałem się jak wiele można dzięki nim osiągnąć.
+Podczas pisania tego projektu poświęciłem mnóstwo czasu, żeby poznać i nauczyć się korzystać z wykorzystywanych przeze mnie bibliotek i natrafiłem na niezliczoną ilość problemów i błędów, jednak dzięki temu nauczyłem się lepszej organizacji kodu oraz korzytania z bardzo rozbudowanych i przydatnych bibliotek a także dowiedziałem się jak wiele można dzięki nim osiągnąć.
