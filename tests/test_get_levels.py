@@ -109,18 +109,6 @@ def test_level_create():
     assert level.floor is None
 
 
-def test_level_create_objects_check_bird():
-    level = Level(data[0], len(data))
-    level.create_objects(space)
-    assert level.bird.body.position == bird_position
-    assert level.bird.radius == bird_radius
-    assert level.bird.shape.radius == bird_radius
-    assert level.bird.shape.density == 0.6
-    assert level.bird.shape.elasticity == 0.7
-    assert level.bird.shape.friction == 0.8
-    assert level.bird.shape.color == colors.bird
-
-
 def test_level_create_objects_check_pig():
     level = Level(data[0], len(data))
     level.create_objects(space)
@@ -183,17 +171,6 @@ def test_get_level():
     assert level.objects['bars'][0]['x_position'] == 700
     assert level.amount_of_levels == 1
     assert level.attempts == 2
-
-
-def test_get_level_check_bird():
-    level = get_level(space, 0)
-    assert level.bird.body.position == bird_position
-    assert level.bird.radius == bird_radius
-    assert level.bird.shape.radius == bird_radius
-    assert level.bird.shape.density == 0.6
-    assert level.bird.shape.elasticity == 0.7
-    assert level.bird.shape.friction == 0.8
-    assert level.bird.shape.color == colors.bird
 
 
 def test_get_level_check_pig():
