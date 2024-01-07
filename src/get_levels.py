@@ -136,10 +136,22 @@ class Game:
         self.load_level(0)
         self._texts = {
             'attempts': Text('0', (130, 70), 40),
-            'info': Text(
+            'start_info': Text(
                 'Press space to start',
                 (SCREEN_WIDTH / 2 - 150, SCREEN_HEIGHT - 100), 30
-                )
+                ),
+            'end_info_restart': Text(
+                'Press space to restart',
+                (SCREEN_WIDTH / 2 - 180, SCREEN_HEIGHT - 110), 30
+            ),
+            'end_info_exit': Text(
+                'Press escape to exit',
+                (SCREEN_WIDTH / 2 - 170, SCREEN_HEIGHT - 70), 30
+            ),
+            'author': Text(
+                'Miłosz Andryszczuk',
+                (SCREEN_WIDTH - 280, SCREEN_HEIGHT - 50), 25
+            )
         }
         self._images = {
             'background': Skin(None, 'background.jpg', (1914, 1029)),
@@ -275,7 +287,7 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.screen.blit(self._images['background'].default_image, (0, -30))
         self.screen.blit(self._images['title'].default_image, (SCREEN_WIDTH / 2 - 256, 200))
-        self._texts['info'].draw(self.screen)
+        self._texts['start_info'].draw(self.screen)
         self.scale_screen()
         self._clock.tick(FPS)
 
@@ -298,7 +310,9 @@ class Game:
         self.screen.fill((255, 255, 255))
         self.screen.blit(self._images['background'].default_image, (0, -30))
         self.screen.blit(self._images['the_end'].default_image, (SCREEN_WIDTH / 2 - 256, 200))
-        self._texts['info'].draw(self.screen)
+        self._texts['end_info_restart'].draw(self.screen)
+        self._texts['end_info_exit'].draw(self.screen)
+        self._texts['author'].draw(self.screen)
         self.scale_screen()
         self._clock.tick(FPS)
 
